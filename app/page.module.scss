@@ -1,29 +1,9 @@
 @use "config" as config;
+@use "mixins" as mixins;
 
 .main {
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-}
-
-.menu {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(25%, auto));
-  width: var(--max-width);
-  max-width: 100%;
-}
-
-/* Mobile */
-@media (max-width: 700px) {
-}
-
-/* Tablet and Smaller Desktop */
-@media (min-width: 701px) and (max-width: 1120px) {
 }

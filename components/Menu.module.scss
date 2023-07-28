@@ -1,0 +1,34 @@
+@use "../app/config" as config;
+@use "../app/mixins" as mixins;
+
+.container {
+  width: config.$content-width;
+  padding: 12px;
+  @include mixins.row-space-between-center();
+
+  @include mixins.mobile {
+    width: 100%;
+  }
+
+  .link {
+    color: config.$black;
+  }
+}
+
+.largeMenu {
+  width: 100%;
+  @include mixins.row-space-between-center();
+
+  @include mixins.mobile {
+    display: none;
+  }
+}
+
+.smallMenu {
+  width: 100%;
+  @include mixins.row-space-between-center();
+
+  @include mixins.desktop {
+    display: none;
+  }
+}
