@@ -1,0 +1,55 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.menuMobile {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 12px;
+  background: config.$lemon;
+
+  @include mixins.desktop {
+    display: none;
+  }
+}
+
+.heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: config.$content-width;
+
+  .intro {
+    width: 30%;
+    padding: 12px;
+
+    h1 {
+      margin-bottom: 12px;
+    }
+  }
+
+  @include mixins.mobile {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .intro,
+    .canvas {
+      width: 100%;
+    }
+  }
+}

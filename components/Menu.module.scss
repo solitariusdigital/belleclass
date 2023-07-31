@@ -1,5 +1,5 @@
-@use "../app/config" as config;
-@use "../app/mixins" as mixins;
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
 
 .container {
   width: config.$content-width;
@@ -12,6 +12,14 @@
 
   .link {
     color: config.$black;
+  }
+}
+
+.menuIcon {
+  background: config.$lemon;
+
+  &:hover {
+    cursor: pointer;
   }
 }
 
