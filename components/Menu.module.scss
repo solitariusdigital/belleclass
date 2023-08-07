@@ -3,23 +3,18 @@
 
 .container {
   width: config.$content-width;
-  padding: 12px;
   @include mixins.row-space-between-center();
 
   @include mixins.mobile {
     width: 100%;
   }
 
+  @include mixins.desktop {
+    padding: 12px;
+  }
+
   .link {
     color: config.$black;
-  }
-}
-
-.menuIcon {
-  background: config.$lemon;
-
-  &:hover {
-    cursor: pointer;
   }
 }
 
@@ -30,13 +25,64 @@
   @include mixins.mobile {
     display: none;
   }
+
+  .largeNavigation {
+    width: 60%;
+    @include mixins.row-space-between-center();
+  }
+}
+
+.nav {
+  font-size: config.$small-font;
+  color: config.$black;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.navActive {
+  font-size: config.$small-font;
+  font-weight: bold;
 }
 
 .smallMenu {
   width: 100%;
-  @include mixins.row-space-between-center();
 
   @include mixins.desktop {
     display: none;
+  }
+
+  .menuIcon {
+    background: config.$gold1;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .topBar {
+    width: 100%;
+    padding: 12px;
+    padding-bottom: 0px;
+    @include mixins.row-space-between-center();
+  }
+
+  .menuMobile {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 12px;
+    background: config.$gold1;
+    text-align: right;
+
+    p {
+      padding: 4px 0px;
+      color: config.$black;
+    }
+
+    @include mixins.desktop {
+      display: none;
+    }
   }
 }

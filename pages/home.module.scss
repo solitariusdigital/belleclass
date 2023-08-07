@@ -14,15 +14,76 @@
   width: 100%;
 }
 
-.menuMobile {
-  display: flex;
-  flex-direction: column;
+.backgroundCover {
+  position: relative;
+  height: 300px;
   width: 100%;
-  padding: 12px;
-  background: config.$lemon;
+
+  .image {
+    position: relative !important;
+    object-position: 50% 30%;
+  }
 
   @include mixins.desktop {
-    display: none;
+    height: 400px;
+  }
+
+  .ctaContainer {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 12px;
+    text-align: right;
+    width: 100%;
+
+    p {
+      color: config.$white;
+      font-size: config.$exbig-font;
+      margin-bottom: 12px;
+    }
+
+    .margin {
+      margin-left: 20px;
+    }
+
+    button {
+      @include mixins.button(config.$gold1, config.$gold3, config.$white);
+      width: 180px;
+
+      @include mixins.mobile {
+        width: 165px;
+      }
+    }
+  }
+
+  .highlightContainer {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+    width: config.$content-width;
+    bottom: 100px;
+    margin: auto;
+    gap: 20px;
+
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+      background: config.$white;
+      box-shadow: config.$card-shadow;
+      @include mixins.border-radius();
+    }
+
+    .highlightOne {
+      border-top: 12px solid config.$gold1;
+    }
+    .highlightTwo {
+      border-top: 12px solid config.$gold2;
+    }
+    .highlightThree {
+      border-top: 12px solid config.$gold3;
+    }
   }
 }
 
@@ -42,8 +103,7 @@
     flex-direction: column;
     width: 100%;
 
-    .intro,
-    .canvas {
+    .intro {
       width: 100%;
     }
   }

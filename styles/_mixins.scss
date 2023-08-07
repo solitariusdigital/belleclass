@@ -14,16 +14,14 @@ $screen-large: 2000px;
   }
 }
 
-@mixin button($color, $subColor, $size) {
-  width: $size;
+@mixin button($color1, $color2, $subColor) {
   height: 40px;
-  border-radius: 50px;
-  font-weight: bold;
-  background: $color;
-  color: $subColor;
-  font-size: 14px;
+  border-radius: 12px;
+  font-size: 16px;
   border: none;
+  color: $subColor;
   box-shadow: config.$button-shadow;
+  background: linear-gradient(to left, $color1, $color2);
 
   &:hover {
     cursor: pointer;
@@ -33,7 +31,7 @@ $screen-large: 2000px;
 @mixin input() {
   padding: 12px;
   height: 40px;
-  background: config.$cream;
+  background: config.$grey;
   color: config.$black;
   font-size: config.$small-font;
   border: none;
