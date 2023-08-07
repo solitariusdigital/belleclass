@@ -12,7 +12,9 @@ export default function Home() {
         <Menu />
       </div>
       {menuMobile && (
-        <div className={classes.menuMobile}>
+        <div
+          className={`${classes.menuMobile} animate__animated animate__slideInDown`}
+        >
           <p>items</p>
           <p>items</p>
           <p>items</p>
@@ -20,14 +22,15 @@ export default function Home() {
           <p>items</p>
         </div>
       )}
-      <div className={classes.heading}>
-        <div className={classes.intro}>
-          <h1>Find clarity in chaos</h1>
-          <p>
-            Major Tom is a full-service marketing agency been purpose-built to
-            help organizations thrive in an increasingly complex landscape.
-          </p>
-        </div>
+
+      <div
+        className={`${classes.heading} animate__animated animate__fadeInLeft`}
+      >
+        <h1>Find clarity in chaos</h1>
+        <p>
+          Major Tom is a full-service marketing agency been purpose-built to
+          help organizations thrive in an increasingly complex landscape.
+        </p>
       </div>
     </main>
   );
