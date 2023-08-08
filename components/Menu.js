@@ -11,7 +11,7 @@ export default function Menu() {
   const activateNav = (link, index) => {
     navigationTopBar.map((nav, i) => {
       if (i === index) {
-        // Router.push(link);
+        Router.push(link);
         nav.active = true;
       } else {
         nav.active = false;
@@ -52,8 +52,8 @@ export default function Menu() {
           <div
             className={`${classes.menuMobile} animate__animated animate__slideInDown`}
           >
-            {navigationTopBar
-              .map((nav, index) => (
+            <div className={classes.list}>
+              {navigationTopBar.map((nav, index) => (
                 <Fragment key={index}>
                   <div
                     className={!nav.active ? classes.nav : classes.navActive}
@@ -62,8 +62,12 @@ export default function Menu() {
                     <p>{nav.title}</p>
                   </div>
                 </Fragment>
-              ))
-              .reverse()}
+              ))}
+            </div>
+            <div className={classes.buttons}>
+              <button>رزرو وقت حضوری</button>
+              <button>مشاوره آنلاین رایگان</button>
+            </div>
           </div>
         )}
       </div>

@@ -33,17 +33,31 @@
 }
 
 .nav {
-  font-size: config.$small-font;
-  color: config.$black;
+  border-bottom: 1px solid config.$white;
 
   &:hover {
     cursor: pointer;
+    border-bottom: 1px solid config.$gold3;
+    color: config.$gold3;
+  }
+
+  @include mixins.mobile {
+    border-bottom: 1px solid config.$gold1;
+
+    &:hover {
+      border-bottom: 1px solid config.$white;
+    }
   }
 }
 
 .navActive {
-  font-size: config.$small-font;
-  font-weight: bold;
+  border-bottom: 1px solid config.$gold3;
+  color: config.$gold3;
+  font-weight: bold !important;
+
+  @include mixins.mobile {
+    border-bottom: 1px solid config.$white;
+  }
 }
 
 .smallMenu {
@@ -70,11 +84,14 @@
 
   .menuMobile {
     display: flex;
-    flex-direction: column;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    text-align: right;
+    align-items: center;
     width: 100%;
     padding: 12px;
     background: config.$gold1;
-    text-align: right;
+    box-shadow: config.$card-shadow;
 
     p {
       padding: 4px 0px;
@@ -83,6 +100,16 @@
 
     @include mixins.desktop {
       display: none;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      button {
+        @include mixins.button(config.$black, config.$black, config.$gold3);
+        width: 180px;
+        margin: 8px 0px;
+      }
     }
   }
 }

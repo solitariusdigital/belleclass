@@ -1,46 +1,172 @@
 import { useState, useContext, useRef, Fragment, useEffect } from "react";
 import { StateContext } from "../context/stateContext";
+import { useRouter } from "next/router";
 import classes from "./home.module.scss";
-import Menu from "@/components/Menu";
 import Image from "next/legacy/image";
 import background from "../assets/background.jpg";
+import Expertise from "@/components/Expertise";
 
 export default function Home() {
+  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
+  const router = useRouter();
+  let pathname = router.pathname;
+
+  const doctors = [
+    {
+      name: "دکتر محمد رضا فرهانی",
+      desc: "فارغ التحصیل رشته پزشکی از دانشگاه علوم پزشکی تهران",
+    },
+    {
+      name: "دکتر محمد رضا فرهانی",
+      desc: "فارغ التحصیل رشته پزشکی از دانشگاه علوم پزشکی تهران",
+    },
+    {
+      name: "دکتر محمد رضا فرهانی",
+      desc: "فارغ التحصیل رشته پزشکی از دانشگاه علوم پزشکی تهران",
+    },
+  ];
+
+  useEffect(() => {
+    navigationTopBar.map((nav) => {
+      if (nav.link === pathname) {
+        nav.active = true;
+      } else {
+        nav.active = false;
+      }
+    });
+    setNavigationTopBar([...navigationTopBar]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Fragment>
-      <div className={classes.menu}>
-        <Menu />
-      </div>
       <div className={classes.heroHeader}>
         <Image
-          className={classes.image}
+          className={classes.heroImage}
           src={background}
           placeholder="blur"
           alt="image"
           layout="fill"
           objectFit="cover"
-          priority
           loading="eager"
+          priority
         />
         <div className={classes.header}>
           <h1>نگهبان زندگی</h1>
           <button>رزرو وقت حضوری</button>
-          <button>مشاور آنلاین رایگان</button>
+          <button>مشاوره آنلاین رایگان</button>
         </div>
+      </div>
+      <div className={classes.highlightHeroContainer}>
+        <div className={classes.highlightOne}></div>
+        <div className={classes.highlightTwo}></div>
+        <div className={classes.highlightThree}></div>
+      </div>
+      <div className={classes.expertise}>
+        <h1>خدمات کلینیک</h1>
+        <Expertise></Expertise>
+      </div>
+      <div className={classes.lifeStyle}>
+        <p>
+          فیلرهای پوستی مواد ژل مانندی هستند که برای بازگرداندن حجم از دست رفته،
+          ایجاد خطوط صاف و نرم کردن چین و چروکها به زیر پوست تزریق میشوند. مدت
+          زمان ماندگاری اثر فیلر های پوستی به محصول، ناحیه درمان و بیمار بستگی
+          دارد. یکی از رایج ترین فیلرها، فیلرهای اسید هیالورونیک است. اسید
+          هیالورونیک HA, یک ماده طبیعی است که در پوست یافت میشود و به صاف و
+          هیدراته شدن پوست کمک می کند. فیلرهای HAمعمولا نرم و ژل مانند هستند و
+          اثر آنها معمولا ۶ تا ۱۲ ماه باقی می ماند
+        </p>
+        <Image
+          className={classes.image}
+          src={background}
+          placeholder="blur"
+          alt="image"
+          loading="eager"
+          priority
+        />
+      </div>
+      <div className={classes.lifeStyle}>
+        <Image
+          className={classes.image}
+          src={background}
+          placeholder="blur"
+          alt="image"
+          loading="eager"
+          priority
+        />
+        <p>
+          فیلرهای پوستی مواد ژل مانندی هستند که برای بازگرداندن حجم از دست رفته،
+          ایجاد خطوط صاف و نرم کردن چین و چروکها به زیر پوست تزریق میشوند. مدت
+          زمان ماندگاری اثر فیلر های پوستی به محصول، ناحیه درمان و بیمار بستگی
+          دارد. یکی از رایج ترین فیلرها، فیلرهای اسید هیالورونیک است. اسید
+          هیالورونیک HA, یک ماده طبیعی است که در پوست یافت میشود و به صاف و
+          هیدراته شدن پوست کمک می کند. فیلرهای HAمعمولا نرم و ژل مانند هستند و
+          اثر آنها معمولا ۶ تا ۱۲ ماه باقی می ماند
+        </p>
       </div>
       <div className={classes.highlightContainer}>
         <div className={classes.highlightOne}></div>
         <div className={classes.highlightTwo}></div>
         <div className={classes.highlightThree}></div>
       </div>
-      <div
-        className={`${classes.heading} animate__animated animate__fadeInLeft`}
-      >
-        <h1>Find clarity in chaos</h1>
-        <p>
-          Major Tom is a full-service marketing agency been purpose-built to
-          help organizations thrive in an increasingly complex landscape.
-        </p>
+      <div className={classes.doctorsContainer}>
+        {doctors.map((doctor, index) => (
+          <div className={classes.items} key={index}>
+            <div>
+              <p className={classes.name}>{doctor.name}</p>
+              <p>{doctor.desc}</p>
+            </div>
+            <Image
+              className={classes.image}
+              placeholder="blur"
+              src={background}
+              alt="image"
+              width={100}
+              height={100}
+              objectFit="cover"
+              loading="eager"
+              priority
+            />
+          </div>
+        ))}
+      </div>
+      <div className={classes.videoContainer}>
+        <div>
+          <Image
+            className={classes.image}
+            src={background}
+            placeholder="blur"
+            alt="image"
+            loading="eager"
+            priority
+          />
+          <button>رزرو وقت حضوری</button>
+          <p>
+            فیلرهای پوستی مواد ژل مانندی هستند که برای بازگرداندن حجم از دست
+            رفته، ایجاد خطوط صاف و نرم کردن چین و چروکها به زیر پوست تزریق
+            میشوند. مدت زمان ماندگاری اثر فیلر های پوستی به محصول، ناحیه درمان و
+            بیمار بستگی دارد. یکی از رایج ترین فیلرها، فیلرهای اسید هیالورونیک
+            است
+          </p>
+        </div>
+        <div>
+          <Image
+            className={classes.image}
+            src={background}
+            placeholder="blur"
+            alt="image"
+            loading="eager"
+            priority
+          />
+          <button>مشاوره آنلاین رایگان</button>
+          <p>
+            فیلرهای پوستی مواد ژل مانندی هستند که برای بازگرداندن حجم از دست
+            رفته، ایجاد خطوط صاف و نرم کردن چین و چروکها به زیر پوست تزریق
+            میشوند. مدت زمان ماندگاری اثر فیلر های پوستی به محصول، ناحیه درمان و
+            بیمار بستگی دارد. یکی از رایج ترین فیلرها، فیلرهای اسید هیالورونیک
+            است
+          </p>
+        </div>
       </div>
     </Fragment>
   );

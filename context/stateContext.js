@@ -5,32 +5,32 @@ export const StateProvider = (props) => {
   const [menuMobile, setMenuMobile] = useState(false);
   const [navigationTopBar, setNavigationTopBar] = useState([
     {
+      title: "صفحه اصلی",
+      link: "/",
+      active: false,
+    },
+    {
       title: "درگاه زیبایی",
-      collection: "portal",
       link: "/portal",
       active: false,
     },
     {
       title: "پزشکان ما",
-      collection: "doctors",
       link: "/doctors",
       active: false,
     },
     {
       title: "درباره ما",
-      collection: "about",
       link: "/about",
       active: false,
     },
     {
       title: "سوالات",
-      collection: "questions",
       link: "/questions",
       active: false,
     },
     {
       title: "آدرس",
-      collection: "address",
       link: "/address",
       active: false,
     },
