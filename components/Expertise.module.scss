@@ -22,6 +22,7 @@
     background: config.$white;
     box-shadow: config.$card-shadow;
     border: 1px solid config.$gold3;
+    font-weight: 300;
 
     &:hover {
       cursor: pointer;

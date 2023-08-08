@@ -131,43 +131,44 @@ export default function Home() {
         ))}
       </div>
       <div className={classes.videoContainer}>
-        <div>
-          <Image
-            className={classes.image}
-            src={background}
-            placeholder="blur"
-            alt="image"
-            loading="eager"
-            priority
-          />
+        <div className={classes.boxContainer}>
+          <div className={classes.box}>
+            <video
+              className={classes.video}
+              preload="metadata"
+              controls
+              src="https://belleclass.com/uploads/1cceeb6f0d5e4042927d1c1d05368f52.MOV"
+            />
+          </div>
           <button>رزرو وقت حضوری</button>
           <p>
             فیلرهای پوستی مواد ژل مانندی هستند که برای بازگرداندن حجم از دست
             رفته، ایجاد خطوط صاف و نرم کردن چین و چروکها به زیر پوست تزریق
             میشوند. مدت زمان ماندگاری اثر فیلر های پوستی به محصول، ناحیه درمان و
             بیمار بستگی دارد. یکی از رایج ترین فیلرها، فیلرهای اسید هیالورونیک
-            است
+            ناحیه درمان و بیمار بستگی دارد. یکی از رایج ترین فیلرها، فیلرهای
+            اسید هیالورونیک است ناحیه درمان و بیمار بستگی دارد. یکی از رایج ترین
+            فیلرها، فیلرهای اسید هیالورونیک است
           </p>
         </div>
-        <div>
-          <Image
-            className={classes.image}
-            src={background}
-            placeholder="blur"
-            alt="image"
-            loading="eager"
-            priority
-          />
+        <div className={classes.boxContainer}>
+          <div className={classes.box}>
+            <video
+              className={classes.video}
+              preload="metadata"
+              controls
+              src="https://belleclass.com/uploads/e7750b4101324885a8e2e55ad4a6a5ab.MOV"
+            />
+          </div>
           <button>مشاوره آنلاین رایگان</button>
           <p>
             فیلرهای پوستی مواد ژل مانندی هستند که برای بازگرداندن حجم از دست
             رفته، ایجاد خطوط صاف و نرم کردن چین و چروکها به زیر پوست تزریق
-            میشوند. مدت زمان ماندگاری اثر فیلر های پوستی به محصول، ناحیه درمان و
-            بیمار بستگی دارد. یکی از رایج ترین فیلرها، فیلرهای اسید هیالورونیک
-            است
+            میشوند. مدت زمان ماندگاری اثر فیلر های پوستی به محصول
           </p>
         </div>
       </div>
+      <div className={classes.footer}></div>
     </Fragment>
   );
 }
