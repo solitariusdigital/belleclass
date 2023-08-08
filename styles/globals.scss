@@ -6,11 +6,11 @@
   padding: 0;
   margin: 0;
   font-family: config.$font;
+  font-weight: 300;
 }
 
 body {
   user-select: none;
-  font-weight: 300;
   background: config.$background;
 }
 

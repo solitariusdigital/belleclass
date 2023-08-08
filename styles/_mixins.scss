@@ -16,7 +16,7 @@ $screen-large: 2000px;
 
 @mixin button($color1, $color2, $subColor) {
   height: 40px;
-  border-radius: 12px;
+  border-radius: 50px;
   font-size: 16px;
   border: none;
   color: $subColor;
@@ -38,7 +38,6 @@ $screen-large: 2000px;
   outline: none;
   border-radius: 0px;
   border-bottom: 1px solid config.$grey;
-  font-weight: 300;
 
   &:focus {
     outline: none;

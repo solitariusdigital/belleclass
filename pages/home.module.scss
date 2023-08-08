@@ -1,21 +1,17 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
-.main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
-}
-
 .menu {
   display: flex;
   justify-content: center;
   width: 100%;
 }
 
-.backgroundCover {
+.container {
   position: relative;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
   height: 300px;
   width: 100%;
 
@@ -28,42 +24,44 @@
     height: 400px;
   }
 
-  .ctaContainer {
+  .header {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 12px;
-    text-align: right;
-    width: 100%;
-
-    p {
-      color: config.$white;
-      font-size: config.$exbig-font;
-      margin-bottom: 12px;
-    }
-
-    .margin {
-      margin-left: 20px;
-    }
+    width: config.$content-width;
+    text-align: center;
 
     button {
       @include mixins.button(config.$gold1, config.$gold3, config.$white);
       width: 180px;
+      margin: 8px;
+    }
+
+    h1 {
+      color: config.$white;
+      font-size: config.$large-font;
+      margin-bottom: 12px;
 
       @include mixins.mobile {
-        width: 165px;
+        font-size: config.$exbig-font;
       }
     }
   }
 
   .highlightContainer {
     position: relative;
+    bottom: 100px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
     width: config.$content-width;
-    bottom: 100px;
     margin: auto;
     gap: 20px;
+
+    @include mixins.mobile {
+      grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+      bottom: 0px;
+      margin: 20px 0px;
+    }
 
     div {
       display: flex;
@@ -76,13 +74,13 @@
     }
 
     .highlightOne {
-      border-top: 12px solid config.$gold1;
+      border-top: 6px solid config.$gold1;
     }
     .highlightTwo {
-      border-top: 12px solid config.$gold2;
+      border-top: 6px solid config.$gold2;
     }
     .highlightThree {
-      border-top: 12px solid config.$gold3;
+      border-top: 6px solid config.$gold3;
     }
   }
 }
