@@ -25,6 +25,8 @@ $screen-large: 2000px;
 
   &:hover {
     cursor: pointer;
+    background: config.$black;
+    color: config.$gold3;
   }
 }
 
