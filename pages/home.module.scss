@@ -137,7 +137,6 @@
 
   p {
     font-weight: 300;
-    font-size: config.$med-font;
   }
 
   @include mixins.mobile {
@@ -210,7 +209,6 @@
 
   p {
     font-weight: 300;
-    font-size: config.$med-font;
     margin: 12px 0px;
   }
 
@@ -235,12 +233,12 @@
     .box {
       height: 500px;
       width: 100%;
+      box-shadow: config.$card-shadow;
 
       .video {
         height: 100%;
         width: 100%;
         object-fit: cover;
-        box-shadow: config.$card-shadow;
         @include mixins.border-radius();
       }
     }

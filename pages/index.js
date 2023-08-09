@@ -49,7 +49,6 @@ export default function Home() {
           layout="fill"
           objectFit="cover"
           loading="eager"
-          priority
         />
         <div className={classes.header}>
           <h1>نگهبان زندگی</h1>
@@ -92,7 +91,6 @@ export default function Home() {
           placeholder="blur"
           alt="image"
           loading="eager"
-          priority
         />
         <p>
           فیلرهای پوستی مواد ژل مانندی هستند که برای بازگرداندن حجم از دست رفته،
@@ -125,7 +123,6 @@ export default function Home() {
               height={100}
               objectFit="cover"
               loading="eager"
-              priority
             />
           </div>
         ))}
