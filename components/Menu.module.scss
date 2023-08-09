@@ -90,11 +90,13 @@
   .topBar {
     width: 100%;
     padding: 12px;
-    padding-bottom: 0px;
+    height: 50px;
     @include mixins.row-space-between-center();
   }
 
   .menuMobile {
+    position: fixed;
+    z-index: 2;
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
