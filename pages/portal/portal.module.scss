@@ -1,0 +1,159 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: config.$content-width;
+  margin: auto;
+  font-weight: 300;
+  padding-bottom: 20px;
+
+  @include mixins.mobile {
+    width: 100%;
+  }
+}
+
+.header {
+  @include mixins.row-space-between-center();
+  padding: 20px;
+  text-align: center;
+  margin: auto;
+
+  p {
+    font-weight: bold;
+    font-size: config.$med-font;
+    margin-right: 12px;
+  }
+}
+
+.register {
+  width: 500px;
+
+  @include mixins.mobile {
+    width: 100%;
+    padding: 0px 20px;
+  }
+}
+
+.portal {
+  width: 100%;
+
+  @include mixins.mobile {
+    padding: 0px 20px;
+  }
+
+  .navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 40px;
+    width: 350px;
+    padding: 8px;
+    margin: auto;
+    border-radius: 50px;
+    background: config.$white;
+    box-shadow: config.$card-shadow;
+    border: 1px solid config.$gold3;
+
+    @include mixins.mobile {
+      width: 100%;
+    }
+  }
+
+  .nav {
+    border-bottom: 1px solid config.$white;
+
+    &:hover {
+      cursor: pointer;
+      color: config.$gold3;
+    }
+  }
+
+  .nav::after {
+    content: "";
+    display: block;
+    width: 0;
+    border-bottom: 1px solid config.$gold3;
+    transition: width 0.3s;
+
+    @include mixins.mobile {
+      border-bottom: 1px solid config.$white;
+    }
+  }
+
+  .nav:hover::after {
+    width: 100%;
+  }
+
+  .navActive {
+    border-bottom: 1px solid config.$gold3;
+    color: config.$gold3;
+    font-weight: bold !important;
+  }
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  gap: 20px;
+  margin: auto;
+  margin-top: 20px;
+  direction: rtl;
+
+  @include mixins.mobile {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px;
+    margin: 0px auto;
+    box-shadow: config.$card-shadow;
+    background: config.$white;
+    text-align: right;
+    @include mixins.border-radius();
+
+    .title {
+      font-weight: bold;
+      font-size: config.$med-font;
+    }
+
+    .row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin: 8px 0px;
+
+      p {
+        max-width: 140px;
+      }
+
+      .icon {
+        margin-left: 12px;
+      }
+    }
+
+    .rowImage {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 8px 0px;
+
+      .title {
+        margin-right: 12px;
+      }
+
+      .image {
+        border-radius: 50%;
+      }
+    }
+  }
+}

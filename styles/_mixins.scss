@@ -34,13 +34,14 @@ $screen-large: 2000px;
 @mixin input() {
   padding: 12px;
   height: 40px;
-  background: config.$grey;
+  background: config.$background;
   color: config.$black;
   font-size: config.$small-font;
   border: none;
   outline: none;
   border-radius: 0px;
-  border-bottom: 1px solid config.$grey;
+  border-bottom: 1px solid config.$gold3;
+  font-weight: 300;
 
   &:focus {
     outline: none;

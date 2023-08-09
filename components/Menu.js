@@ -9,6 +9,7 @@ export default function Menu() {
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
 
   const activateNav = (link, index) => {
+    setMenuMobile(false);
     navigationTopBar.map((nav, i) => {
       if (i === index) {
         Router.push(link);

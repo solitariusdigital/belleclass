@@ -1,16 +1,11 @@
-import { useState, useContext, useRef, Fragment, useEffect } from "react";
+import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "../context/stateContext";
-import { useRouter } from "next/router";
 import classes from "./home.module.scss";
 import Image from "next/legacy/image";
 import background from "../assets/background.jpg";
 import Expertise from "@/components/Expertise";
 
 export default function Home() {
-  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
-  const router = useRouter();
-  let pathname = router.pathname;
-
   const doctors = [
     {
       name: "دکتر محمد رضا فرهانی",
@@ -25,18 +20,6 @@ export default function Home() {
       desc: "فارغ التحصیل رشته پزشکی از دانشگاه علوم پزشکی تهران",
     },
   ];
-
-  useEffect(() => {
-    navigationTopBar.map((nav) => {
-      if (nav.link === pathname) {
-        nav.active = true;
-      } else {
-        nav.active = false;
-      }
-    });
-    setNavigationTopBar([...navigationTopBar]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <Fragment>
