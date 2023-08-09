@@ -95,7 +95,7 @@ export const StateProvider = (props) => {
   // application user context
   const [appUsers, setAppUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
-  const [userLogIn, setUserLogin] = useState(false);
+  const [userLogIn, setUserLogin] = useState(true);
 
   const stateContext = {
     menuMobile,

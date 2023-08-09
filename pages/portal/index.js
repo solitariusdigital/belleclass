@@ -87,11 +87,13 @@ export default function Portal() {
 
   return (
     <div className={classes.container}>
-      <div className={classes.headerHero}>
-        <p>سارا اکبری</p>
-        <Person4Icon />
-      </div>
-      {userLogIn ? (
+      {userLogIn && (
+        <div className={classes.headerHero}>
+          <p>سارا اکبری</p>
+          <Person4Icon />
+        </div>
+      )}
+      {!userLogIn ? (
         <div className={classes.register}>
           <Register></Register>
         </div>
@@ -215,10 +217,9 @@ export default function Portal() {
                 درمان و بیمار بستگی دارد. یکی از رایج ترین فیلرها، فیلرهای اسید
                 هیالورونیک است
               </p>
-              <div className={classes.rowImage}>
-                <p className={classes.title}>دکتر محمد رضا فرهانی</p>
+              <div className={classes.rowDoctor}>
                 <Image
-                  className={classes.imageProfile}
+                  className={classes.image}
                   placeholder="blur"
                   src={background}
                   alt="image"
@@ -227,6 +228,7 @@ export default function Portal() {
                   objectFit="cover"
                   loading="eager"
                 />
+                <p className={classes.title}>دکتر محمد رضا فرهانی</p>
               </div>
               <p className={classes.text}>
                 فیلرهای پوستی مواد ژل مانندی هستند که برای بازگرداندن حجم از دست
@@ -234,6 +236,19 @@ export default function Portal() {
                 میشوند. مدت زمان ماندگاری اثر فیلر های پوستی به محصول، ناحیه
                 درمان و بیمار بستگی دارد. یکی از رایج ترین فیلرها
               </p>
+              <div className={classes.input}>
+                <p className={classes.label}>مشاوره تخصصی</p>
+                <textarea
+                  placeholder="اینجا تایپ کن"
+                  type="text"
+                  id="comment"
+                  name="comment"
+                  // value={comment}
+                  autoComplete="off"
+                  dir="rtl"
+                ></textarea>
+                <button>ارسال</button>
+              </div>
             </div>
           )}
         </div>

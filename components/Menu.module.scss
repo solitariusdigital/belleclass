@@ -9,12 +9,12 @@
     width: 100%;
   }
 
-  @include mixins.desktop {
-    padding: 12px;
+  @include mixins.tablet {
+    width: 100%;
   }
 
-  .link {
-    color: config.$black;
+  @include mixins.desktop {
+    padding: 12px 0px;
   }
 }
 
@@ -26,9 +26,18 @@
     display: none;
   }
 
+  @include mixins.tablet {
+    padding: 0px 8px;
+    width: 100%;
+  }
+
   .largeNavigation {
-    width: 60%;
+    width: 50%;
     @include mixins.row-space-between-center();
+
+    @include mixins.tablet {
+      width: 70%;
+    }
   }
 }
 
@@ -122,8 +131,7 @@
 
       button {
         @include mixins.button(config.$black, config.$black, config.$gold3);
-        width: 180px;
-        margin: 8px 0px;
+        margin: 12px 0px;
       }
     }
   }

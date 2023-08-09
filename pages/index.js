@@ -54,6 +54,7 @@ export default function Home() {
         <div className={classes.highlightTwo}></div>
         <div className={classes.highlightThree}></div>
       </div>
+      <div className={classes.border}></div>
       <div className={classes.expertise}>
         <h1>خدمات کلینیک</h1>
         <Expertise></Expertise>
@@ -103,10 +104,6 @@ export default function Home() {
       <div className={classes.doctorsContainer}>
         {doctors.map((doctor, index) => (
           <div className={classes.items} key={index}>
-            <div>
-              <p className={classes.name}>{doctor.name}</p>
-              <p>{doctor.desc}</p>
-            </div>
             <Image
               className={classes.image}
               placeholder="blur"
@@ -117,6 +114,10 @@ export default function Home() {
               objectFit="cover"
               loading="eager"
             />
+            <div>
+              <p className={classes.name}>{doctor.name}</p>
+              <p>{doctor.desc}</p>
+            </div>
           </div>
         ))}
       </div>

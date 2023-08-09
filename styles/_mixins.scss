@@ -21,6 +21,7 @@ $screen-large: 2000px;
 }
 
 @mixin button($color1, $color2, $subColor) {
+  width: 180px;
   height: 40px;
   border-radius: 50px;
   font-size: 16px;
@@ -53,6 +54,26 @@ $screen-large: 2000px;
     outline: none;
     background: transparent;
     border-bottom: 1px solid config.$black;
+  }
+}
+
+@mixin textarea() {
+  width: 100%;
+  height: 200px;
+  resize: none;
+  padding: 12px;
+  outline: none;
+  border-radius: 12px;
+  font-weight: 300;
+  background: config.$background;
+  color: config.$black;
+  font-size: config.$small-font;
+  border: 1px solid config.$gold3;
+
+  &:focus {
+    outline: none;
+    background: transparent;
+    border: 1px solid config.$black;
   }
 }
 

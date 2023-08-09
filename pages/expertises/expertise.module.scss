@@ -10,6 +10,11 @@
     width: 100%;
     padding: 0px 20px;
   }
+
+  @include mixins.tablet {
+    width: 100%;
+    padding: 0px 20px;
+  }
 }
 
 .information {

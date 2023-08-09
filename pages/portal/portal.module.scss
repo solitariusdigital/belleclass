@@ -13,6 +13,11 @@
   @include mixins.mobile {
     width: 100%;
   }
+
+  @include mixins.tablet {
+    width: 100%;
+    padding: 0px 20px;
+  }
 }
 
 .headerHero {
@@ -30,6 +35,7 @@
 
 .register {
   width: 500px;
+  margin: 50px auto;
 
   @include mixins.mobile {
     width: 100%;
@@ -39,6 +45,7 @@
 
 .portal {
   width: 100%;
+  margin-bottom: 50px;
 
   @include mixins.mobile {
     padding: 0px 20px;
@@ -109,6 +116,23 @@
     flex-direction: column;
   }
 
+  .rowImage {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 8px 0px;
+
+    .title {
+      margin-right: 12px;
+    }
+
+    .image,
+    .imageProfile {
+      border-radius: 50%;
+    }
+  }
+
   .item {
     display: flex;
     flex-direction: column;
@@ -138,24 +162,6 @@
   }
 }
 
-.rowImage {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin: 8px 0px;
-  border: 1px solid red;
-
-  .title {
-    margin-right: 12px;
-  }
-
-  .image,
-  .imageProfile {
-    border-radius: 50%;
-  }
-}
-
 .row {
   display: flex;
   flex-direction: row;
@@ -172,6 +178,41 @@
   width: 500px;
   margin: auto;
   text-align: right;
+
+  .input {
+    margin-top: 40px;
+    text-align: center;
+
+    .label {
+      color: config.$grey;
+      text-align: right;
+      margin-bottom: 12px;
+    }
+
+    textarea {
+      @include mixins.textarea();
+    }
+
+    button {
+      @include mixins.button(config.$gold1, config.$gold3, config.$white);
+      margin: 12px;
+    }
+  }
+
+  .rowDoctor {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    direction: rtl;
+
+    .title {
+      margin-right: 12px;
+    }
+
+    .image {
+      border-radius: 50%;
+    }
+  }
 
   .header {
     @include mixins.row-space-between-center();
