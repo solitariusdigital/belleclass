@@ -9,15 +9,18 @@ import background from "../../assets/background.jpg";
 import Person4Icon from "@mui/icons-material/Person4";
 import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 import LocalPoliceIcon from "@mui/icons-material/LocalPolice";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 export default function Portal() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const [portalType, setPortalType] = useState("online" || "visit");
+  const [displayDetails, setDisplayDetails] = useState(false);
 
   const online = [
     {
-      title: "تورم تورم تورمتورم تتورم تورمورم تورم و کبودی",
+      title: "تورم تورم تورمتورم تتورم تورم و کبودی",
       completed: true,
       date: "1402/05/02 ",
     },
@@ -76,9 +79,15 @@ export default function Portal() {
     },
   ];
 
+  const selected = {
+    title: "وجود تورم و کبودی",
+    completed: false,
+    date: "1402/05/02 ",
+  };
+
   return (
     <div className={classes.container}>
-      <div className={classes.header}>
+      <div className={classes.headerHero}>
         <p>سارا اکبری</p>
         <Person4Icon />
       </div>
@@ -88,75 +97,145 @@ export default function Portal() {
         </div>
       ) : (
         <div className={classes.portal}>
-          <div className={classes.navigation}>
-            <p
-              className={
-                portalType === "online" ? classes.nav : classes.navActive
-              }
-              onClick={() => setPortalType("visit")}
-            >
-              وقت حضوری
-            </p>
-            <p
-              className={
-                portalType === "visit" ? classes.nav : classes.navActive
-              }
-              onClick={() => setPortalType("online")}
-            >
-              مشاوره آنلاین
-            </p>
-          </div>
-          <div className={classes.cards}>
-            {portalType === "online" && (
-              <Fragment>
-                {online.map((item, index) => (
-                  <div className={classes.item} key={index}>
-                    <p className={classes.title}>{item.title}</p>
-                    <div className={classes.row}>
-                      {item.completed ? (
-                        <div className={classes.row}>
-                          <TaskAltIcon className={classes.icon} />
-                          <p>مشاوره تکمیل شده</p>
-                        </div>
-                      ) : (
-                        <div className={classes.row}>
-                          <TimelapseIcon className={classes.icon} />
-                          <p>در انتظار مشاوره</p>
-                        </div>
-                      )}
-                      <p>{item.date}</p>
+          {!displayDetails && (
+            <div className={classes.navigation}>
+              <p
+                className={
+                  portalType === "online" ? classes.nav : classes.navActive
+                }
+                onClick={() => setPortalType("visit")}
+              >
+                وقت حضوری
+              </p>
+              <p
+                className={
+                  portalType === "visit" ? classes.nav : classes.navActive
+                }
+                onClick={() => setPortalType("online")}
+              >
+                مشاوره آنلاین
+              </p>
+            </div>
+          )}
+          {!displayDetails && (
+            <div className={classes.cards}>
+              {portalType === "online" && (
+                <Fragment>
+                  {online.map((item, index) => (
+                    <div
+                      className={classes.item}
+                      key={index}
+                      onClick={() => setDisplayDetails(!displayDetails)}
+                    >
+                      <div className={classes.row}>
+                        <p className={classes.title}>{item.title}</p>
+                        <KeyboardArrowLeftIcon />
+                      </div>
+                      <div className={classes.row}>
+                        {item.completed ? (
+                          <div className={classes.row}>
+                            <TaskAltIcon className={classes.icon} />
+                            <p>مشاوره تکمیل شده</p>
+                          </div>
+                        ) : (
+                          <div className={classes.row}>
+                            <TimelapseIcon className={classes.icon} />
+                            <p>در انتظار مشاوره</p>
+                          </div>
+                        )}
+                        <p>{item.date}</p>
+                      </div>
                     </div>
+                  ))}
+                </Fragment>
+              )}
+              {portalType === "visit" && (
+                <Fragment>
+                  {visit.map((item, index) => (
+                    <div className={classes.item} key={index}>
+                      <div className={classes.rowImage}>
+                        <Image
+                          className={classes.image}
+                          placeholder="blur"
+                          src={background}
+                          alt="image"
+                          width={50}
+                          height={50}
+                          objectFit="cover"
+                          loading="eager"
+                        />
+                        <p className={classes.title}>{item.doctor}</p>
+                      </div>
+                      <div className={classes.row}>
+                        <p className={classes.title}>{item.title}</p>
+                        <p className={classes.time}>{item.time}</p>
+                        <p>{item.date}</p>
+                      </div>
+                    </div>
+                  ))}
+                </Fragment>
+              )}
+            </div>
+          )}
+          {displayDetails && (
+            <div className={classes.details}>
+              <div className={classes.header}>
+                <ArrowBackIosIcon
+                  className={classes.arrowBack}
+                  onClick={() => setDisplayDetails(!displayDetails)}
+                />
+                <p className={classes.title}>{selected.title}</p>
+              </div>
+              <div className={classes.row}>
+                <p>{selected.date}</p>
+                {selected.completed ? (
+                  <div className={classes.row}>
+                    <p>مشاوره تکمیل شده</p>
+                    <TaskAltIcon className={classes.icon} />
                   </div>
-                ))}
-              </Fragment>
-            )}
-            {portalType === "visit" && (
-              <Fragment>
-                {visit.map((item, index) => (
-                  <div className={classes.item} key={index}>
-                    <div className={classes.rowImage}>
-                      <Image
-                        className={classes.image}
-                        placeholder="blur"
-                        src={background}
-                        alt="image"
-                        width={50}
-                        height={50}
-                        objectFit="cover"
-                        loading="eager"
-                      />
-                      <p className={classes.title}>{item.doctor}</p>
-                    </div>
-                    <div className={classes.row}>
-                      <p className={classes.title}>{item.title}</p>
-                      <p>{item.time}</p>
-                      <p>{item.date}</p>
-                    </div>
+                ) : (
+                  <div className={classes.row}>
+                    <p>در انتظار مشاوره</p>
+                    <TimelapseIcon className={classes.icon} />
                   </div>
-                ))}
-              </Fragment>
-            )}
-          </div>
+                )}
+              </div>
+              <Image
+                className={classes.image}
+                src={background}
+                placeholder="blur"
+                alt="image"
+                loading="eager"
+                priority
+              />
+              <p className={classes.text}>
+                فیلرهای پوستی مواد ژل مانندی هستند که برای بازگرداندن حجم از دست
+                رفته، ایجاد خطوط صاف و نرم کردن چین و چروکها به زیر پوست تزریق
+                میشوند. مدت زمان ماندگاری اثر فیلر های پوستی به محصول، ناحیه
+                درمان و بیمار بستگی دارد. یکی از رایج ترین فیلرها، فیلرهای اسید
+                هیالورونیک است
+              </p>
+              <div className={classes.rowImage}>
+                <p className={classes.title}>دکتر محمد رضا فرهانی</p>
+                <Image
+                  className={classes.imageProfile}
+                  placeholder="blur"
+                  src={background}
+                  alt="image"
+                  width={50}
+                  height={50}
+                  objectFit="cover"
+                  loading="eager"
+                />
+              </div>
+              <p className={classes.text}>
+                فیلرهای پوستی مواد ژل مانندی هستند که برای بازگرداندن حجم از دست
+                رفته، ایجاد خطوط صاف و نرم کردن چین و چروکها به زیر پوست تزریق
+                میشوند. مدت زمان ماندگاری اثر فیلر های پوستی به محصول، ناحیه
+                درمان و بیمار بستگی دارد. یکی از رایج ترین فیلرها
+              </p>
+            </div>
+          )}
         </div>
       )}
     </div>

@@ -13,7 +13,8 @@
     grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
   }
 
-  p {
+  p,
+  .active {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,5 +35,10 @@
     @include mixins.desktop {
       height: 45px;
     }
+  }
+
+  .active {
+    background: config.$black;
+    color: config.$gold3;
   }
 }

@@ -15,7 +15,7 @@
   }
 }
 
-.header {
+.headerHero {
   @include mixins.row-space-between-center();
   padding: 20px;
   text-align: center;
@@ -45,10 +45,8 @@
   }
 
   .navigation {
-    display: flex;
-    flex-direction: row;
+    @include mixins.row-space-between-center();
     justify-content: space-around;
-    align-items: center;
     height: 40px;
     width: 350px;
     padding: 8px;
@@ -103,6 +101,9 @@
   margin-top: 20px;
   direction: rtl;
 
+  @include mixins.tablet {
+    grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+  }
   @include mixins.mobile {
     display: flex;
     flex-direction: column;
@@ -120,40 +121,86 @@
     text-align: right;
     @include mixins.border-radius();
 
+    &:hover {
+      cursor: pointer;
+    }
+
     .title {
       font-weight: bold;
       font-size: config.$med-font;
+      width: 100%;
+      margin-left: 12px;
     }
 
-    .row {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      margin: 8px 0px;
-
-      p {
-        max-width: 140px;
-      }
-
-      .icon {
-        margin-left: 12px;
-      }
+    .time {
+      margin: 0px 8px;
     }
+  }
+}
 
-    .rowImage {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      margin: 8px 0px;
+.rowImage {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px 0px;
+  border: 1px solid red;
 
-      .title {
-        margin-right: 12px;
-      }
+  .title {
+    margin-right: 12px;
+  }
 
-      .image {
-        border-radius: 50%;
-      }
+  .image,
+  .imageProfile {
+    border-radius: 50%;
+  }
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0px;
+
+  .icon {
+    margin-left: 12px;
+  }
+}
+
+.details {
+  width: 500px;
+  margin: auto;
+  text-align: right;
+
+  .header {
+    @include mixins.row-space-between-center();
+  }
+
+  .title {
+    font-weight: bold;
+    font-size: config.$med-font;
+  }
+
+  .arrowBack {
+    &:hover {
+      cursor: pointer;
     }
+  }
+
+  .text {
+    box-shadow: config.$card-shadow;
+    background: config.$white;
+    padding: 12px;
+    @include mixins.border-radius();
+    margin: 20px 0px;
+  }
+
+  .image {
+    @include mixins.border-radius();
+  }
+
+  @include mixins.mobile {
+    width: 100%;
   }
 }

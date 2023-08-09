@@ -6,6 +6,16 @@ import background from "../assets/background.jpg";
 import Expertise from "@/components/Expertise";
 
 export default function Home() {
+  const { expertiseAreas, setExpertiseAreas } = useContext(StateContext);
+
+  useEffect(() => {
+    expertiseAreas.map((nav) => {
+      nav.active = false;
+    });
+    setExpertiseAreas([...expertiseAreas]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const doctors = [
     {
       name: "دکتر محمد رضا فرهانی",

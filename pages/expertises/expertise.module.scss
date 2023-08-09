@@ -1,6 +1,17 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
-.items {
-  color: red;
+.container {
+  width: config.$content-width;
+  margin: auto;
+  text-align: center;
+
+  @include mixins.mobile {
+    width: 100%;
+    padding: 0px 20px;
+  }
+}
+
+.information {
+  margin-top: 20px;
 }
