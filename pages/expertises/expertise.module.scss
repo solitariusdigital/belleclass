@@ -5,6 +5,8 @@
   width: config.$content-width;
   margin: 20px auto;
   text-align: center;
+  font-weight: 300;
+  text-align: right;
 
   @include mixins.mobile {
     width: 100%;
@@ -18,5 +20,44 @@
 }
 
 .information {
-  margin-top: 50px;
+  margin: 40px auto;
+  background: config.$white;
+  box-shadow: config.$card-shadow;
+  @include mixins.border-radius();
+  padding: 12px;
+
+  @include mixins.desktop {
+    width: config.$content-width;
+  }
+
+  @include mixins.tablet {
+    width: 100%;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 8px 0px;
+
+    .icon {
+      position: relative;
+      top: 8px;
+      margin-left: 8px;
+    }
+  }
+
+  h2 {
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+
+  .title {
+    font-weight: bold;
+    font-size: config.$med-font;
+    margin: 8px 0px;
+  }
+
+  .items {
+    margin: 20px 0px;
+  }
 }

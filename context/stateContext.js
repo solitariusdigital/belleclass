@@ -32,15 +32,7 @@ export const StateProvider = (props) => {
   ]);
   const [expertiseAreas, setExpertiseAreas] = useState([
     {
-      title: "درمان با فرکانس رادویی",
-      active: false,
-    },
-    {
       title: "فیلر",
-      active: false,
-    },
-    {
-      title: "ذخیره فیبروبلاست",
       active: false,
     },
     {
@@ -61,6 +53,10 @@ export const StateProvider = (props) => {
     },
     {
       title: "پلاسمای غنی از پلاکت",
+      active: false,
+    },
+    {
+      title: "درمان با فرکانس رادویی",
       active: false,
     },
     {
