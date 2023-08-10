@@ -42,9 +42,10 @@
     margin-bottom: 20px;
 
     p {
+      padding: 8px;
       background: config.$white;
       box-shadow: config.$card-shadow;
-      padding: 8px;
+      color: config.$gold3;
       @include mixins.border-radius();
     }
   }

@@ -4,9 +4,11 @@ import classes from "./home.module.scss";
 import Image from "next/legacy/image";
 import background from "../assets/background.jpg";
 import Expertise from "@/components/Expertise";
+import Router from "next/router";
 
 export default function Home() {
   const { expertiseAreas, setExpertiseAreas } = useContext(StateContext);
+  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
 
   useEffect(() => {
     expertiseAreas.map((nav) => {
@@ -30,6 +32,19 @@ export default function Home() {
       desc: "فارغ التحصیل رشته پزشکی از دانشگاه علوم پزشکی تهران",
     },
   ];
+
+  const doctorsPage = () => {
+    let route = "/doctors";
+    Router.push(route);
+    navigationTopBar.map((nav) => {
+      if (nav.link === route) {
+        nav.active = true;
+      } else {
+        nav.active = false;
+      }
+    });
+    setNavigationTopBar([...navigationTopBar]);
+  };
 
   return (
     <Fragment>
@@ -56,7 +71,6 @@ export default function Home() {
       </div>
       <div className={classes.border}></div>
       <div className={classes.expertise}>
-        <h1>خدمات کلینیک</h1>
         <Expertise></Expertise>
       </div>
       <div className={classes.lifeStyle}>
@@ -103,7 +117,11 @@ export default function Home() {
       </div>
       <div className={classes.doctorsContainer}>
         {doctors.map((doctor, index) => (
-          <div className={classes.items} key={index}>
+          <div
+            className={classes.items}
+            key={index}
+            onClick={() => doctorsPage()}
+          >
             <Image
               className={classes.image}
               placeholder="blur"

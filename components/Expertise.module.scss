@@ -1,6 +1,12 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
+.expertise {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .items {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));

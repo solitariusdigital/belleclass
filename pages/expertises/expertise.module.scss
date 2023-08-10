@@ -3,7 +3,7 @@
 
 .container {
   width: config.$content-width;
-  margin: auto;
+  margin: 20px auto;
   text-align: center;
 
   @include mixins.mobile {
@@ -18,5 +18,5 @@
 }
 
 .information {
-  margin-top: 20px;
+  margin-top: 50px;
 }
