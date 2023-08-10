@@ -8,7 +8,6 @@
   width: config.$content-width;
   margin: auto;
   font-weight: 300;
-  padding-bottom: 20px;
 
   @include mixins.mobile {
     width: 100%;
@@ -147,6 +146,8 @@
 
     &:hover {
       cursor: pointer;
+      position: relative;
+      bottom: 5px;
     }
 
     .title {
