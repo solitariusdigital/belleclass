@@ -27,7 +27,7 @@
   }
 
   @include mixins.tablet {
-    padding: 0px 20px;
+    padding: 0px 12px;
     width: 100%;
   }
 
@@ -132,6 +132,12 @@
       button {
         @include mixins.button(config.$black, config.$black, config.$gold3);
         margin: 12px 0px;
+
+        &:hover {
+          cursor: pointer;
+          background: config.$white;
+          color: config.$black;
+        }
       }
     }
   }

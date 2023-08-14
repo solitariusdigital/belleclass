@@ -68,7 +68,7 @@
 .highlightContainer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-  gap: 20px;
+  gap: 12px;
   margin: auto;
   width: config.$content-width;
   direction: rtl;
@@ -80,7 +80,7 @@
   @include mixins.tablet {
     grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
     width: 100%;
-    padding: 0px 20px;
+    padding: 0px 12px;
   }
 
   @include mixins.mobile {
@@ -88,7 +88,7 @@
     width: 100%;
     bottom: 0px;
     padding: 0px 12px;
-    margin: 20px 0px;
+    margin: 12px 0px;
   }
 
   div {
@@ -142,7 +142,7 @@
 
   @include mixins.tablet {
     width: 100%;
-    padding: 0px 20px;
+    padding: 0px 12px;
   }
 }
 
@@ -150,7 +150,7 @@
   width: config.$content-width;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
-  gap: 20px;
+  gap: 12px;
   margin: 60px auto;
   text-align: right;
   align-items: center;
@@ -161,7 +161,7 @@
 
   @include mixins.tablet {
     width: 100%;
-    padding: 0px 20px;
+    padding: 0px 12px;
   }
 
   @include mixins.mobile {
@@ -180,7 +180,7 @@
 .doctorsContainer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-  gap: 20px;
+  gap: 12px;
   margin: 60px auto;
   width: config.$content-width;
   direction: rtl;
@@ -188,7 +188,7 @@
   @include mixins.tablet {
     grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
     width: 100%;
-    padding: 20px;
+    padding: 12px;
     margin: 40px auto;
   }
 
@@ -236,7 +236,7 @@
 .videoContainer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
-  gap: 20px;
+  gap: 12px;
   width: config.$content-width;
   margin: auto;
 
@@ -245,7 +245,7 @@
   }
 
   @include mixins.tablet {
-    padding: 20px;
+    padding: 12px;
     margin: 40px auto;
   }
 

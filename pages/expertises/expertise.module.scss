@@ -3,19 +3,19 @@
 
 .container {
   width: config.$content-width;
-  margin: 20px auto;
+  margin: 12px auto;
   text-align: center;
   font-weight: 300;
   text-align: right;
 
   @include mixins.mobile {
     width: 100%;
-    padding: 0px 20px;
+    padding: 0px 12px;
   }
 
   @include mixins.tablet {
     width: 100%;
-    padding: 0px 20px;
+    padding: 0px 12px;
   }
 }
 
@@ -39,7 +39,7 @@
   }
 
   h2 {
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     font-weight: bold;
   }
 
@@ -50,6 +50,6 @@
   }
 
   .items {
-    margin: 20px 0px;
+    margin: 12px 0px;
   }
 }

@@ -15,13 +15,13 @@
 
   @include mixins.tablet {
     width: 100%;
-    padding: 0px 20px;
+    padding: 0px 12px;
   }
 }
 
 .headerHero {
   @include mixins.row-space-between-center();
-  padding: 20px;
+  padding: 12px;
   text-align: center;
   margin: auto;
 
@@ -38,7 +38,7 @@
 
   @include mixins.mobile {
     width: 100%;
-    padding: 0px 20px;
+    padding: 0px 12px;
   }
 }
 
@@ -47,7 +47,7 @@
   margin-bottom: 50px;
 
   @include mixins.mobile {
-    padding: 0px 20px;
+    padding: 0px 12px;
   }
 
   .navigation {
@@ -102,9 +102,9 @@
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-  gap: 20px;
+  gap: 12px;
   margin: auto;
-  margin-top: 20px;
+  margin-top: 12px;
   direction: rtl;
 
   @include mixins.tablet {
@@ -235,7 +235,7 @@
     background: config.$white;
     padding: 12px;
     @include mixins.border-radius();
-    margin: 20px 0px;
+    margin: 12px 0px;
   }
 
   .image {
