@@ -26,14 +26,6 @@
   @include mixins.border-radius();
   padding: 12px;
 
-  @include mixins.desktop {
-    width: config.$content-width;
-  }
-
-  @include mixins.tablet {
-    width: 100%;
-  }
-
   .row {
     display: flex;
     flex-direction: row-reverse;
