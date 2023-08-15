@@ -43,3 +43,18 @@ export function abbreviateNumber(num) {
 export function calculatePercentage(percentage, value) {
   return value * (percentage / 100);
 }
+
+export function getMonthName(number) {
+  const date = new Date();
+  date.setMonth(monthNumber + 2);
+  return date.toLocaleString("fa-IR", { month: "long" });
+}
+
+export function toFarsiNumber(number) {
+  const farsiDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+  return number
+    .toString()
+    .split("")
+    .map((x) => farsiDigits[x])
+    .join("");
+}
