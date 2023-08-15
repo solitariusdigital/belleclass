@@ -1,0 +1,35 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: config.$content-width;
+  margin: 12px auto;
+
+  .timeContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+    gap: 12px;
+    text-align: center;
+    margin: 20px 0px;
+    width: 400px;
+
+    @include mixins.mobile {
+      width: 100%;
+    }
+  }
+
+  .time {
+    padding: 8px;
+    background: config.$white;
+    box-shadow: config.$card-shadow;
+    color: config.$gold3;
+    @include mixins.border-radius();
+  }
+
+  .button {
+    @include mixins.button(config.$gold1, config.$gold3, config.$white);
+  }
+}
