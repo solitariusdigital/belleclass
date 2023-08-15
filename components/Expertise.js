@@ -29,7 +29,7 @@ export default function Expertise() {
   return (
     <div className={classes.expertise}>
       <h2>خدمات کلینیک</h2>
-      <div className={classes.items}>
+      <div className={`${classes.items} animate__animated animate__pulse`}>
         {expertiseAreas.map((item, index) => (
           <p
             className={item.active ? classes.active : ""}
