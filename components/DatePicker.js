@@ -1,24 +1,45 @@
 import { useState } from "react";
-import Calendar from "react-calendar";
 import classes from "./DatePicker.module.scss";
-import "react-calendar/dist/Calendar.css";
+import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
+import { Calendar, utils } from "@hassanmojab/react-modern-calendar-datepicker";
+// import { Calendar, utils } from "react-modern-calendar-datepicker";
+// import "react-modern-calendar-datepicker/lib/DatePicker.css";
 
 export default function DatePicker() {
-  const [date, setDate] = useState(new Date());
+  const [day, setDay] = useState(null);
   const [time, setTime] = useState();
+  const [alert, setAlert] = useState("");
 
-  const times = ["08:00", "09:00", "10:00", "14:00", "15:00"];
+  const times = [
+    "08:00",
+    "09:00",
+    "10:00",
+    "11:00",
+    "12:00",
+    "13:00",
+    "14:00",
+    "15:00",
+  ];
 
   const datePick = () => {
-    console.log(date, time);
+    if (!day || !time) {
+      setAlert("تاریخ و زمان انتخاب کنید");
+      setTimeout(() => {
+        setAlert("");
+      }, 3000);
+      return;
+    }
+    console.log(day, time);
   };
+
   return (
     <div className={classes.container}>
       <Calendar
-        onChange={setDate}
-        value={date}
-        locale="fa-IR"
-        calendarType="islamic"
+        value={day}
+        onChange={setDay}
+        shouldHighlightWeekends
+        minimumDate={utils("fa").getToday()}
+        locale="fa"
       />
       <div className={classes.timeContainer}>
         {times.map((time, index) => (
@@ -27,6 +48,7 @@ export default function DatePicker() {
           </p>
         ))}
       </div>
+      <p className={classes.alert}>{alert}</p>
       <button className={classes.button} onClick={() => datePick()}>
         Click
       </button>

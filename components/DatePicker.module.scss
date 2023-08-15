@@ -7,18 +7,20 @@
   align-items: center;
   width: config.$content-width;
   margin: 12px auto;
+  width: 400px;
+
+  @include mixins.mobile {
+    width: 100%;
+    padding: 0px 12px;
+  }
 
   .timeContainer {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
     gap: 12px;
     text-align: center;
-    margin: 20px 0px;
-    width: 400px;
-
-    @include mixins.mobile {
-      width: 100%;
-    }
+    margin-top: 20px;
+    width: 100%;
   }
 
   .time {
@@ -27,9 +29,21 @@
     box-shadow: config.$card-shadow;
     color: config.$gold3;
     @include mixins.border-radius();
+
+    &:hover {
+      background: config.$black;
+      color: config.$gold3;
+      cursor: pointer;
+    }
   }
 
   .button {
     @include mixins.button(config.$gold1, config.$gold3, config.$white);
+  }
+
+  .alert {
+    color: config.$red;
+    margin: 20px;
+    height: 20px;
   }
 }
