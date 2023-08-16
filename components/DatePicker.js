@@ -8,32 +8,49 @@ import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
 
 export default function DatePicker() {
   const [day, setDay] = useState(null);
-  const [time, setTime] = useState();
+  const [time, setTime] = useState("");
   const [alert, setAlert] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
-
-  const times = [
-    "08:00",
-    "09:00",
-    "10:00",
-    "11:00",
-    "12:00",
-    "13:00",
-    "14:00",
-    "15:00",
-  ];
+  const [times, setTimes] = useState({
+    "08:00": false,
+    "09:00": false,
+    "10:00": false,
+    "11:00": false,
+    "12:00": false,
+    "13:00": false,
+    "14:00": false,
+    "15:00": false,
+  });
 
   const datePick = () => {
     if (!day || !time) {
       setAlert("تاریخ و زمان انتخاب کنید");
       setTimeout(() => {
         setAlert("");
-      }, 3000);
+      }, 1000);
       return;
     }
   };
 
+  const resetTime = () => {
+    let updatedTime = { ...times };
+    Object.keys(updatedTime).forEach((v) => (updatedTime[v] = false));
+    setTimes(updatedTime);
+  };
+
+  const assingDay = (day) => {
+    setDay(day);
+    resetTime();
+    setSelectedDate("");
+    setTime("");
+  };
+
   const displayDate = (time) => {
+    let updatedTime = { ...times };
+    Object.keys(times).forEach((item) =>
+      item === time ? (updatedTime[item] = true) : (updatedTime[item] = false)
+    );
+    setTimes(updatedTime);
     if (day) {
       setTime(time);
       setSelectedDate(
@@ -43,6 +60,12 @@ export default function DatePicker() {
           toFarsiNumber(time).slice(0, 2) + ":" + toFarsiNumber(time).slice(2)
         }`
       );
+    } else {
+      setAlert("تاریخ انتخاب کنید");
+      resetTime();
+      setTimeout(() => {
+        setAlert("");
+      }, 1000);
     }
   };
 
@@ -50,16 +73,16 @@ export default function DatePicker() {
     <div className={classes.container}>
       <Calendar
         value={day}
-        onChange={setDay}
+        onChange={(day) => assingDay(day)}
         shouldHighlightWeekends
         minimumDate={utils("fa").getToday()}
         locale="fa"
       />
       <div className={classes.timeContainer}>
-        {times.map((time, index) => (
+        {Object.keys(times).map((time, index) => (
           <p
             key={index}
-            className={classes.time}
+            className={times[time] ? classes.activeTime : classes.time}
             onClick={() => displayDate(time)}
           >
             {time}

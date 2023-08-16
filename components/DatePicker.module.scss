@@ -23,18 +23,24 @@
     width: 100%;
   }
 
-  .time {
+  .time,
+  .activeTime {
     padding: 8px;
     background: config.$white;
     box-shadow: config.$card-shadow;
-    color: config.$gold3;
+    color: config.$black;
     @include mixins.border-radius();
 
     &:hover {
-      background: config.$black;
-      color: config.$gold3;
+      background: config.$gold3;
+      color: config.$white;
       cursor: pointer;
     }
+  }
+
+  .activeTime {
+    background: config.$gold3;
+    color: config.$white;
   }
 
   .button {
@@ -51,5 +57,6 @@
   .message {
     color: config.$black;
     font-weight: bold;
+    font-size: config.$med-font;
   }
 }
