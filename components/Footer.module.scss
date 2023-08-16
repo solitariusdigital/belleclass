@@ -1,0 +1,15 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.footer {
+  width: 100%;
+  height: 250px;
+  margin-top: 60px;
+  background: config.$gold1;
+  padding: 12px;
+  border-top-left-radius: 300px;
+
+  @include mixins.mobile {
+    border-top-left-radius: 200px;
+  }
+}

@@ -2,6 +2,7 @@ import { useState, useContext, useRef, Fragment, useEffect } from "react";
 import { StateContext } from "../context/stateContext";
 import classes from "./Menu.module.scss";
 import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 import Router from "next/router";
 
 export default function Menu() {
@@ -43,11 +44,19 @@ export default function Menu() {
       <div className={classes.smallMenu}>
         <div className={classes.topBar}>
           <p>LOGO</p>
-          <MenuIcon
-            className={classes.menuIcon}
-            onClick={() => setMenuMobile(!menuMobile)}
-            sx={{ fontSize: 30 }}
-          />
+          {menuMobile ? (
+            <CloseIcon
+              className={classes.menuIcon}
+              onClick={() => setMenuMobile(!menuMobile)}
+              sx={{ fontSize: 30 }}
+            />
+          ) : (
+            <MenuIcon
+              className={classes.menuIcon}
+              onClick={() => setMenuMobile(!menuMobile)}
+              sx={{ fontSize: 30 }}
+            />
+          )}
         </div>
         {menuMobile && (
           <div

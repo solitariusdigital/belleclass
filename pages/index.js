@@ -5,6 +5,7 @@ import Image from "next/legacy/image";
 import background from "../assets/background.jpg";
 import Expertise from "@/components/Expertise";
 import Router from "next/router";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const { expertiseAreas, setExpertiseAreas } = useContext(StateContext);
@@ -199,7 +200,7 @@ export default function Home() {
           </p>
         </div>
       </div>
-      <div className={classes.footer}></div>
+      <Footer></Footer>
     </Fragment>
   );
 }
