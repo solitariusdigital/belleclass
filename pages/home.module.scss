@@ -146,33 +146,55 @@
   }
 }
 
-.lifeStyle {
+.lifeStyleContainer {
   width: config.$content-width;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
-  gap: 12px;
-  margin: 60px auto;
-  text-align: right;
-  align-items: center;
+  margin: auto;
 
-  p {
-    font-weight: 300;
+  @include mixins.mobile {
+    width: 100%;
+    padding: 12px;
   }
 
   @include mixins.tablet {
     width: 100%;
     padding: 0px 12px;
   }
+}
+
+.lifeStyle {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+  gap: 12px;
+  margin: 60px auto;
+  width: 100%;
+  text-align: right;
+  align-items: center;
+  background: config.$white;
+  box-shadow: config.$card-shadow;
+  @include mixins.border-radius();
+
+  p {
+    font-weight: 300;
+    padding: 50px;
+
+    @include mixins.mobile {
+      padding: 12px;
+    }
+  }
+
+  @include mixins.tablet {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+  }
 
   @include mixins.mobile {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    padding: 0px 12px;
+    padding: 12px;
   }
 
   .image {
-    box-shadow: config.$image-shadow;
     @include mixins.border-radius();
   }
 }

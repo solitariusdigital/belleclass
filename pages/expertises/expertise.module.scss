@@ -24,7 +24,7 @@
   background: config.$white;
   box-shadow: config.$card-shadow;
   @include mixins.border-radius();
-  padding: 12px;
+  padding: 50px 100px;
 
   .row {
     display: flex;
