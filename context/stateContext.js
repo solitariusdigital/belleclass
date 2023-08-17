@@ -24,11 +24,6 @@ export const StateProvider = (props) => {
       link: "/expertises",
       active: false,
     },
-    {
-      title: "آدرس",
-      link: "/address",
-      active: false,
-    },
   ]);
   const [expertiseAreas, setExpertiseAreas] = useState([
     {
