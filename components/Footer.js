@@ -1,7 +1,7 @@
 import classes from "./Footer.module.scss";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import PlaceIcon from "@mui/icons-material/Place";
-import PhoneIcon from "@mui/icons-material/Phone";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import PhoneIphoneOutlinedIcon from "@mui/icons-material/PhoneIphoneOutlined";
 
 export default function Footer() {
   return (
@@ -13,11 +13,11 @@ export default function Footer() {
         </div>
         <div className={classes.information}>
           <div className={classes.row}>
-            <PlaceIcon />
+            <LocationOnOutlinedIcon />
             <p>تهران، فرشته، خیابان نیلوفر، مجتمع یوتوپیا، طبقه ۴</p>
           </div>
           <div className={classes.row}>
-            <PhoneIcon />
+            <PhoneIphoneOutlinedIcon />
             <p>۰۲۱ ۹۱۶۹۰۰۳۰</p>
           </div>
           <div
