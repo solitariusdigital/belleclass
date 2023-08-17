@@ -92,7 +92,7 @@ export default function DatePicker() {
       {alert && <p className={classes.alert}>{alert}</p>}
       {selectedDate && <p className={classes.message}>{selectedDate} ساعت</p>}
       <button className={classes.button} onClick={() => datePick()}>
-        رزرو وقت حضوری
+        ثبت وقت حضوری
       </button>
     </div>
   );

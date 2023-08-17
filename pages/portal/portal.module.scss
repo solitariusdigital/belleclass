@@ -8,6 +8,7 @@
   width: config.$content-width;
   margin: auto;
   font-weight: 300;
+  min-height: 500px;
 
   @include mixins.mobile {
     width: 100%;
@@ -23,7 +24,7 @@
   @include mixins.row-space-between-center();
   padding: 12px;
   text-align: center;
-  margin: auto;
+  margin: 0px auto;
 
   p {
     font-weight: bold;

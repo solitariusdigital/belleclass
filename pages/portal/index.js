@@ -11,7 +11,6 @@ import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 import LocalPoliceIcon from "@mui/icons-material/LocalPolice";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import DatePicker from "@/components/DatePicker";
 
 export default function Portal() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
@@ -20,6 +19,26 @@ export default function Portal() {
   const [displayDetails, setDisplayDetails] = useState(false);
 
   const online = [
+    {
+      title: "تورم تورم تورمتورم تتورم تورم و کبودی",
+      completed: true,
+      date: "1402/05/02 ",
+    },
+    {
+      title: "وجود تورم و کبودی",
+      completed: false,
+      date: "1402/05/02 ",
+    },
+    {
+      title: "وجود تورم و کبودی",
+      completed: true,
+      date: "1402/05/02 ",
+    },
+    {
+      title: "وجود تورم و کبودی",
+      completed: false,
+      date: "1402/05/02 ",
+    },
     {
       title: "تورم تورم تورمتورم تتورم تورم و کبودی",
       completed: true,
@@ -88,7 +107,6 @@ export default function Portal() {
 
   return (
     <div className={classes.container}>
-      <DatePicker />
       {userLogIn && (
         <div className={classes.headerHero}>
           <p>سارا اکبری</p>
