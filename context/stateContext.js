@@ -5,7 +5,7 @@ export const StateProvider = (props) => {
   const [menuMobile, setMenuMobile] = useState(false);
   const [navigationTopBar, setNavigationTopBar] = useState([
     {
-      title: "صفحه اصلی",
+      title: "بل کلاس",
       link: "/",
       active: false,
     },
@@ -56,7 +56,7 @@ export const StateProvider = (props) => {
       active: false,
     },
     {
-      title: "درمان با فرکانس رادویی",
+      title: "RF درمان با فرکانس رادویی",
       active: false,
     },
     {
@@ -77,7 +77,7 @@ export const StateProvider = (props) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [userLogIn, setUserLogin] = useState(true);
 
-  const [displayExpertise, setDisplayExpertise] = useState("");
+  const [displayExpertise, setDisplayExpertise] = useState("فیلر");
 
   const stateContext = {
     menuMobile,

@@ -2,6 +2,7 @@ import { useState, useContext, useRef, Fragment, useEffect } from "react";
 import { StateContext } from "../context/stateContext";
 import { useRouter } from "next/router";
 import Menu from "@/components/Menu";
+import Footer from "@/components/Footer";
 
 export default function RootLayout({ children }) {
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
@@ -25,7 +26,10 @@ export default function RootLayout({ children }) {
       <div className="menu">
         <Menu />
       </div>
-      <main>{children}</main>
+      <div className="main">
+        <main>{children}</main>
+        <Footer />
+      </div>
     </Fragment>
   );
 }

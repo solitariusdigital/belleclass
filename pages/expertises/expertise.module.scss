@@ -26,6 +26,10 @@
   @include mixins.border-radius();
   padding: 50px 100px;
 
+  @include mixins.mobile {
+    padding: 12px;
+  }
+
   .row {
     display: flex;
     flex-direction: row-reverse;

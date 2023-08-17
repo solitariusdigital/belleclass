@@ -7,9 +7,24 @@
   margin-top: 60px;
   background: config.$gold1;
   padding: 12px;
-  border-top-left-radius: 300px;
+  border-top-left-radius: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  @include mixins.mobile {
-    border-top-left-radius: 200px;
+  .buttons {
+    display: flex;
+    flex-direction: column;
+
+    button {
+      @include mixins.button(config.$black, config.$black, config.$gold3);
+      margin: 12px 0px;
+
+      &:hover {
+        cursor: pointer;
+        background: config.$white;
+        color: config.$black;
+      }
+    }
   }
 }
