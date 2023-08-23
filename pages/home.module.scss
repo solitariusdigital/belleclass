@@ -59,13 +59,13 @@
   }
 }
 
-.highlightHeroContainer {
+.bannerHeroContainer {
   position: relative;
   bottom: 100px;
 }
 
-.highlightHeroContainer,
-.highlightContainer {
+.bannerHeroContainer,
+.bannerContainer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
   gap: 12px;
@@ -91,24 +91,15 @@
     margin: 12px 0px;
   }
 
-  div {
+  .banner {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 200px;
     background: config.$white;
     box-shadow: config.$card-shadow;
-    @include mixins.border-radius();
-  }
-
-  .highlightOne {
-    border-top: 6px solid config.$gold1;
-  }
-  .highlightTwo {
-    border-top: 6px solid config.$gold2;
-  }
-  .highlightThree {
     border-top: 6px solid config.$gold3;
+    @include mixins.border-radius();
   }
 }
 

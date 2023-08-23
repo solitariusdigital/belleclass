@@ -51,7 +51,7 @@ export const StateProvider = (props) => {
       active: false,
     },
     {
-      title: "RF درمان با فرکانس رادویی",
+      title: "درمان با فرکانس رادویی",
       active: false,
     },
     {

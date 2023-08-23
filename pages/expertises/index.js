@@ -518,7 +518,7 @@ export default function Expertises() {
               </div>
             </Fragment>
           )}
-          {displayExpertise === "RF درمان با فرکانس رادویی" && (
+          {displayExpertise === "درمان با فرکانس رادویی" && (
             <Fragment>
               <p>
                 درمان با فرکانس رادیویی یک روش غیرجراحی برای سفت کردن پوست است.

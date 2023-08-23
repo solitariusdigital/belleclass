@@ -59,15 +59,16 @@ export default function Home() {
           loading="eager"
         />
         <div className={classes.header}>
+          <h1>The Gaurdian of Life</h1>
           <h1>نگهبان زندگی</h1>
           <button>رزرو وقت حضوری</button>
           <button>مشاوره آنلاین رایگان</button>
         </div>
       </div>
-      <div className={classes.highlightHeroContainer}>
-        <div className={classes.highlightOne}></div>
-        <div className={classes.highlightTwo}></div>
-        <div className={classes.highlightThree}></div>
+      <div className={classes.bannerHeroContainer}>
+        <div className={classes.banner}></div>
+        <div className={classes.banner}></div>
+        <div className={classes.banner}></div>
       </div>
       <div className={classes.border}></div>
       <div className={classes.expertise}>
@@ -132,10 +133,10 @@ export default function Home() {
         </div>
       </div>
 
-      <div className={classes.highlightContainer}>
-        <div className={classes.highlightOne}></div>
-        <div className={classes.highlightTwo}></div>
-        <div className={classes.highlightThree}></div>
+      <div className={classes.bannerContainer}>
+        <div className={classes.banner}></div>
+        <div className={classes.banner}></div>
+        <div className={classes.banner}></div>
       </div>
       <div className={classes.doctorsContainer}>
         {doctors.map((doctor, index) => (
