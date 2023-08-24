@@ -9,6 +9,7 @@
   direction: rtl;
   font-weight: 300;
   width: config.$content-width;
+  margin-top: 70px;
 
   @include mixins.mobile {
     display: flex;

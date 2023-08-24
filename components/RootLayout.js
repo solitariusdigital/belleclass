@@ -28,8 +28,8 @@ export default function RootLayout({ children }) {
       </div>
       <div className="main">
         <main>{children}</main>
-        <Footer />
       </div>
+      <Footer />
     </Fragment>
   );
 }

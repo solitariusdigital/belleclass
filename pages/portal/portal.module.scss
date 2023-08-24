@@ -9,6 +9,7 @@
   margin: auto;
   font-weight: 300;
   min-height: 500px;
+  margin-top: 70px;
 
   @include mixins.mobile {
     width: 100%;

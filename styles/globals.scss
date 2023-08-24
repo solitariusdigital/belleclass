@@ -33,7 +33,7 @@ h3 {
 }
 
 .main {
-  margin-top: 60px;
+  min-height: 100vh;
 }
 
 .menu {
@@ -44,4 +44,5 @@ h3 {
   justify-content: center;
   width: 100%;
   background: config.$background;
+  height: 50px;
 }
