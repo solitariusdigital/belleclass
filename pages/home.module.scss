@@ -31,7 +31,7 @@
     }
 
     button {
-      @include mixins.button(config.$gold1, config.$gold3, config.$white);
+      @include mixins.button(config.$gold1, config.$gold3, config.$black);
       margin: 12px;
     }
 
@@ -280,7 +280,7 @@
     }
 
     button {
-      @include mixins.button(config.$gold1, config.$gold3, config.$white);
+      @include mixins.button(config.$gold1, config.$gold3, config.$black);
       width: 100%;
       margin: 12px 0px;
     }

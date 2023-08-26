@@ -2,6 +2,11 @@ import { useState, createContext } from "react";
 export const StateContext = createContext();
 
 export const StateProvider = (props) => {
+  // application user context
+  const [appUsers, setAppUsers] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [userLogIn, setUserLogin] = useState(true);
+
   const [menuMobile, setMenuMobile] = useState(false);
   const [navigationTopBar, setNavigationTopBar] = useState([
     {
@@ -11,7 +16,7 @@ export const StateProvider = (props) => {
     },
     {
       title: "پرتال",
-      link: "/portal",
+      link: `${userLogIn ? "/portal/patient" : "/portal/doctor"}`,
       active: false,
     },
     {
@@ -67,10 +72,6 @@ export const StateProvider = (props) => {
       active: false,
     },
   ]);
-  // application user context
-  const [appUsers, setAppUsers] = useState([]);
-  const [currentUser, setCurrentUser] = useState(null);
-  const [userLogIn, setUserLogin] = useState(true);
 
   const [displayExpertise, setDisplayExpertise] = useState("فیلر");
 

@@ -8,7 +8,6 @@ import Router from "next/router";
 
 export default function Home() {
   const { expertiseAreas, setExpertiseAreas } = useContext(StateContext);
-  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
 
   useEffect(() => {
     expertiseAreas.map((nav) => {
@@ -33,19 +32,6 @@ export default function Home() {
     },
   ];
 
-  const doctorsPage = () => {
-    let route = "/doctors";
-    Router.push(route);
-    navigationTopBar.map((nav) => {
-      if (nav.link === route) {
-        nav.active = true;
-      } else {
-        nav.active = false;
-      }
-    });
-    setNavigationTopBar([...navigationTopBar]);
-  };
-
   return (
     <Fragment>
       <div className={classes.heroHeader}>
@@ -61,8 +47,12 @@ export default function Home() {
         <div className={classes.header}>
           <h1>The Gaurdian of Life</h1>
           <h1>نگهبان زندگی</h1>
-          <button>رزرو وقت حضوری</button>
-          <button>مشاوره آنلاین رایگان</button>
+          <button onClick={() => (window.location.href = "/doctors")}>
+            رزرو وقت حضوری
+          </button>
+          <button onClick={() => (window.location.href = "/assessment")}>
+            مشاوره آنلاین رایگان
+          </button>
         </div>
       </div>
       <div className={classes.bannerHeroContainer}>
@@ -143,7 +133,7 @@ export default function Home() {
           <div
             className={classes.items}
             key={index}
-            onClick={() => doctorsPage()}
+            onClick={() => (window.location.href = "/doctors")}
           >
             <Image
               className={classes.image}
@@ -172,7 +162,9 @@ export default function Home() {
               src="https://belleclass.com/uploads/1cceeb6f0d5e4042927d1c1d05368f52.MOV"
             />
           </div>
-          <button>رزرو وقت حضوری</button>
+          <button onClick={() => (window.location.href = "/doctors")}>
+            رزرو وقت حضوری
+          </button>
           <p>
             فیلرهای پوستی مواد ژل مانندی هستند که برای بازگرداندن حجم از دست
             رفته، ایجاد خطوط صاف و نرم کردن چین و چروکها به زیر پوست تزریق
@@ -192,7 +184,9 @@ export default function Home() {
               src="https://belleclass.com/uploads/e7750b4101324885a8e2e55ad4a6a5ab.MOV"
             />
           </div>
-          <button>مشاوره آنلاین رایگان</button>
+          <button onClick={() => (window.location.href = "/assessment")}>
+            مشاوره آنلاین رایگان
+          </button>
           <p>
             فیلرهای پوستی مواد ژل مانندی هستند که برای بازگرداندن حجم از دست
             رفته، ایجاد خطوط صاف و نرم کردن چین و چروکها به زیر پوست تزریق

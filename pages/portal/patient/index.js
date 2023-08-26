@@ -1,18 +1,16 @@
 import { useState, useContext, useRef, Fragment, useEffect } from "react";
-import { StateContext } from "../../context/stateContext";
-import classes from "./portal.module.scss";
+import { StateContext } from "../../../context/stateContext";
+import classes from "../portal.module.scss";
 import Register from "@/components/Register";
 import TimelapseIcon from "@mui/icons-material/Timelapse";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import Image from "next/legacy/image";
-import background from "../../assets/background.jpg";
+import background from "../../../assets/background.jpg";
 import Person4Icon from "@mui/icons-material/Person4";
-import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
-import LocalPoliceIcon from "@mui/icons-material/LocalPolice";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
-export default function Portal() {
+export default function Patient() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const [portalType, setPortalType] = useState("online" || "visit");
@@ -106,7 +104,7 @@ export default function Portal() {
   };
 
   return (
-    <div className={classes.container}>
+    <div className={classes.containerPatient}>
       {userLogIn && (
         <div className={classes.headerHero}>
           <p>سارا اکبری</p>

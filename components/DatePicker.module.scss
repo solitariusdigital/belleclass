@@ -8,10 +8,28 @@
   width: config.$content-width;
   margin: 12px auto;
   width: 400px;
+  font-weight: 300;
 
   @include mixins.mobile {
     width: 100%;
     padding: 0px 12px;
+  }
+
+  .header {
+    width: 100%;
+    @include mixins.row-space-between-center();
+    margin-bottom: 20px;
+
+    .title {
+      font-weight: bold;
+      font-size: config.$big-font;
+    }
+
+    .arrowBack {
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 
   .timeContainer {
@@ -44,7 +62,7 @@
   }
 
   .button {
-    @include mixins.button(config.$gold1, config.$gold3, config.$white);
+    @include mixins.button(config.$gold1, config.$gold3, config.$black);
     margin-top: 20px;
   }
 

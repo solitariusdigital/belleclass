@@ -29,7 +29,7 @@ $screen-large: 2000px;
   color: $subColor;
   box-shadow: config.$button-shadow;
   background: linear-gradient(to left, $color1, $color2);
-  font-weight: 300;
+  font-weight: bold;
 
   &:hover {
     cursor: pointer;

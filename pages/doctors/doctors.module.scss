@@ -35,12 +35,17 @@
   box-shadow: config.$card-shadow;
   @include mixins.border-radius();
 
+  &:hover {
+    position: relative;
+    bottom: 5px;
+  }
+
   .tags {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
     gap: 12px;
     text-align: center;
-    margin-bottom: 12px;
+    margin: 20px 0px;
 
     p {
       padding: 8px;
@@ -55,7 +60,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 12px;
 
     .name {
       font-weight: bold;
@@ -68,19 +72,13 @@
     }
   }
 
-  .column {
-    display: flex;
-    flex-direction: column;
+  .button {
+    width: 100%;
+    @include mixins.row-space-between-center();
 
     button {
-      @include mixins.button(config.$gold1, config.$gold3, config.$white);
-      width: 100%;
-      margin-top: 12px;
+      @include mixins.button(config.$gold1, config.$gold3, config.$black);
+      width: 150px;
     }
-  }
-
-  &:hover {
-    position: relative;
-    bottom: 5px;
   }
 }
