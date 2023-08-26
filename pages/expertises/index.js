@@ -3,6 +3,7 @@ import { StateContext } from "../../context/stateContext";
 import classes from "./expertise.module.scss";
 import Expertise from "@/components/Expertise";
 import FiberManualRecordOutlined from "@mui/icons-material/FiberManualRecordOutlined";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 export default function Expertises() {
   const { expertiseAreas, setExpertiseAreas } = useContext(StateContext);
@@ -846,6 +847,11 @@ export default function Expertises() {
           )}
         </div>
       )}
+      <KeyboardArrowUpIcon
+        className="icon"
+        onClick={() => window.scrollTo(0, 0)}
+        sx={{ fontSize: 36 }}
+      />
     </div>
   );
 }

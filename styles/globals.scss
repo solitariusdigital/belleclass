@@ -46,3 +46,9 @@ h3 {
   background: config.$background;
   height: 50px;
 }
+
+.icon {
+  &:hover {
+    cursor: pointer;
+  }
+}

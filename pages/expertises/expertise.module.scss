@@ -3,11 +3,10 @@
 
 .container {
   width: config.$content-width;
-  margin: 12px auto;
-  text-align: center;
+  margin: auto;
   font-weight: 300;
-  text-align: right;
   margin-top: 70px;
+  text-align: center;
 
   @include mixins.mobile {
     width: 100%;
@@ -21,11 +20,12 @@
 }
 
 .information {
-  margin: 40px auto;
   background: config.$white;
   box-shadow: config.$card-shadow;
   @include mixins.border-radius();
   padding: 50px 100px;
+  margin: 20px auto;
+  text-align: right;
 
   @include mixins.mobile {
     padding: 12px;
