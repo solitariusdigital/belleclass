@@ -2,19 +2,11 @@ import { Schema, model, models } from "mongoose";
 
 const DoctorSchema = new Schema(
   {
-    name: {
-      type: String,
-      required: false,
-    },
-    bio: {
-      type: String,
-      required: false,
-    },
+    name: String,
+    bio: String,
     education: String,
-    permission: {
-      type: String,
-      required: false,
-    },
+    userId: String,
+    permission: String,
     image: String,
     tags: [String],
     users: [String],

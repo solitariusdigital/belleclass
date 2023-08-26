@@ -35,7 +35,7 @@ export default function Footer() {
             }
           >
             <InstagramIcon className="icon" />
-            <p>Belle Class Official</p>
+            <p>belleclass.official</p>
           </div>
         </div>
       </div>

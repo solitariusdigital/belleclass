@@ -23,7 +23,6 @@ export default function Expertise() {
     });
     setDisplayExpertise(title);
     setExpertiseAreas([...expertiseAreas]);
-    setNavigationTopBar([...navigationTopBar]);
   };
 
   return (

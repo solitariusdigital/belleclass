@@ -2,19 +2,13 @@ import { Schema, model, models } from "mongoose";
 
 const UserSchema = new Schema(
   {
-    name: {
-      type: String,
-      required: false,
-    },
+    name: String,
     phone: {
       type: String,
       required: true,
       unique: true,
     },
-    permission: {
-      type: String,
-      required: false,
-    },
+    permission: String,
     doctors: [String],
     visits: [String],
     records: [String],

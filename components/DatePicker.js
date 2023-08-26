@@ -15,7 +15,6 @@ export default function DatePicker() {
   const [alert, setAlert] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const [times, setTimes] = useState({
-    "08:00": false,
     "09:00": false,
     "10:00": false,
     "11:00": false,
@@ -23,6 +22,9 @@ export default function DatePicker() {
     "13:00": false,
     "14:00": false,
     "15:00": false,
+    "16:00": false,
+    "17:00": false,
+    "18:00": false,
   });
 
   const datePick = () => {

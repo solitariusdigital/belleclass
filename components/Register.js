@@ -6,7 +6,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import secureLocalStorage from "react-secure-storage";
 import Router from "next/router";
 
-function Register() {
+export default function Register() {
   const { userLogIn, setUserLogin } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { appUsers, setAppUsers } = useContext(StateContext);
@@ -50,7 +50,6 @@ function Register() {
       setDisplayCounter(true);
       let tokenId = fourGenerator();
       setToken(tokenId);
-      startCounter();
 
       // const api = Kavenegar.KavenegarApi({
       //   apikey: kavenegarKey,
@@ -80,7 +79,16 @@ function Register() {
 
   const handleRegister = async () => {
     if (token === Number(checkToken)) {
-      await createUser();
+      // Check if user already exists in the database
+      const existingUser = appUsers.find((user) => user.phone === phone);
+      if (existingUser) {
+        setUserLogin(true);
+        setCurrentUser(existingUser);
+        secureLocalStorage.setItem("currentUser", JSON.stringify(existingUser));
+        Router.push("/");
+      } else {
+        await createUser();
+      }
     } else {
       setAlert("کد تایید اشتباه است");
     }
@@ -96,26 +104,18 @@ function Register() {
     const user = {
       name: "",
       phone: phone.trim(),
-      permission: "user",
+      permission: "patient",
     };
     try {
-      // const data = await createUserApi(user);
-      // if (data.hasOwnProperty("error")) {
-      //   setAlert("خطا در برقراری ارتباط");
-      // } else {
-      //   setRegister(false);
-      //   setUserLogin(true);
-      //   setCurrentUser(data);
-      //   secureLocalStorage.setItem("currentUser", JSON.stringify(data));
-      //   if (referralData.user) {
-      //     const userData = appUsers.find(
-      //       (user) => user.phone === referralData.user.phone
-      //     );
-      //     userData.loyalty = userData.loyalty + 50000;
-      //     await updateUserApi(userData);
-      //   }
-      //   Router.push("/");
-      // }
+      const userData = await createUserApi(user);
+      if (userData.hasOwnProperty("error")) {
+        setAlert("خطا در برقراری ارتباط");
+      } else {
+        setUserLogin(true);
+        setCurrentUser(userData);
+        secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
+        Router.push("/");
+      }
     } catch (error) {
       setAlert("خطا در برقراری ارتباط");
     }
@@ -198,5 +198,3 @@ function Register() {
     </Fragment>
   );
 }
-
-export default Register;

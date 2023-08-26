@@ -16,7 +16,7 @@ export const StateProvider = (props) => {
     },
     {
       title: "پرتال",
-      link: `${userLogIn ? "/portal/patient" : "/portal/doctor"}`,
+      link: "/portal",
       active: false,
     },
     {

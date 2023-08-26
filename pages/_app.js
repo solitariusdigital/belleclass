@@ -1,7 +1,5 @@
-import { useState, useEffect } from "react";
 import RootLayout from "../components/RootLayout";
 import { StateProvider } from "../context/stateContext";
-import Router from "next/router";
 import { DefaultSeo } from "next-seo";
 import "../styles/globals.scss";
 

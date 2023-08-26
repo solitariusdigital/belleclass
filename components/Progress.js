@@ -14,7 +14,6 @@ export default function Progress(props) {
     backgroundColor: color,
     transition: "width 1s ease-in-out",
     borderRadius: "inherit",
-    textAlign: "right",
   };
 
   return (
