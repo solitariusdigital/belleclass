@@ -55,7 +55,7 @@ export default function Doctors() {
   return (
     <div className={classes.container}>
       {doctors.map((doctor, index) => (
-        <div className={classes.items} key={index}>
+        <div className={classes.information} key={index}>
           <div className={classes.row}>
             <Image
               className={classes.image}
@@ -76,7 +76,7 @@ export default function Doctors() {
           </div>
           <div className={classes.button}>
             <button onClick={() => toBooking()}>تقویم</button>
-            <button onClick={() => Router.push("/doctors/1")}>پرفایل</button>
+            <button onClick={() => Router.push("/doctors/1")}>پروفایل</button>
           </div>
         </div>
       ))}

@@ -29,7 +29,7 @@ export default function DatePicker() {
 
   const datePick = () => {
     if (!day || !time) {
-      setAlert("تاریخ و زمان انتخاب کنید");
+      setAlert("روز و زمان انتخاب کنید");
       setTimeout(() => {
         setAlert("");
       }, 1000);
@@ -61,12 +61,12 @@ export default function DatePicker() {
       setSelectedDate(
         `${toFarsiNumber(day.year)}/${toFarsiNumber(day.month)}/${toFarsiNumber(
           day.day
-        )} ${
+        )} - ${
           toFarsiNumber(time).slice(0, 2) + ":" + toFarsiNumber(time).slice(2)
         }`
       );
     } else {
-      setAlert("تاریخ انتخاب کنید");
+      setAlert("روز انتخاب کنید");
       resetTime();
       setTimeout(() => {
         setAlert("");

@@ -3,10 +3,16 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import PhoneIphoneOutlinedIcon from "@mui/icons-material/PhoneIphoneOutlined";
 import Router from "next/router";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 export default function Footer() {
   return (
     <div className={classes.footer}>
+      <KeyboardArrowUpIcon
+        className="icon"
+        onClick={() => window.scrollTo(0, 0)}
+        sx={{ color: "#ffffff", fontSize: 36 }}
+      />
       <div className={classes.container}>
         <div className={classes.buttons}>
           <button onClick={() => (window.location.href = "/doctors")}>
