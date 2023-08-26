@@ -97,7 +97,9 @@ export default function DatePicker() {
             className={times[time] ? classes.activeTime : classes.time}
             onClick={() => displayDate(time)}
           >
-            {time}
+            {toFarsiNumber(time).slice(0, 2) +
+              ":" +
+              toFarsiNumber(time).slice(2)}
           </p>
         ))}
       </div>
