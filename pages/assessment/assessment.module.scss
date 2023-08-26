@@ -2,5 +2,18 @@
 @use "styles/_mixins.scss" as mixins;
 
 .container {
+  font-weight: 300;
+  margin: auto;
   margin-top: 70px;
+  width: config.$content-width;
+
+  @include mixins.mobile {
+    width: 100%;
+    padding: 0px 12px;
+  }
+
+  @include mixins.tablet {
+    width: 100%;
+    padding: 0px 12px;
+  }
 }
