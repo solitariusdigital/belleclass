@@ -147,7 +147,7 @@ export default function Patient() {
                       key={index}
                       onClick={() => setDisplayDetails(!displayDetails)}
                     >
-                      <div className={classes.row}>
+                      <div className={classes.topRow}>
                         <p className={classes.title}>{item.title}</p>
                         <KeyboardArrowLeftIcon />
                       </div>
@@ -173,7 +173,7 @@ export default function Patient() {
                 <Fragment>
                   {visit.map((item, index) => (
                     <div className={classes.item} key={index}>
-                      <div className={classes.rowImage}>
+                      <div className={classes.topRow}>
                         <Image
                           className={classes.image}
                           placeholder="blur"
@@ -201,12 +201,12 @@ export default function Patient() {
             <div className={classes.details}>
               <div className={classes.header}>
                 <ArrowBackIosIcon
-                  className={classes.arrowBack}
+                  className="icon"
                   onClick={() => setDisplayDetails(!displayDetails)}
                 />
                 <p className={classes.title}>{selected.title}</p>
               </div>
-              <div className={classes.row}>
+              <div className={classes.topRow}>
                 <p>{selected.date}</p>
                 {selected.completed ? (
                   <div className={classes.row}>
