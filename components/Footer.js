@@ -8,11 +8,13 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 export default function Footer() {
   return (
     <div className={classes.footer}>
-      <KeyboardArrowUpIcon
-        className="icon"
-        onClick={() => window.scrollTo(0, 0)}
-        sx={{ color: "#ffffff", fontSize: 36 }}
-      />
+      <div className={classes.scroll}>
+        <KeyboardArrowUpIcon
+          className="icon"
+          onClick={() => window.scrollTo(0, 0)}
+          sx={{ fontSize: 36 }}
+        />
+      </div>
       <div className={classes.container}>
         <div className={classes.buttons}>
           <button onClick={() => (window.location.href = "/doctors")}>

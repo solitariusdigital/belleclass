@@ -39,7 +39,7 @@ export default function Register() {
 
   const verifyPhone = () => {
     if (phone.length === 0) {
-      setAlert("شماره موبایل را وارد کنید");
+      setAlert("موبایل خالی");
       setTimeout(() => {
         setAlert("");
       }, 3000);
@@ -70,7 +70,7 @@ export default function Register() {
       //   }
       // );
     } else {
-      setAlert("شماره موبایل اشتباه است");
+      setAlert("موبایل اشتباه");
     }
     setTimeout(() => {
       setAlert("");
@@ -90,7 +90,7 @@ export default function Register() {
         await createUser();
       }
     } else {
-      setAlert("کد تایید اشتباه است");
+      setAlert("کد تایید اشتباه");
     }
     setToken("");
     setCheckToken("");

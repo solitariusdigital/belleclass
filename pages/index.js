@@ -62,6 +62,7 @@ export default function Home() {
       </div>
       <div className={classes.border}></div>
       <div className={classes.expertise}>
+        <h2>خدمات کلینیک</h2>
         <Expertise></Expertise>
       </div>
       <div className={classes.lifeStyleContainer}>
@@ -122,7 +123,6 @@ export default function Home() {
           />
         </div>
       </div>
-
       <div className={classes.bannerContainer}>
         <div className={classes.banner}></div>
         <div className={classes.banner}></div>

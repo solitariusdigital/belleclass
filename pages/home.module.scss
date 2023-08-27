@@ -122,8 +122,15 @@
 }
 
 .expertise {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
   margin: auto;
   width: config.$content-width;
+
+  h2 {
+    margin-bottom: 20px;
+  }
 
   @include mixins.mobile {
     width: 100%;

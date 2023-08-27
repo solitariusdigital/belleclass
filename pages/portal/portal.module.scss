@@ -10,7 +10,6 @@
   margin: auto;
   font-weight: 300;
   min-height: 500px;
-  margin-top: 70px;
 
   @include mixins.mobile {
     width: 100%;
@@ -190,7 +189,6 @@
       align-items: center;
       direction: rtl;
       margin-top: 40px;
-      margin-bottom: 20px;
 
       .title {
         margin-right: 8px;
@@ -214,7 +212,8 @@
     .text {
       box-shadow: config.$card-shadow;
       background: config.$white;
-      padding: 12px;
+      margin-top: 20px;
+      padding: 16px;
       @include mixins.border-radius();
     }
 
