@@ -53,3 +53,11 @@ h3 {
     cursor: pointer;
   }
 }
+
+.alert {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: config.$red;
+  height: 12px;
+}

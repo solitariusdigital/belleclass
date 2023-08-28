@@ -3,14 +3,10 @@ import { Schema, model, models } from "mongoose";
 const RecordSchema = new Schema(
   {
     title: String,
-    images: {
-      one: String,
-      two: String,
-      three: String,
-    },
-    user: String,
-    doctor: String,
-    archive: String,
+    images: String,
+    userId: String,
+    doctorId: String,
+    archiveId: String,
     comments: [String],
     completed: Boolean,
   },

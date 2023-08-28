@@ -1,276 +1,299 @@
-import { useState, useContext, useRef, Fragment, useEffect } from "react";
+import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "../../../context/stateContext";
 import classes from "../portal.module.scss";
-import Register from "@/components/Register";
 import TimelapseIcon from "@mui/icons-material/Timelapse";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import Image from "next/legacy/image";
-import background from "../../../assets/background.jpg";
 import Person4Icon from "@mui/icons-material/Person4";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import Router from "next/router";
+import dbConnect from "@/services/dbConnect";
+import recordModel from "@/models/Record";
+import visitModel from "@/models/Visit";
+import { convertDate } from "@/services/utility";
+import { getDoctorApi, updateRecordApi, getRecordApi } from "@/services/api";
+import avatar from "../../../assets/avatar.png";
 
-export default function Patient() {
-  const { userLogIn, setUserLogin } = useContext(StateContext);
+export default function Patient({ records, visits }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const [portalType, setPortalType] = useState("online" || "visit");
   const [displayDetails, setDisplayDetails] = useState(false);
+  const [selected, setSelected] = useState(null);
 
-  const online = [
-    {
-      title: "تورم تورم تورمتورم تتورم تورم و کبودی",
-      completed: true,
-      date: "1402/05/02 ",
-    },
-    {
-      title: "وجود تورم و کبودی",
-      completed: false,
-      date: "1402/05/02 ",
-    },
-    {
-      title: "وجود تورم و کبودی",
-      completed: true,
-      date: "1402/05/02 ",
-    },
-    {
-      title: "وجود تورم و کبودی",
-      completed: false,
-      date: "1402/05/02 ",
-    },
-    {
-      title: "تورم تورم تورمتورم تتورم تورم و کبودی",
-      completed: true,
-      date: "1402/05/02 ",
-    },
-    {
-      title: "وجود تورم و کبودی",
-      completed: false,
-      date: "1402/05/02 ",
-    },
-    {
-      title: "وجود تورم و کبودی",
-      completed: true,
-      date: "1402/05/02 ",
-    },
-    {
-      title: "وجود تورم و کبودی",
-      completed: false,
-      date: "1402/05/02 ",
-    },
-  ];
+  const [displayRecords, setDisplayRecords] = useState([]);
+  const [displayVisits, setDisplayVisits] = useState([]);
+  const [comment, setComment] = useState("");
+  const [alert, setAlert] = useState("");
 
-  const visit = [
-    {
-      doctor: "دکتر محمد رضا فرهانی",
-      title: "وجود تورمتورم تورم تورم و کبودی",
-      completed: true,
-      date: "1402/05/02 ",
-      time: "09:30",
-    },
-    {
-      doctor: "دکتر محمد رضا فرهانی",
-      title: "وجود تورم و کبودی",
-      completed: true,
-      date: "1402/05/02 ",
-      time: "11:30",
-    },
-    {
-      doctor: "دکتر محمد رضا فرهانی",
-      title: "وجود تورم و کبودی",
-      completed: true,
-      date: "1402/05/02 ",
-      time: "14:30",
-    },
-    {
-      doctor: "دکتر محمد رضا فرهانی",
-      title: "وجود تورم و کبودی",
-      completed: true,
-      date: "1402/05/02 ",
-      time: "18:30",
-    },
-    {
-      doctor: "دکتر محمد رضا فرهانی",
-      title: "وجود تورم و کبودی",
-      completed: true,
-      date: "1402/05/02 ",
-      time: "10:30",
-    },
-  ];
+  useEffect(() => {
+    if (!currentUser) {
+      Router.push("/portal");
+    } else {
+      setDisplayRecords(
+        records
+          .filter((record) => {
+            return record.userId === currentUser["_id"];
+          })
+          .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
+      );
+      const currentVisits = [];
+      for (const visit of visits) {
+        if (visit.userId === currentUser["_id"]) {
+          currentVisits.push(visit);
+        }
+      }
+      currentVisits.sort(
+        (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
+      );
+      // inject doctor info into visit object
+      currentVisits.forEach(async (item, index) => {
+        let doctorData = await getDoctorApi(item.doctorId);
+        currentVisits[index].doctor = doctorData;
+      });
+      setDisplayVisits(currentVisits);
+    }
+  }, [currentUser, records, visits]);
 
-  const selected = {
-    title: "وجود تورم و کبودی",
-    completed: false,
-    date: "1402/05/02 ",
+  const margin = {
+    margin: "8px 0px",
+  };
+
+  const submit = async (id) => {
+    if (!comment) {
+      setAlert("مشاوره خالی");
+      setTimeout(() => {
+        setAlert("");
+      }, 3000);
+      return;
+    }
+
+    let recordData = await getRecordApi(id);
+    console.log(recordData);
+    recordData.comments[1] = comment;
+    recordData.completed = true;
+    await updateRecordApi(recordData);
+    Router.push("/portal");
   };
 
   return (
-    <div className={classes.containerPatient}>
-      {userLogIn && (
-        <div className={classes.headerHero}>
-          <p>سارا اکبری</p>
-          <Person4Icon />
-        </div>
-      )}
-      {!userLogIn ? (
-        <div className={classes.register}>
-          <Register></Register>
-        </div>
-      ) : (
-        <div className={classes.portal}>
-          {!displayDetails && (
-            <div className={classes.navigation}>
-              <p
-                className={
-                  portalType === "online" ? classes.nav : classes.navActive
-                }
-                onClick={() => setPortalType("visit")}
-              >
-                وقت حضوری
-              </p>
-              <p
-                className={
-                  portalType === "visit" ? classes.nav : classes.navActive
-                }
-                onClick={() => setPortalType("online")}
-              >
-                مشاوره آنلاین
-              </p>
-            </div>
-          )}
-          {!displayDetails && (
-            <div className={classes.cards}>
-              {portalType === "online" && (
-                <Fragment>
-                  {online.map((item, index) => (
-                    <div
-                      className={classes.item}
-                      key={index}
-                      onClick={() => setDisplayDetails(!displayDetails)}
-                    >
-                      <div className={classes.topRow}>
-                        <p className={classes.title}>{item.title}</p>
-                        <KeyboardArrowLeftIcon />
-                      </div>
-                      <div className={classes.row}>
-                        {item.completed ? (
-                          <div className={classes.row}>
-                            <TaskAltIcon className={classes.icon} />
-                            <p>مشاوره تکمیل شده</p>
-                          </div>
-                        ) : (
-                          <div className={classes.row}>
-                            <TimelapseIcon className={classes.icon} />
-                            <p>در انتظار مشاوره</p>
-                          </div>
-                        )}
-                        <p>{item.date}</p>
-                      </div>
-                    </div>
-                  ))}
-                </Fragment>
-              )}
-              {portalType === "visit" && (
-                <Fragment>
-                  {visit.map((item, index) => (
-                    <div className={classes.item} key={index}>
-                      <div className={classes.topRow}>
-                        <Image
-                          className={classes.image}
-                          placeholder="blur"
-                          src={background}
-                          alt="image"
-                          width={50}
-                          height={50}
-                          objectFit="cover"
-                          loading="eager"
-                        />
-                        <p className={classes.title}>{item.doctor}</p>
-                      </div>
-                      <div className={classes.row}>
-                        <p className={classes.title}>{item.title}</p>
-                        <p className={classes.time}>{item.time}</p>
-                        <p>{item.date}</p>
-                      </div>
-                    </div>
-                  ))}
-                </Fragment>
-              )}
-            </div>
-          )}
-          {displayDetails && (
-            <div className={classes.details}>
-              <div className={classes.header}>
-                <ArrowBackIosIcon
-                  className="icon"
-                  onClick={() => setDisplayDetails(!displayDetails)}
-                />
-                <p className={classes.title}>{selected.title}</p>
+    <Fragment>
+      {currentUser && (
+        <div className={classes.containerPatient}>
+          <div className={classes.headerHero}>
+            <p>{currentUser.name ? currentUser.name : currentUser.phone}</p>
+            <Person4Icon />
+          </div>
+          <div className={classes.portal}>
+            {!displayDetails && (
+              <div className={classes.navigation}>
+                <p
+                  className={
+                    portalType === "online" ? classes.nav : classes.navActive
+                  }
+                  onClick={() => setPortalType("visit")}
+                >
+                  وقت حضوری
+                </p>
+                <p
+                  className={
+                    portalType === "visit" ? classes.nav : classes.navActive
+                  }
+                  onClick={() => setPortalType("online")}
+                >
+                  مشاوره آنلاین
+                </p>
               </div>
-              <div className={classes.topRow}>
-                <p>{selected.date}</p>
-                {selected.completed ? (
-                  <div className={classes.row}>
-                    <p>مشاوره تکمیل شده</p>
-                    <TaskAltIcon className={classes.icon} />
-                  </div>
-                ) : (
-                  <div className={classes.row}>
-                    <p>در انتظار مشاوره</p>
-                    <TimelapseIcon className={classes.icon} />
-                  </div>
+            )}
+            {!displayDetails && (
+              <div className={classes.cards}>
+                {portalType === "online" && (
+                  <Fragment>
+                    {displayRecords.map((item, index) => (
+                      <div
+                        className={classes.item}
+                        key={index}
+                        onClick={() => {
+                          setDisplayDetails(!displayDetails);
+                          setSelected(item);
+                        }}
+                      >
+                        <div className={classes.row} style={margin}>
+                          <p className={classes.title}>{item.title}</p>
+                          <KeyboardArrowLeftIcon />
+                        </div>
+                        <div className={classes.row}>
+                          {item.completed ? (
+                            <div className={classes.row} style={margin}>
+                              <div className={classes.subRow}>
+                                <TaskAltIcon className={classes.icon} />
+                                <p>مشاوره تکمیل شده</p>
+                              </div>
+                              <p>{convertDate(item.updatedAt)}</p>
+                            </div>
+                          ) : (
+                            <div className={classes.row} style={margin}>
+                              <div className={classes.subRow}>
+                                <TimelapseIcon className={classes.icon} />
+                                <p>در انتظار مشاوره</p>
+                              </div>
+                              <p>{convertDate(item.createdAt)}</p>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </Fragment>
+                )}
+                {portalType === "visit" && (
+                  <Fragment>
+                    {displayVisits.map((item, index) => (
+                      <div className={classes.item} key={index}>
+                        <div className={classes.row} style={margin}>
+                          <div className={classes.image}>
+                            <Image
+                              className={classes.image}
+                              src={item.doctor.image}
+                              placeholder="blur"
+                              blurDataURL={item.doctor.image}
+                              alt="image"
+                              width={60}
+                              height={60}
+                              objectFit="cover"
+                              loading="eager"
+                            />
+                          </div>
+                          <p className={classes.title}>{item.doctor.name}</p>
+                        </div>
+                        <div className={classes.row} style={margin}>
+                          <p className={classes.greyTitle}>عنوان مشاوره</p>
+                          <p className={classes.title}>{item.title}</p>
+                        </div>
+                        <div className={classes.row} style={margin}>
+                          <p className={classes.greyTitle}>تاریخ ثبت</p>
+                          <p>{convertDate(item.createdAt)}</p>
+                        </div>
+                        <div className={classes.row} style={margin}>
+                          <p className={classes.greyTitle}>تاریخ مشاوره</p>
+                          <p className={classes.time}>ساعت {item.time}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </Fragment>
                 )}
               </div>
-              <Image
-                className={classes.image}
-                src={background}
-                placeholder="blur"
-                alt="image"
-                loading="eager"
-                priority
-              />
-              <p className={classes.text}>
-                فیلرهای پوستی مواد ژل مانندی هستند که برای بازگرداندن حجم از دست
-                رفته، ایجاد خطوط صاف و نرم کردن چین و چروکها به زیر پوست تزریق
-                میشوند. مدت زمان ماندگاری اثر فیلر های پوستی به محصول، ناحیه
-                درمان و بیمار بستگی دارد. یکی از رایج ترین فیلرها، فیلرهای اسید
-                هیالورونیک است
-              </p>
-              <div className={classes.rowDoctor}>
-                <Image
-                  className={classes.image}
-                  placeholder="blur"
-                  src={background}
-                  alt="image"
-                  width={50}
-                  height={50}
-                  objectFit="cover"
-                  loading="eager"
-                />
-                <p className={classes.title}>دکتر محمد رضا فرهانی</p>
+            )}
+            {displayDetails && (
+              <div className={classes.details}>
+                <div className={classes.header}>
+                  <ArrowBackIosIcon
+                    className="icon"
+                    onClick={() => setDisplayDetails(!displayDetails)}
+                  />
+                  <p className={classes.title}>{selected.title}</p>
+                </div>
+                <div className={classes.row} style={margin}>
+                  <p>{selected.date}</p>
+                  {selected.completed ? (
+                    <div className={classes.row}>
+                      <p>{convertDate(selected.updatedAt)}</p>
+                      <div className={classes.subRow}>
+                        <p>مشاوره تکمیل شده</p>
+                        <TaskAltIcon className={classes.icon} />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className={classes.row}>
+                      <p>{convertDate(selected.createdAt)}</p>
+                      <div className={classes.subRow}>
+                        <p>در انتظار مشاوره</p>
+                        <TimelapseIcon className={classes.icon} />
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className={classes.imageContainer}>
+                  <Image
+                    className={classes.image}
+                    src={selected.image}
+                    placeholder="blur"
+                    blurDataURL={selected.image}
+                    alt="image"
+                    loading="eager"
+                    layout="fill"
+                    objectFit="cover"
+                    priority
+                  />
+                </div>
+                <p className={classes.text}>{selected.comments[0]}</p>
+                <div className={classes.rowDoctor}>
+                  <Image
+                    className={classes.image}
+                    src={avatar}
+                    placeholder="blur"
+                    alt="image"
+                    width={50}
+                    height={50}
+                    objectFit="cover"
+                    loading="eager"
+                  />
+                  <p className={classes.title}>پزشک بل کلاس</p>
+                </div>
+                {!selected.completed && (
+                  <p className={classes.message} onClick={() => handleDoc()}>
+                    هنگام تکمیل مشاوره به شما پیام داده میشود
+                  </p>
+                )}
+                {selected.completed && (
+                  <p className={classes.text}>{selected.comments[1]}</p>
+                )}
+                {!selected.completed && (
+                  <Fragment>
+                    <div className={classes.input}>
+                      <p className={classes.label}>مشاوره تخصصی</p>
+                      <textarea
+                        placeholder="..."
+                        type="text"
+                        id="comment"
+                        name="comment"
+                        onChange={(e) => setComment(e.target.value)}
+                        value={comment}
+                        autoComplete="off"
+                        dir="rtl"
+                      ></textarea>
+                      <p className="alert">{alert}</p>
+                      <button onClick={() => submit(selected["_id"])}>
+                        ارسال
+                      </button>
+                    </div>
+                  </Fragment>
+                )}
               </div>
-              <p className={classes.text}>
-                فیلرهای پوستی مواد ژل مانندی هستند که برای بازگرداندن حجم از دست
-                رفته، ایجاد خطوط صاف و نرم کردن چین و چروکها به زیر پوست تزریق
-                میشوند. مدت زمان ماندگاری اثر فیلر های پوستی به محصول، ناحیه
-                درمان و بیمار بستگی دارد. یکی از رایج ترین فیلرها
-              </p>
-              <div className={classes.input}>
-                <p className={classes.label}>مشاوره تخصصی</p>
-                <textarea
-                  placeholder="اینجا تایپ کن"
-                  type="text"
-                  id="comment"
-                  name="comment"
-                  // value={comment}
-                  autoComplete="off"
-                  dir="rtl"
-                ></textarea>
-                <button>ارسال</button>
-              </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       )}
-    </div>
+    </Fragment>
   );
+}
+
+// initial connection to db
+export async function getServerSideProps(context) {
+  try {
+    await dbConnect();
+    const records = await recordModel.find();
+    const visits = await visitModel.find();
+
+    return {
+      props: {
+        records: JSON.parse(JSON.stringify(records)),
+        visits: JSON.parse(JSON.stringify(visits)),
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      notFound: true,
+    };
+  }
 }

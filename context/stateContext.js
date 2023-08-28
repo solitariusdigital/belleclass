@@ -5,7 +5,6 @@ export const StateProvider = (props) => {
   // application user context
   const [appUsers, setAppUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
-  const [userLogIn, setUserLogin] = useState(true);
 
   const [menuMobile, setMenuMobile] = useState(false);
   const [navigationTopBar, setNavigationTopBar] = useState([
@@ -82,8 +81,6 @@ export const StateProvider = (props) => {
     setNavigationTopBar,
     currentUser,
     setCurrentUser,
-    userLogIn,
-    setUserLogin,
     appUsers,
     setAppUsers,
     expertiseAreas,

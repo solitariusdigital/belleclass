@@ -1,8 +1,17 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
-.containerPatient,
-.containerDoctor {
+.register {
+  width: 500px;
+  margin: 50px auto;
+
+  @include mixins.mobile {
+    width: 100%;
+    padding: 0px 12px;
+  }
+}
+
+.containerPatient {
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -33,16 +42,6 @@
     }
   }
 
-  .register {
-    width: 500px;
-    margin: 50px auto;
-
-    @include mixins.mobile {
-      width: 100%;
-      padding: 0px 12px;
-    }
-  }
-
   .portal {
     width: 100%;
 
@@ -57,7 +56,7 @@
       width: 350px;
       padding: 8px;
       margin: auto;
-      margin-bottom: 50px;
+      margin-bottom: 40px;
       border-radius: 50px;
       background: config.$white;
       box-shadow: config.$card-shadow;
@@ -120,42 +119,37 @@
       .title {
         font-weight: bold;
         font-size: config.$med-font;
-        width: 100%;
-        margin-left: 8px;
-      }
-
-      .time {
-        margin: 0px 8px;
       }
     }
   }
 
-  .topRow {
+  .row,
+  .subRow {
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: space-between;
-    margin-bottom: 12px;
+    align-items: center;
 
-    .title {
-      margin-right: 8px;
-    }
-
-    .image,
-    .imageProfile {
+    .image {
       border-radius: 50%;
+      margin-left: 12px;
     }
-  }
 
-  .row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    .greyTitle {
+      color: config.$grey;
+    }
+
+    .time {
+      font-weight: bold;
+    }
 
     .icon {
       margin-left: 8px;
     }
+  }
+
+  .row {
+    width: 100%;
   }
 
   .details {
@@ -217,8 +211,19 @@
       @include mixins.border-radius();
     }
 
-    .image {
-      @include mixins.border-radius();
+    .message {
+      text-align: center;
+      color: config.$grey;
+      margin-top: 20px;
+    }
+
+    .imageContainer {
+      position: relative;
+      height: 300px;
+
+      .image {
+        @include mixins.border-radius();
+      }
     }
 
     @include mixins.mobile {

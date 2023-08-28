@@ -1,13 +1,13 @@
 import { useState, useContext, useRef, Fragment, useEffect } from "react";
 import { StateContext } from "../context/stateContext";
 import classes from "./Register.module.scss";
-import { fourGenerator } from "../services/utility";
+import { fourGenerator } from "@/services/utility";
 import CloseIcon from "@mui/icons-material/Close";
 import secureLocalStorage from "react-secure-storage";
 import Router from "next/router";
+import { createUserApi, getUsersApi } from "@/services/api";
 
 export default function Register() {
-  const { userLogIn, setUserLogin } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { appUsers, setAppUsers } = useContext(StateContext);
 
@@ -17,6 +17,14 @@ export default function Register() {
   const [alert, setAlert] = useState("");
   const [displayCounter, setDisplayCounter] = useState(false);
   let [counter, setCounter] = useState(59);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getUsersApi();
+      setAppUsers(data);
+    };
+    fetchData().catch(console.error);
+  }, [setAppUsers]);
 
   let intervalRef = useRef(null);
   const startCounter = () => {
@@ -49,8 +57,8 @@ export default function Register() {
     if (phone.length === 11 && phone.slice(0, 2) === "09") {
       setDisplayCounter(true);
       let tokenId = fourGenerator();
+      console.log(tokenId);
       setToken(tokenId);
-
       // const api = Kavenegar.KavenegarApi({
       //   apikey: kavenegarKey,
       // });
@@ -80,12 +88,11 @@ export default function Register() {
   const handleRegister = async () => {
     if (token === Number(checkToken)) {
       // Check if user already exists in the database
-      const existingUser = appUsers.find((user) => user.phone === phone);
-      if (existingUser) {
-        setUserLogin(true);
-        setCurrentUser(existingUser);
-        secureLocalStorage.setItem("currentUser", JSON.stringify(existingUser));
-        Router.push("/");
+      const userData = appUsers.find((user) => user.phone === phone);
+      if (userData) {
+        setCurrentUser(userData);
+        secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
+        Router.push("/portal");
       } else {
         await createUser();
       }
@@ -111,10 +118,9 @@ export default function Register() {
       if (userData.hasOwnProperty("error")) {
         setAlert("خطا در برقراری ارتباط");
       } else {
-        setUserLogin(true);
         setCurrentUser(userData);
         secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
-        Router.push("/");
+        Router.push("/portal");
       }
     } catch (error) {
       setAlert("خطا در برقراری ارتباط");
@@ -153,8 +159,8 @@ export default function Register() {
         {displayCounter ? (
           <div className={classes.activationContainer}>
             <div className={classes.activationCode}>
-              <p className={classes.alert}>{counter}</p>
-              <p className={classes.alert}>ثانیه تا درخواست مجدد کد</p>
+              <p className="alert">{counter}</p>
+              <p className="alert">ثانیه تا درخواست مجدد کد</p>
             </div>
           </div>
         ) : (
@@ -187,7 +193,7 @@ export default function Register() {
           />
         </div>
         <div className={classes.formAction}>
-          <p className={classes.alert}>{alert}</p>
+          <p className="alert">{alert}</p>
           {checkToken.length === 4 && (
             <button className="mainButton" onClick={() => handleRegister()}>
               ورود / ​ثبت نام

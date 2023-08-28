@@ -103,7 +103,7 @@ export default function DatePicker() {
           </p>
         ))}
       </div>
-      {alert && <p className={classes.alert}>{alert}</p>}
+      {alert && <p className="alert">{alert}</p>}
       {selectedDate && <p className={classes.message}>{selectedDate} ساعت</p>}
       <button className={classes.button} onClick={() => datePick()}>
         ثبت

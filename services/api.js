@@ -40,7 +40,7 @@ export const getUsersApi = async () => {
 
 // doctors api
 export const updateDoctorApi = async (data) => {
-  const response = await fetch("/api/doctor", {
+  const response = await fetch("/api/doctors", {
     method: "PUT",
     body: JSON.stringify(data),
     headers: {
@@ -80,7 +80,7 @@ export const getDoctorsApi = async () => {
 
 // visits api
 export const updateVisitApi = async (data) => {
-  const response = await fetch("/api/visit", {
+  const response = await fetch("/api/visits", {
     method: "PUT",
     body: JSON.stringify(data),
     headers: {
@@ -120,7 +120,7 @@ export const getVisitsApi = async () => {
 
 // archives api
 export const updateArchiveApi = async (data) => {
-  const response = await fetch("/api/archive", {
+  const response = await fetch("/api/archives", {
     method: "PUT",
     body: JSON.stringify(data),
     headers: {
@@ -160,7 +160,7 @@ export const getArchivesApi = async () => {
 
 // records api
 export const updateRecordApi = async (data) => {
-  const response = await fetch("/api/record", {
+  const response = await fetch("/api/records", {
     method: "PUT",
     body: JSON.stringify(data),
     headers: {
