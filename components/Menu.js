@@ -76,7 +76,7 @@ export default function Menu() {
             </div>
             <div className={classes.buttons}>
               <button onClick={() => (window.location.href = "/doctors")}>
-                رزرو وقت حضوری
+                رزرو مراجعه حضوری
               </button>
               <button onClick={() => (window.location.href = "/assessment")}>
                 مشاوره آنلاین رایگان

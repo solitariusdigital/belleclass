@@ -7,6 +7,8 @@ const VisitSchema = new Schema(
     doctorId: String,
     recordId: String,
     time: String,
+    completed: Boolean,
+    canceled: Boolean,
   },
   { timestamps: true }
 );

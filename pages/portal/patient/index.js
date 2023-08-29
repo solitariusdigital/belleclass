@@ -12,8 +12,15 @@ import dbConnect from "@/services/dbConnect";
 import recordModel from "@/models/Record";
 import visitModel from "@/models/Visit";
 import { convertDate } from "@/services/utility";
-import { getDoctorApi, updateRecordApi, getRecordApi } from "@/services/api";
+import {
+  getDoctorApi,
+  updateRecordApi,
+  getRecordApi,
+  getVisitApi,
+  updateVisitApi,
+} from "@/services/api";
 import avatar from "@/assets/avatar.png";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function Patient({ records, visits }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
@@ -35,7 +42,8 @@ export default function Patient({ records, visits }) {
           .filter((record) => {
             return record.userId === currentUser["_id"];
           })
-          .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
+          .sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt))
+          .sort((a, b) => a.completed - b.completed)
       );
       const currentVisits = [];
       for (const visit of visits) {
@@ -43,9 +51,9 @@ export default function Patient({ records, visits }) {
           currentVisits.push(visit);
         }
       }
-      currentVisits.sort(
-        (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
-      );
+      currentVisits
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .sort((a, b) => a.canceled - b.canceled);
       // inject doctor info into visit object
       currentVisits.forEach(async (item, index) => {
         let doctorData = await getDoctorApi(item.doctorId);
@@ -69,11 +77,20 @@ export default function Patient({ records, visits }) {
     }
 
     let recordData = await getRecordApi(id);
-    console.log(recordData);
     recordData.comments[1] = comment;
     recordData.completed = true;
     await updateRecordApi(recordData);
     Router.push("/portal");
+  };
+
+  const cancelVisit = async (id) => {
+    const confirm = window.confirm("لغو مراجعه مطمئنی؟");
+    if (confirm) {
+      let recordData = await getVisitApi(id);
+      recordData.canceled = true;
+      await updateVisitApi(recordData);
+      Router.push("/portal");
+    }
   };
 
   return (
@@ -93,7 +110,7 @@ export default function Patient({ records, visits }) {
                   }
                   onClick={() => setPortalType("visit")}
                 >
-                  وقت حضوری
+                  مراجعه حضوری
                 </p>
                 <p
                   className={
@@ -109,7 +126,7 @@ export default function Patient({ records, visits }) {
               <p className="message">مشاوره آنلاین خالی</p>
             )}
             {displayVisits.length === 0 && portalType === "visit" && (
-              <p className="message">وقت حضوری خالی</p>
+              <p className="message">مراجعه حضوری خالی</p>
             )}
             {!displayDetails && (
               <div className={classes.cards}>
@@ -137,7 +154,10 @@ export default function Patient({ records, visits }) {
                           {item.completed ? (
                             <div className={classes.row} style={margin}>
                               <div className={classes.subRow}>
-                                <TaskAltIcon className={classes.icon} />
+                                <TaskAltIcon
+                                  className={classes.icon}
+                                  sx={{ color: "#57a361" }}
+                                />
                                 <p>مشاوره تکمیل شده</p>
                               </div>
                               <p>{convertDate(item.updatedAt)}</p>
@@ -145,7 +165,10 @@ export default function Patient({ records, visits }) {
                           ) : (
                             <div className={classes.row} style={margin}>
                               <div className={classes.subRow}>
-                                <TimelapseIcon className={classes.icon} />
+                                <TimelapseIcon
+                                  className={classes.icon}
+                                  sx={{ color: "#b69119" }}
+                                />
                                 <p>در انتظار مشاوره</p>
                               </div>
                               <p>{convertDate(item.createdAt)}</p>
@@ -168,8 +191,8 @@ export default function Patient({ records, visits }) {
                               placeholder="blur"
                               blurDataURL={item.doctor.image}
                               alt="image"
-                              width={80}
-                              height={80}
+                              width={70}
+                              height={70}
                               objectFit="cover"
                               loading="eager"
                             />
@@ -177,16 +200,60 @@ export default function Patient({ records, visits }) {
                           <p className={classes.title}>{item.doctor.name}</p>
                         </div>
                         <div className={classes.row} style={margin}>
-                          <p className={classes.greyTitle}>تاریخ ثبت</p>
-                          <p>{convertDate(item.createdAt)}</p>
-                        </div>
-                        <div className={classes.row} style={margin}>
                           <p className={classes.greyTitle}>عنوان</p>
                           <p className={classes.title}>{item.title}</p>
                         </div>
                         <div className={classes.row} style={margin}>
-                          <p className={classes.greyTitle}>تاریخ مراجعه</p>
-                          <p className={classes.time}>ساعت {item.time}</p>
+                          <p className={classes.greyTitle}>تاریخ ثبت</p>
+                          <p>{convertDate(item.createdAt)}</p>
+                        </div>
+                        <div className={classes.row} style={margin}>
+                          {item.canceled ? (
+                            <div className={classes.row}>
+                              <div className={classes.subRow}>
+                                <CloseIcon
+                                  className={classes.icon}
+                                  sx={{ color: "#d40d12" }}
+                                />
+                                <p>مراجعه لغو شده</p>
+                              </div>
+                              <p>{convertDate(item.updatedAt)}</p>
+                            </div>
+                          ) : (
+                            <Fragment>
+                              {item.completed ? (
+                                <div className={classes.row}>
+                                  <div className={classes.subRow}>
+                                    <TaskAltIcon
+                                      className={classes.icon}
+                                      sx={{ color: "#57a361" }}
+                                    />
+                                    <p>مراجعه تکمیل شده</p>
+                                  </div>
+                                  <p>{convertDate(item.updatedAt)}</p>
+                                </div>
+                              ) : (
+                                <div className={classes.row}>
+                                  <div className={classes.subRow}>
+                                    <TimelapseIcon
+                                      className={classes.icon}
+                                      sx={{ color: "#b69119" }}
+                                    />
+                                    <p>در انتظار مراجعه</p>
+                                    {!item.canceled && !item.completed && (
+                                      <p
+                                        className={classes.cancel}
+                                        onClick={() => cancelVisit(item["_id"])}
+                                      >
+                                        لغو
+                                      </p>
+                                    )}
+                                  </div>
+                                  <p className={classes.time}>{item.time}</p>
+                                </div>
+                              )}
+                            </Fragment>
+                          )}
                         </div>
                       </div>
                     ))}
@@ -227,8 +294,8 @@ export default function Patient({ records, visits }) {
                     src={avatar}
                     placeholder="blur"
                     alt="image"
-                    width={80}
-                    height={80}
+                    width={70}
+                    height={70}
                     objectFit="cover"
                     loading="eager"
                   />
@@ -239,7 +306,10 @@ export default function Patient({ records, visits }) {
                     <p>{convertDate(selected.updatedAt)}</p>
                     <div className={classes.subRow}>
                       <p>مشاوره تکمیل شده</p>
-                      <TaskAltIcon className={classes.icon} />
+                      <TaskAltIcon
+                        className={classes.icon}
+                        sx={{ color: "#57a361" }}
+                      />
                     </div>
                   </div>
                 ) : (
@@ -247,7 +317,10 @@ export default function Patient({ records, visits }) {
                     <p>{convertDate(selected.createdAt)}</p>
                     <div className={classes.subRow}>
                       <p>در انتظار مشاوره</p>
-                      <TimelapseIcon className={classes.icon} />
+                      <TimelapseIcon
+                        className={classes.icon}
+                        sx={{ color: "#b69119" }}
+                      />
                     </div>
                   </div>
                 )}
@@ -255,7 +328,7 @@ export default function Patient({ records, visits }) {
                   <Fragment>
                     <p className={classes.text}>{selected.comments[1]}</p>
                     <button onClick={() => (window.location.href = "/doctors")}>
-                      رزرو وقت حضوری
+                      رزرو مراجعه حضوری
                     </button>
                   </Fragment>
                 )}

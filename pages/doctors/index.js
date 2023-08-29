@@ -23,8 +23,8 @@ export default function Doctors({ doctors }) {
               blurDataURL={doctor.image}
               alt="image"
               loading="eager"
-              width={80}
-              height={80}
+              width={70}
+              height={70}
               objectFit="cover"
               priority
             />

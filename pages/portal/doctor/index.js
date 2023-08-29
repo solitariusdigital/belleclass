@@ -125,7 +125,7 @@ export default function Patient() {
                   }
                   onClick={() => setPortalType("visit")}
                 >
-                  وقت حضوری
+                  مراجعه حضوری
                 </p>
                 <p
                   className={

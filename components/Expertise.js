@@ -26,7 +26,7 @@ export default function Expertise() {
   };
 
   return (
-    <div className={`${classes.items} animate__animated animate__pulse`}>
+    <div className={classes.items}>
       {expertiseAreas.map((item, index) => (
         <p
           className={item.active ? classes.active : ""}

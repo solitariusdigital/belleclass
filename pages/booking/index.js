@@ -20,7 +20,7 @@ export default function Booking() {
         />
         <p className={classes.title}>{doctor.name}</p>
       </div>
-      <DatePicker />
+      <DatePicker doctorId={doctor.id} />
     </div>
   );
 }

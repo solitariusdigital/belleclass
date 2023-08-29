@@ -133,7 +133,7 @@ export default function Register() {
   return (
     <Fragment>
       <div className={classes.form}>
-        <p className={classes.title}>خوش آمدید</p>
+        <p className={classes.title}>پرتال بل کلاس</p>
         <div className={classes.input}>
           <div className={classes.bar}>
             <p className={classes.label}>

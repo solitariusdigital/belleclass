@@ -48,7 +48,7 @@ export default function Home() {
           <h1>The Gaurdian of Life</h1>
           <h1>نگهبان زندگی</h1>
           <button onClick={() => (window.location.href = "/doctors")}>
-            رزرو وقت حضوری
+            رزرو مراجعه حضوری
           </button>
           <button onClick={() => (window.location.href = "/assessment")}>
             مشاوره آنلاین رایگان
@@ -163,7 +163,7 @@ export default function Home() {
             />
           </div>
           <button onClick={() => (window.location.href = "/doctors")}>
-            رزرو وقت حضوری
+            رزرو مراجعه حضوری
           </button>
           <p>
             فیلرهای پوستی مواد ژل مانندی هستند که برای بازگرداندن حجم از دست

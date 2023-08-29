@@ -99,6 +99,7 @@
     }
 
     .item {
+      position: relative;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -109,7 +110,6 @@
       background: config.$white;
       text-align: right;
       @include mixins.border-radius();
-
       &:hover {
         cursor: pointer;
         position: relative;
@@ -150,6 +150,15 @@
 
   .row {
     width: 100%;
+  }
+
+  .cancel {
+    color: config.$red;
+    margin-right: 12px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .details {

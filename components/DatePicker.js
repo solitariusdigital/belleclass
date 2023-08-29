@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { StateContext } from "@/context/stateContext";
 import classes from "./DatePicker.module.scss";
 import { toFarsiNumber } from "../services/utility";
 import { Calendar, utils } from "@hassanmojab/react-modern-calendar-datepicker";
 import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
 // import { Calendar, utils } from "react-modern-calendar-datepicker";
 // import "react-modern-calendar-datepicker/lib/DatePicker.css";
+import { createVisitApi, getDoctorApi, updateDoctorApi } from "@/services/api";
+import Router from "next/router";
 
-export default function DatePicker() {
+export default function DatePicker({ doctorId }) {
+  const { currentUser, setCurrentUser } = useContext(StateContext);
+
   const [day, setDay] = useState(null);
   const [time, setTime] = useState("");
   const [alert, setAlert] = useState("");
@@ -24,7 +29,7 @@ export default function DatePicker() {
     "18:00": false,
   });
 
-  const datePick = () => {
+  const datePick = async () => {
     if (!day || !time) {
       setAlert("روز و زمان انتخاب کنید");
       setTimeout(() => {
@@ -32,6 +37,23 @@ export default function DatePicker() {
       }, 1000);
       return;
     }
+    // create a new visit
+    let visit = {
+      title: "",
+      userId: currentUser["_id"],
+      doctorId: doctorId,
+      recordId: "",
+      time: selectedDate,
+      completed: false,
+      canceled: false,
+    };
+    let newVisit = await createVisitApi(visit);
+    // add new visit and user to doctor object
+    let doctor = await getDoctorApi(doctorId);
+    doctor.users.push(currentUser["_id"]);
+    doctor.visits.push(newVisit["_id"]);
+    await updateDoctorApi(doctor);
+    Router.push("/portal");
   };
 
   const resetTime = () => {
