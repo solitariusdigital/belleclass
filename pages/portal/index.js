@@ -18,7 +18,7 @@ export default function Index() {
       });
       Router.push({
         pathname: `/portal/${currentUser.permission}`,
-        query: { id: currentUser["_id"], permission: currentUser.permission },
+        query: { id: currentUser["_id"], p: currentUser.permission },
       });
     }
   }, [currentUser, navigationTopBar]);

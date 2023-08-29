@@ -81,7 +81,7 @@ export default function Patient({ records, visits }) {
   return (
     <Fragment>
       {currentUser && (
-        <div className={classes.containerPatient}>
+        <div className={classes.container}>
           <div className={classes.headerHero}>
             <p>{currentUser.name ? currentUser.name : currentUser.phone}</p>
             {currentUser.permission === "patient" && <Person4Icon />}
@@ -354,7 +354,7 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     let id = context.query.id;
-    let permission = context.query.permission;
+    let permission = context.query.p;
 
     let records = null;
     let visits = null;
