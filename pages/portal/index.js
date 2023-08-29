@@ -2,7 +2,6 @@ import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import Router from "next/router";
 import Register from "@/components/Register";
-import classes from "./portal.module.scss";
 
 export default function Index() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
@@ -17,7 +16,10 @@ export default function Index() {
           nav.active = false;
         }
       });
-      Router.push(`/portal/${currentUser.permission}`);
+      Router.push({
+        pathname: `/portal/${currentUser.permission}`,
+        query: { id: currentUser["_id"], permission: currentUser.permission },
+      });
     }
   }, [currentUser, navigationTopBar]);
 

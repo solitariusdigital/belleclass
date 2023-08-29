@@ -1,17 +1,22 @@
 import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
-import classes from "../portal.module.scss";
+import classes from "./portal.module.scss";
 import TimelapseIcon from "@mui/icons-material/Timelapse";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import Image from "next/legacy/image";
 import Person4Icon from "@mui/icons-material/Person4";
+import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
+import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Router from "next/router";
 import dbConnect from "@/services/dbConnect";
 import recordModel from "@/models/Record";
 import visitModel from "@/models/Visit";
+import doctorModel from "@/models/Doctor";
 import { convertDate } from "@/services/utility";
+import avatar from "@/assets/avatar.png";
+import CloseIcon from "@mui/icons-material/Close";
 import {
   getDoctorApi,
   updateRecordApi,
@@ -19,8 +24,6 @@ import {
   getVisitApi,
   updateVisitApi,
 } from "@/services/api";
-import avatar from "@/assets/avatar.png";
-import CloseIcon from "@mui/icons-material/Close";
 
 export default function Patient({ records, visits }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
@@ -28,7 +31,6 @@ export default function Patient({ records, visits }) {
   const [displayDetails, setDisplayDetails] = useState(false);
   const [selected, setSelected] = useState(null);
 
-  const [displayRecords, setDisplayRecords] = useState([]);
   const [displayVisits, setDisplayVisits] = useState([]);
   const [comment, setComment] = useState("");
   const [alert, setAlert] = useState("");
@@ -37,29 +39,12 @@ export default function Patient({ records, visits }) {
     if (!currentUser) {
       Router.push("/portal");
     } else {
-      setDisplayRecords(
-        records
-          .filter((record) => {
-            return record.userId === currentUser["_id"];
-          })
-          .sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt))
-          .sort((a, b) => a.completed - b.completed)
-      );
-      const currentVisits = [];
-      for (const visit of visits) {
-        if (visit.userId === currentUser["_id"]) {
-          currentVisits.push(visit);
-        }
-      }
-      currentVisits
-        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-        .sort((a, b) => a.canceled - b.canceled);
       // inject doctor info into visit object
-      currentVisits.forEach(async (item, index) => {
+      visits.forEach(async (item, index) => {
         let doctorData = await getDoctorApi(item.doctorId);
-        currentVisits[index].doctor = doctorData;
+        visits[index].doctor = doctorData;
       });
-      setDisplayVisits(currentVisits);
+      setDisplayVisits(visits);
     }
   }, [currentUser, records, visits]);
 
@@ -99,7 +84,9 @@ export default function Patient({ records, visits }) {
         <div className={classes.containerPatient}>
           <div className={classes.headerHero}>
             <p>{currentUser.name ? currentUser.name : currentUser.phone}</p>
-            <Person4Icon />
+            {currentUser.permission === "patient" && <Person4Icon />}
+            {currentUser.permission === "doctor" && <HealthAndSafetyIcon />}
+            {currentUser.permission === "admin" && <MilitaryTechIcon />}
           </div>
           <div className={classes.portal}>
             {!displayDetails && (
@@ -122,7 +109,7 @@ export default function Patient({ records, visits }) {
                 </p>
               </div>
             )}
-            {displayRecords.length === 0 && portalType === "online" && (
+            {records.length === 0 && portalType === "online" && (
               <p className="message">مشاوره آنلاین خالی</p>
             )}
             {displayVisits.length === 0 && portalType === "visit" && (
@@ -132,7 +119,7 @@ export default function Patient({ records, visits }) {
               <div className={classes.cards}>
                 {portalType === "online" && (
                   <Fragment>
-                    {displayRecords.map((item, index) => (
+                    {records.map((item, index) => (
                       <div
                         className={classes.item}
                         key={index}
@@ -366,8 +353,35 @@ export default function Patient({ records, visits }) {
 export async function getServerSideProps(context) {
   try {
     await dbConnect();
-    const records = await recordModel.find();
-    const visits = await visitModel.find();
+    let id = context.query.id;
+    let permission = context.query.permission;
+
+    let records = null;
+    let visits = null;
+
+    switch (permission) {
+      case "doctor":
+        const doctor = await doctorModel.find({ userId: id });
+        const doctorId = doctor[0]["_id"].toString();
+        records = await recordModel.find({ doctorId: doctorId });
+        visits = await visitModel.find({ doctorId: doctorId });
+        break;
+      case "patient":
+        records = await recordModel.find({ userId: id });
+        visits = await visitModel.find({ userId: id });
+        break;
+      case "admin":
+        records = await recordModel.find();
+        visits = await visitModel.find();
+        break;
+    }
+
+    records
+      .sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt))
+      .sort((a, b) => a.completed - b.completed);
+    visits
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .sort((a, b) => a.canceled - b.canceled);
 
     return {
       props: {

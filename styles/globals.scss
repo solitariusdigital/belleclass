@@ -70,7 +70,7 @@ h3 {
 
 .register {
   width: 500px;
-  margin: 50px auto;
+  margin: auto;
 
   @include mixins.mobile {
     width: 100%;
