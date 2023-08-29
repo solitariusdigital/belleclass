@@ -57,7 +57,6 @@ export default function Register() {
     if (phone.length === 11 && phone.slice(0, 2) === "09") {
       setDisplayCounter(true);
       let tokenId = fourGenerator();
-      console.log(tokenId);
       setToken(tokenId);
       // const api = Kavenegar.KavenegarApi({
       //   apikey: kavenegarKey,
@@ -194,6 +193,7 @@ export default function Register() {
         </div>
         <div className={classes.formAction}>
           <p className="alert">{alert}</p>
+          <p className="alert">{token}</p>
           {checkToken.length === 4 && (
             <button className="mainButton" onClick={() => handleRegister()}>
               ورود / ​ثبت نام

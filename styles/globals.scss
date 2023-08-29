@@ -65,3 +65,13 @@ h3 {
 .message {
   color: config.$grey;
 }
+
+.register {
+  width: 500px;
+  margin: 50px auto;
+
+  @include mixins.mobile {
+    width: 100%;
+    padding: 0px 12px;
+  }
+}

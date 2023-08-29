@@ -4,12 +4,8 @@
 .container {
   width: config.$content-width;
   margin: auto;
-  width: 400px;
+  width: 330px;
   font-weight: 300;
-
-  @include mixins.mobile {
-    width: 100%;
-  }
 }
 
 .header {

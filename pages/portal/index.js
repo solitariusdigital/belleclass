@@ -24,7 +24,7 @@ export default function Index() {
   return (
     <Fragment>
       {!currentUser && (
-        <div className={classes.register}>
+        <div className="register">
           <Register></Register>
         </div>
       )}
