@@ -27,10 +27,12 @@
     color: config.$black;
     @include mixins.border-radius();
 
-    &:hover {
-      background: config.$gold3;
-      color: config.$white;
-      cursor: pointer;
+    @include mixins.desktop {
+      &:hover {
+        background: config.$gold3;
+        color: config.$white;
+        cursor: pointer;
+      }
     }
   }
 

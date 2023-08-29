@@ -60,9 +60,11 @@
     .nav {
       font-weight: bold !important;
 
-      &:hover {
-        cursor: pointer;
-        color: config.$gold3;
+      @include mixins.desktop {
+        &:hover {
+          cursor: pointer;
+          color: config.$gold3;
+        }
       }
     }
 
@@ -100,10 +102,13 @@
       background: config.$white;
       text-align: right;
       @include mixins.border-radius();
-      &:hover {
-        cursor: pointer;
-        position: relative;
-        bottom: 5px;
+
+      @include mixins.desktop {
+        &:hover {
+          cursor: pointer;
+          position: relative;
+          bottom: 5px;
+        }
       }
 
       .title {
@@ -146,8 +151,10 @@
     color: config.$red;
     margin-right: 12px;
 
-    &:hover {
-      cursor: pointer;
+    @include mixins.desktop {
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 

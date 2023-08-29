@@ -231,10 +231,12 @@
     @include mixins.border-radius();
     @include mixins.row-space-between-center();
 
-    &:hover {
-      cursor: pointer;
-      position: relative;
-      bottom: 5px;
+    @include mixins.desktop {
+      &:hover {
+        cursor: pointer;
+        position: relative;
+        bottom: 5px;
+      }
     }
 
     div {

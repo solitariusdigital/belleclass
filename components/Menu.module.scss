@@ -45,9 +45,11 @@
   border-bottom: 1px solid config.$background;
   font-weight: bold !important;
 
-  &:hover {
-    cursor: pointer;
-    color: config.$gold3;
+  @include mixins.desktop {
+    &:hover {
+      cursor: pointer;
+      color: config.$gold3;
+    }
   }
 
   @include mixins.mobile {
@@ -91,8 +93,10 @@
   .menuIcon {
     background: config.$gold1;
 
-    &:hover {
-      cursor: pointer;
+    @include mixins.desktop {
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 
@@ -132,10 +136,12 @@
         @include mixins.button(config.$black, config.$black, config.$gold3);
         margin: 12px 0px;
 
-        &:hover {
-          cursor: pointer;
-          background: config.$white;
-          color: config.$black;
+        @include mixins.desktop {
+          &:hover {
+            cursor: pointer;
+            background: config.$white;
+            color: config.$black;
+          }
         }
       }
     }

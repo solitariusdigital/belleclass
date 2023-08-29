@@ -49,8 +49,10 @@ h3 {
 }
 
 .icon {
-  &:hover {
-    cursor: pointer;
+  @include mixins.desktop {
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 

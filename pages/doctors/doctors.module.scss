@@ -34,9 +34,11 @@
   box-shadow: config.$card-shadow;
   @include mixins.border-radius();
 
-  &:hover {
-    position: relative;
-    bottom: 5px;
+  @include mixins.desktop {
+    &:hover {
+      position: relative;
+      bottom: 5px;
+    }
   }
 
   .tags {

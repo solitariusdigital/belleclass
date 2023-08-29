@@ -25,10 +25,12 @@
     border: 1px solid config.$gold3;
     font-weight: 300;
 
-    &:hover {
-      cursor: pointer;
-      background: config.$black;
-      color: config.$gold3;
+    @include mixins.desktop {
+      &:hover {
+        cursor: pointer;
+        background: config.$black;
+        color: config.$gold3;
+      }
     }
   }
 
