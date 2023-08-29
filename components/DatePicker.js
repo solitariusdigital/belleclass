@@ -50,7 +50,9 @@ export default function DatePicker({ doctorId }) {
     let newVisit = await createVisitApi(visit);
     // add new visit and user to doctor object
     let doctor = await getDoctorApi(doctorId);
-    doctor.users.push(currentUser["_id"]);
+    if (!doctor.users.includes(currentUser["_id"])) {
+      doctor.users.push(currentUser["_id"]);
+    }
     doctor.visits.push(newVisit["_id"]);
     await updateDoctorApi(doctor);
     Router.push("/portal");
