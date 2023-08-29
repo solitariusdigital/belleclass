@@ -105,6 +105,12 @@ export default function Patient({ records, visits }) {
                 </p>
               </div>
             )}
+            {displayRecords.length === 0 && portalType === "online" && (
+              <p className="message">مشاوره آنلاین خالی</p>
+            )}
+            {displayVisits.length === 0 && portalType === "visit" && (
+              <p className="message">وقت حضوری خالی</p>
+            )}
             {!displayDetails && (
               <div className={classes.cards}>
                 {portalType === "online" && (
@@ -162,8 +168,8 @@ export default function Patient({ records, visits }) {
                               placeholder="blur"
                               blurDataURL={item.doctor.image}
                               alt="image"
-                              width={60}
-                              height={60}
+                              width={80}
+                              height={80}
                               objectFit="cover"
                               loading="eager"
                             />
@@ -221,8 +227,8 @@ export default function Patient({ records, visits }) {
                     src={avatar}
                     placeholder="blur"
                     alt="image"
-                    width={60}
-                    height={60}
+                    width={80}
+                    height={80}
                     objectFit="cover"
                     loading="eager"
                   />

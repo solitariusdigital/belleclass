@@ -6,7 +6,6 @@ const DoctorSchema = new Schema(
     bio: String,
     education: String,
     userId: String,
-    permission: String,
     image: String,
     tags: [String],
     users: [String],

@@ -1,8 +1,8 @@
 import { useState, useContext, Fragment, useEffect } from "react";
-import { StateContext } from "../context/stateContext";
+import { StateContext } from "@/context/stateContext";
 import classes from "./home.module.scss";
 import Image from "next/legacy/image";
-import background from "../assets/background.jpg";
+import background from "@/assets/background.jpg";
 import Expertise from "@/components/Expertise";
 import Router from "next/router";
 

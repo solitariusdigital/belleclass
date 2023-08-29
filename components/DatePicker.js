@@ -3,9 +3,6 @@ import classes from "./DatePicker.module.scss";
 import { toFarsiNumber } from "../services/utility";
 import { Calendar, utils } from "@hassanmojab/react-modern-calendar-datepicker";
 import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
-import Router from "next/router";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-
 // import { Calendar, utils } from "react-modern-calendar-datepicker";
 // import "react-modern-calendar-datepicker/lib/DatePicker.css";
 
@@ -76,13 +73,6 @@ export default function DatePicker() {
 
   return (
     <div className={classes.container}>
-      <div className={classes.header}>
-        <ArrowBackIosIcon
-          className={classes.arrowBack}
-          onClick={() => Router.push("/doctors")}
-        />
-        <p className={classes.title}>دکتر محمد رضا فرهانی</p>
-      </div>
       <Calendar
         value={day}
         onChange={(day) => assingDay(day)}

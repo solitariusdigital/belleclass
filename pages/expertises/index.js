@@ -1,5 +1,5 @@
 import { useState, useContext, Fragment, useEffect } from "react";
-import { StateContext } from "../../context/stateContext";
+import { StateContext } from "@/context/stateContext";
 import classes from "./expertise.module.scss";
 import Expertise from "@/components/Expertise";
 import FiberManualRecordOutlined from "@mui/icons-material/FiberManualRecordOutlined";

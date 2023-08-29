@@ -1,10 +1,10 @@
 import { useState, useContext, useRef, Fragment, useEffect } from "react";
-import { StateContext } from "../context/stateContext";
+import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import Menu from "@/components/Menu";
 import Footer from "@/components/Footer";
 import secureLocalStorage from "react-secure-storage";
-import { getNotificationsApi, getUserApi } from "../services/api";
+import { getNotificationsApi, getUserApi } from "@/services/api";
 
 export default function RootLayout({ children }) {
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);

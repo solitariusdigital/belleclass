@@ -1,10 +1,10 @@
 import { useState, useContext, useRef, Fragment, useEffect } from "react";
-import { StateContext } from "../../../context/stateContext";
+import { StateContext } from "@/context/stateContext";
 import classes from "../portal.module.scss";
 import TimelapseIcon from "@mui/icons-material/Timelapse";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import Image from "next/legacy/image";
-import background from "../../../assets/background.jpg";
+import background from "@/assets/background.jpg";
 import Person4Icon from "@mui/icons-material/Person4";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";

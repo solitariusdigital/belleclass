@@ -1,5 +1,5 @@
 import { useState, useContext, Fragment, useEffect } from "react";
-import { StateContext } from "../../context/stateContext";
+import { StateContext } from "@/context/stateContext";
 import Router from "next/router";
 import Register from "@/components/Register";
 import classes from "./portal.module.scss";

@@ -1,5 +1,5 @@
 import { useState, useContext, useRef, Fragment, useEffect } from "react";
-import { StateContext } from "../context/stateContext";
+import { StateContext } from "@/context/stateContext";
 import classes from "./Register.module.scss";
 import { fourGenerator } from "@/services/utility";
 import CloseIcon from "@mui/icons-material/Close";

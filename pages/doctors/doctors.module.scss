@@ -73,6 +73,7 @@
 
   .button {
     width: 100%;
+    margin-top: 12px;
     @include mixins.row-space-between-center();
 
     button {
