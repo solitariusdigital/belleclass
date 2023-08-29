@@ -34,7 +34,7 @@ h3 {
 
 .main {
   min-height: 100vh;
-  margin-top: 70px;
+  margin-top: 60px;
 }
 
 .menu {
@@ -54,10 +54,14 @@ h3 {
   }
 }
 
-.alert {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.alert,
+.message {
+  text-align: center;
   color: config.$red;
-  height: 12px;
+  margin: 16px 0px;
+  font-size: config.$tiny-font;
+}
+
+.message {
+  color: config.$grey;
 }

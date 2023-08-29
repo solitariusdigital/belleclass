@@ -155,10 +155,10 @@
   .details {
     width: 500px;
     margin: auto;
-    text-align: right;
+    text-align: center;
 
     .input {
-      margin-top: 40px;
+      margin-top: 30px;
       text-align: center;
 
       .label {
@@ -170,11 +170,12 @@
       textarea {
         @include mixins.textarea();
       }
+    }
 
-      button {
-        @include mixins.button(config.$gold1, config.$gold3, config.$black);
-        margin: 12px;
-      }
+    button {
+      @include mixins.button(config.$gold1, config.$gold3, config.$black);
+      margin: 12px;
+      margin-top: 40px;
     }
 
     .rowDoctor {
@@ -183,6 +184,7 @@
       align-items: center;
       direction: rtl;
       margin-top: 40px;
+      margin-bottom: 20px;
 
       .title {
         margin-right: 8px;
@@ -194,7 +196,7 @@
     }
 
     .header {
-      margin-bottom: 12px;
+      margin-bottom: 20px;
       @include mixins.row-space-between-center();
     }
 
@@ -208,13 +210,8 @@
       background: config.$white;
       margin-top: 20px;
       padding: 16px;
+      text-align: right;
       @include mixins.border-radius();
-    }
-
-    .message {
-      text-align: center;
-      color: config.$grey;
-      margin-top: 20px;
     }
 
     .imageContainer {

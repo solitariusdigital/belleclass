@@ -12,6 +12,10 @@
     font-size: config.$big-font;
     margin-bottom: 12px;
   }
+
+  button {
+    @include mixins.button(config.$gold1, config.$gold3, config.$black);
+  }
 }
 
 .formAction {
@@ -19,10 +23,6 @@
   flex-direction: column;
   align-items: center;
   margin: 12px 0px;
-
-  button {
-    @include mixins.button(config.$gold1, config.$gold3, config.$white);
-  }
 }
 
 .input {
@@ -37,7 +37,7 @@
   .label {
     color: config.$grey;
     font-size: config.$small-font;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
 
     span {
       color: config.$grey;
@@ -61,16 +61,12 @@
   justify-content: center;
   margin: 12px 0px;
 
-  button {
-    @include mixins.button(config.$gold1, config.$gold3, config.$white);
-  }
-
   .activationCode {
     display: flex;
     flex-direction: row-reverse;
 
     p {
-      margin: 0px 5px;
+      margin: 0px 4px;
       height: 35px;
     }
   }

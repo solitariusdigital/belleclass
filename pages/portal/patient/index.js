@@ -1,5 +1,5 @@
 import { useState, useContext, Fragment, useEffect } from "react";
-import { StateContext } from "../../../context/stateContext";
+import { StateContext } from "@/context/stateContext";
 import classes from "../portal.module.scss";
 import TimelapseIcon from "@mui/icons-material/Timelapse";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
@@ -13,7 +13,7 @@ import recordModel from "@/models/Record";
 import visitModel from "@/models/Visit";
 import { convertDate } from "@/services/utility";
 import { getDoctorApi, updateRecordApi, getRecordApi } from "@/services/api";
-import avatar from "../../../assets/avatar.png";
+import avatar from "@/assets/avatar.png";
 
 export default function Patient({ records, visits }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
@@ -116,11 +116,16 @@ export default function Patient({ records, visits }) {
                         onClick={() => {
                           setDisplayDetails(!displayDetails);
                           setSelected(item);
+                          window.scrollTo(0, 0);
                         }}
                       >
                         <div className={classes.row} style={margin}>
                           <p className={classes.title}>{item.title}</p>
                           <KeyboardArrowLeftIcon />
+                        </div>
+                        <div className={classes.row} style={margin}>
+                          <p className={classes.greyTitle}>تاریخ ثبت</p>
+                          <p>{convertDate(item.createdAt)}</p>
                         </div>
                         <div className={classes.row}>
                           {item.completed ? (
@@ -166,15 +171,15 @@ export default function Patient({ records, visits }) {
                           <p className={classes.title}>{item.doctor.name}</p>
                         </div>
                         <div className={classes.row} style={margin}>
-                          <p className={classes.greyTitle}>عنوان مشاوره</p>
-                          <p className={classes.title}>{item.title}</p>
-                        </div>
-                        <div className={classes.row} style={margin}>
                           <p className={classes.greyTitle}>تاریخ ثبت</p>
                           <p>{convertDate(item.createdAt)}</p>
                         </div>
                         <div className={classes.row} style={margin}>
-                          <p className={classes.greyTitle}>تاریخ مشاوره</p>
+                          <p className={classes.greyTitle}>عنوان</p>
+                          <p className={classes.title}>{item.title}</p>
+                        </div>
+                        <div className={classes.row} style={margin}>
+                          <p className={classes.greyTitle}>تاریخ مراجعه</p>
                           <p className={classes.time}>ساعت {item.time}</p>
                         </div>
                       </div>
@@ -193,24 +198,8 @@ export default function Patient({ records, visits }) {
                   <p className={classes.title}>{selected.title}</p>
                 </div>
                 <div className={classes.row} style={margin}>
-                  <p>{selected.date}</p>
-                  {selected.completed ? (
-                    <div className={classes.row}>
-                      <p>{convertDate(selected.updatedAt)}</p>
-                      <div className={classes.subRow}>
-                        <p>مشاوره تکمیل شده</p>
-                        <TaskAltIcon className={classes.icon} />
-                      </div>
-                    </div>
-                  ) : (
-                    <div className={classes.row}>
-                      <p>{convertDate(selected.createdAt)}</p>
-                      <div className={classes.subRow}>
-                        <p>در انتظار مشاوره</p>
-                        <TimelapseIcon className={classes.icon} />
-                      </div>
-                    </div>
-                  )}
+                  <p>{convertDate(selected.createdAt)}</p>
+                  <p className={classes.greyTitle}>تاریخ ثبت</p>
                 </div>
                 <div className={classes.imageContainer}>
                   <Image
@@ -232,20 +221,37 @@ export default function Patient({ records, visits }) {
                     src={avatar}
                     placeholder="blur"
                     alt="image"
-                    width={50}
-                    height={50}
+                    width={60}
+                    height={60}
                     objectFit="cover"
                     loading="eager"
                   />
                   <p className={classes.title}>پزشک بل کلاس</p>
                 </div>
-                {!selected.completed && (
-                  <p className={classes.message} onClick={() => handleDoc()}>
-                    هنگام تکمیل مشاوره به شما پیام داده میشود
-                  </p>
+                {selected.completed ? (
+                  <div className={classes.row}>
+                    <p>{convertDate(selected.updatedAt)}</p>
+                    <div className={classes.subRow}>
+                      <p>مشاوره تکمیل شده</p>
+                      <TaskAltIcon className={classes.icon} />
+                    </div>
+                  </div>
+                ) : (
+                  <div className={classes.row}>
+                    <p>{convertDate(selected.createdAt)}</p>
+                    <div className={classes.subRow}>
+                      <p>در انتظار مشاوره</p>
+                      <TimelapseIcon className={classes.icon} />
+                    </div>
+                  </div>
                 )}
                 {selected.completed && (
-                  <p className={classes.text}>{selected.comments[1]}</p>
+                  <Fragment>
+                    <p className={classes.text}>{selected.comments[1]}</p>
+                    <button onClick={() => (window.location.href = "/doctors")}>
+                      رزرو وقت حضوری
+                    </button>
+                  </Fragment>
                 )}
                 {!selected.completed && (
                   <Fragment>

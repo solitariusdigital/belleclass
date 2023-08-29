@@ -15,4 +15,16 @@
     width: 100%;
     padding: 0px 12px;
   }
+
+  .header {
+    width: 50%;
+    margin: auto;
+    @include mixins.row-space-between-center();
+    justify-content: space-around;
+    text-align: center;
+
+    @include mixins.mobile {
+      width: 100%;
+    }
+  }
 }

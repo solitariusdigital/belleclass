@@ -11,7 +11,13 @@ export default function Footer() {
       <div className={classes.scroll}>
         <KeyboardArrowUpIcon
           className="icon"
-          onClick={() => window.scrollTo(0, 0)}
+          onClick={() =>
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: "smooth",
+            })
+          }
           sx={{ fontSize: 36 }}
         />
       </div>
