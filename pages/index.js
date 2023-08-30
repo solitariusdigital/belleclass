@@ -4,7 +4,6 @@ import classes from "./home.module.scss";
 import Image from "next/legacy/image";
 import background from "@/assets/background.jpg";
 import Expertise from "@/components/Expertise";
-import Router from "next/router";
 
 export default function Home() {
   const { expertiseAreas, setExpertiseAreas } = useContext(StateContext);

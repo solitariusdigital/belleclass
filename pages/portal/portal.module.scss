@@ -46,7 +46,6 @@
       width: 350px;
       padding: 8px;
       margin: auto;
-      margin-bottom: 40px;
       border-radius: 50px;
       background: config.$white;
       box-shadow: config.$card-shadow;
@@ -79,7 +78,6 @@
     grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
     gap: 12px;
     margin: auto;
-    margin-top: 12px;
     direction: rtl;
 
     @include mixins.tablet {
@@ -113,7 +111,6 @@
 
       .title {
         font-weight: bold;
-        font-size: config.$med-font;
       }
     }
   }
@@ -122,7 +119,6 @@
   .subRow {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
 
     .image {
@@ -144,12 +140,41 @@
   }
 
   .row {
+    justify-content: space-between;
     width: 100%;
   }
 
-  .cancel {
-    color: config.$red;
-    margin-right: 12px;
+  .actionContainer {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+
+    .cancel,
+    .done {
+      color: config.$red;
+
+      @include mixins.desktop {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .done {
+      color: config.$green;
+      margin-bottom: 12px;
+    }
+  }
+
+  .logout {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    color: config.$grey;
+
+    p {
+      border-bottom: 1px solid config.$grey;
+    }
 
     @include mixins.desktop {
       &:hover {

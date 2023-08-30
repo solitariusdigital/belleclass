@@ -6,12 +6,21 @@ import { Calendar, utils } from "@hassanmojab/react-modern-calendar-datepicker";
 import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
 // import { Calendar, utils } from "react-modern-calendar-datepicker";
 // import "react-modern-calendar-datepicker/lib/DatePicker.css";
-import { createVisitApi, getDoctorApi, updateDoctorApi } from "@/services/api";
 import Router from "next/router";
+import CloseIcon from "@mui/icons-material/Close";
+import {
+  createVisitApi,
+  getDoctorApi,
+  updateDoctorApi,
+  getUserApi,
+  updateUserApi,
+} from "@/services/api";
 
 export default function DatePicker({ doctorId }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
 
+  const [name, setName] = useState(currentUser.name);
+  const [title, setTitle] = useState("");
   const [day, setDay] = useState(null);
   const [time, setTime] = useState("");
   const [alert, setAlert] = useState("");
@@ -29,7 +38,7 @@ export default function DatePicker({ doctorId }) {
     "18:00": false,
   });
 
-  const datePick = async () => {
+  const createVisit = async () => {
     if (!day || !time) {
       setAlert("روز و زمان انتخاب کنید");
       setTimeout(() => {
@@ -37,9 +46,16 @@ export default function DatePicker({ doctorId }) {
       }, 1000);
       return;
     }
-    // create a new visit
+    if (!name || !title) {
+      setAlert("نام و عنوان وارد کنید");
+      setTimeout(() => {
+        setAlert("");
+      }, 1000);
+      return;
+    }
+    // create a new visit object
     let visit = {
-      title: "",
+      title: title,
       userId: currentUser["_id"],
       doctorId: doctorId,
       recordId: "",
@@ -48,14 +64,29 @@ export default function DatePicker({ doctorId }) {
       canceled: false,
     };
     let newVisit = await createVisitApi(visit);
+    await updateDoctorObject(newVisit["_id"]);
+    await updateUserObject();
+    Router.push("/portal");
+  };
+
+  const updateDoctorObject = async (id) => {
     // add new visit and user to doctor object
     let doctor = await getDoctorApi(doctorId);
+    doctor.visits.push(id);
     if (!doctor.users.includes(currentUser["_id"])) {
       doctor.users.push(currentUser["_id"]);
     }
-    doctor.visits.push(newVisit["_id"]);
     await updateDoctorApi(doctor);
-    Router.push("/portal");
+  };
+
+  const updateUserObject = async () => {
+    // add new doctor to user object
+    let user = await getUserApi(currentUser["_id"]);
+    user.name = name;
+    if (!user.doctors.includes(doctorId)) {
+      user.doctors.push(doctorId);
+    }
+    await updateUserApi(user);
   };
 
   const resetTime = () => {
@@ -97,6 +128,49 @@ export default function DatePicker({ doctorId }) {
 
   return (
     <div className={classes.container}>
+      <div className={classes.input}>
+        <div className={classes.bar}>
+          <p className={classes.label}>
+            نام و نام خانوادگی
+            <span>*</span>
+          </p>
+          <CloseIcon
+            className="icon"
+            onClick={() => setName("")}
+            sx={{ fontSize: 16 }}
+          />
+        </div>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+          autoComplete="off"
+          dir="rtl"
+        />
+        <div className={classes.bar}>
+          <p className={classes.label}>
+            عنوان مراجعه
+            <span>*</span>
+          </p>
+          <CloseIcon
+            className="icon"
+            onClick={() => setTitle("")}
+            sx={{ fontSize: 16 }}
+          />
+        </div>
+        <input
+          placeholder="گودی زیر چشم"
+          type="text"
+          id="title"
+          name="title"
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+          autoComplete="off"
+          dir="rtl"
+        />
+      </div>
       <Calendar
         value={day}
         onChange={(day) => assingDay(day)}
@@ -117,9 +191,10 @@ export default function DatePicker({ doctorId }) {
           </p>
         ))}
       </div>
+
       {alert && <p className="alert">{alert}</p>}
       {selectedDate && <p className={classes.message}>{selectedDate} ساعت</p>}
-      <button className={classes.button} onClick={() => datePick()}>
+      <button className={classes.button} onClick={() => createVisit()}>
         ثبت
       </button>
     </div>

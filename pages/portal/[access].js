@@ -17,21 +17,24 @@ import doctorModel from "@/models/Doctor";
 import { convertDate } from "@/services/utility";
 import avatar from "@/assets/avatar.png";
 import CloseIcon from "@mui/icons-material/Close";
+import secureLocalStorage from "react-secure-storage";
 import {
   getDoctorApi,
   updateRecordApi,
   getRecordApi,
   getVisitApi,
   updateVisitApi,
+  getUserApi,
 } from "@/services/api";
 
-export default function Patient({ records, visits }) {
+export default function Access({ records, visits }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const [portalType, setPortalType] = useState("online" || "visit");
   const [displayDetails, setDisplayDetails] = useState(false);
   const [selected, setSelected] = useState(null);
 
   const [displayVisits, setDisplayVisits] = useState([]);
+  const [displayRecords, setDisplayRecords] = useState([]);
   const [comment, setComment] = useState("");
   const [alert, setAlert] = useState("");
 
@@ -39,10 +42,18 @@ export default function Patient({ records, visits }) {
     if (!currentUser) {
       Router.push("/portal");
     } else {
-      // inject doctor info into visit object
+      // inject user info into record object
+      records.forEach(async (item, index) => {
+        let userData = await getUserApi(item.userId);
+        records[index].user = userData;
+      });
+      setDisplayRecords(records);
+      // inject doctor/user info into visit object
       visits.forEach(async (item, index) => {
         let doctorData = await getDoctorApi(item.doctorId);
+        let userData = await getUserApi(item.userId);
         visits[index].doctor = doctorData;
+        visits[index].user = userData;
       });
       setDisplayVisits(visits);
     }
@@ -52,7 +63,7 @@ export default function Patient({ records, visits }) {
     margin: "8px 0px",
   };
 
-  const submit = async (id) => {
+  const actionRecord = async (record) => {
     if (!comment) {
       setAlert("مشاوره خالی");
       setTimeout(() => {
@@ -61,21 +72,36 @@ export default function Patient({ records, visits }) {
       return;
     }
 
-    let recordData = await getRecordApi(id);
+    let recordData = await getRecordApi(record["_id"]);
     recordData.comments[1] = comment;
     recordData.completed = true;
     await updateRecordApi(recordData);
     Router.push("/portal");
   };
 
-  const cancelVisit = async (id) => {
-    const confirm = window.confirm("لغو مراجعه مطمئنی؟");
+  const actionVisit = async (id, type) => {
+    const message = `${
+      type === "done" ? "تکمیل مراجعه مطمئنی؟" : "لغو مراجعه مطمئنی؟"
+    }`;
+    const confirm = window.confirm(message);
     if (confirm) {
       let recordData = await getVisitApi(id);
-      recordData.canceled = true;
+      switch (type) {
+        case "done":
+          recordData.completed = true;
+          break;
+        case "cancel":
+          recordData.canceled = true;
+          break;
+      }
       await updateVisitApi(recordData);
       Router.push("/portal");
     }
+  };
+
+  const logOut = () => {
+    secureLocalStorage.removeItem("currentUser");
+    setCurrentUser(null);
   };
 
   return (
@@ -109,17 +135,19 @@ export default function Patient({ records, visits }) {
                 </p>
               </div>
             )}
-            {records.length === 0 && portalType === "online" && (
-              <p className="message">مشاوره آنلاین خالی</p>
-            )}
-            {displayVisits.length === 0 && portalType === "visit" && (
-              <p className="message">مراجعه حضوری خالی</p>
+            {!displayDetails && (
+              <p className="message">
+                {portalType === "visit"
+                  ? displayVisits.length
+                  : displayRecords.length}{" "}
+                تعداد
+              </p>
             )}
             {!displayDetails && (
               <div className={classes.cards}>
                 {portalType === "online" && (
                   <Fragment>
-                    {records.map((item, index) => (
+                    {displayRecords.map((item, index) => (
                       <div
                         className={classes.item}
                         key={index}
@@ -145,7 +173,7 @@ export default function Patient({ records, visits }) {
                                   className={classes.icon}
                                   sx={{ color: "#57a361" }}
                                 />
-                                <p>مشاوره تکمیل شده</p>
+                                <p>مشاوره تکمیل</p>
                               </div>
                               <p>{convertDate(item.updatedAt)}</p>
                             </div>
@@ -170,7 +198,7 @@ export default function Patient({ records, visits }) {
                   <Fragment>
                     {displayVisits.map((item, index) => (
                       <div className={classes.item} key={index}>
-                        <div className={classes.row} style={margin}>
+                        <div className={classes.subRow} style={margin}>
                           <div className={classes.image}>
                             <Image
                               className={classes.image}
@@ -184,16 +212,32 @@ export default function Patient({ records, visits }) {
                               loading="eager"
                             />
                           </div>
-                          <p className={classes.title}>{item.doctor.name}</p>
-                        </div>
-                        <div className={classes.row} style={margin}>
-                          <p className={classes.greyTitle}>عنوان</p>
-                          <p className={classes.title}>{item.title}</p>
+                          <div>
+                            <p className={classes.title}>{item.doctor.name}</p>
+                            <p>{item.doctor.education}</p>
+                          </div>
                         </div>
                         <div className={classes.row} style={margin}>
                           <p className={classes.greyTitle}>تاریخ ثبت</p>
                           <p>{convertDate(item.createdAt)}</p>
                         </div>
+                        <div className={classes.row} style={margin}>
+                          <p className={classes.greyTitle}>عنوان</p>
+                          <p className={classes.title}>{item.title}</p>
+                        </div>
+                        {(currentUser.permission === "admin" ||
+                          currentUser.permission === "doctor") && (
+                          <Fragment>
+                            <div className={classes.row} style={margin}>
+                              <p className={classes.greyTitle}>بیمار</p>
+                              <p className={classes.title}>{item.user.name}</p>
+                            </div>
+                            <div className={classes.row} style={margin}>
+                              <p className={classes.greyTitle}>موبایل</p>
+                              <p className={classes.title}>{item.user.phone}</p>
+                            </div>
+                          </Fragment>
+                        )}
                         <div className={classes.row} style={margin}>
                           {item.canceled ? (
                             <div className={classes.row}>
@@ -202,7 +246,7 @@ export default function Patient({ records, visits }) {
                                   className={classes.icon}
                                   sx={{ color: "#d40d12" }}
                                 />
-                                <p>مراجعه لغو شده</p>
+                                <p>مراجعه لغو</p>
                               </div>
                               <p>{convertDate(item.updatedAt)}</p>
                             </div>
@@ -215,7 +259,7 @@ export default function Patient({ records, visits }) {
                                       className={classes.icon}
                                       sx={{ color: "#57a361" }}
                                     />
-                                    <p>مراجعه تکمیل شده</p>
+                                    <p>مراجعه تکمیل</p>
                                   </div>
                                   <p>{convertDate(item.updatedAt)}</p>
                                 </div>
@@ -226,15 +270,7 @@ export default function Patient({ records, visits }) {
                                       className={classes.icon}
                                       sx={{ color: "#b69119" }}
                                     />
-                                    <p>در انتظار مراجعه</p>
-                                    {!item.canceled && !item.completed && (
-                                      <p
-                                        className={classes.cancel}
-                                        onClick={() => cancelVisit(item["_id"])}
-                                      >
-                                        لغو
-                                      </p>
-                                    )}
+                                    <p>زمان مراجعه</p>
                                   </div>
                                   <p className={classes.time}>{item.time}</p>
                                 </div>
@@ -242,6 +278,27 @@ export default function Patient({ records, visits }) {
                             </Fragment>
                           )}
                         </div>
+                        {(currentUser.permission === "admin" ||
+                          currentUser.permission === "doctor") &&
+                          !item.canceled &&
+                          !item.completed && (
+                            <div className={classes.actionContainer}>
+                              <p
+                                className={classes.done}
+                                onClick={() => actionVisit(item["_id"], "done")}
+                              >
+                                تکمیل
+                              </p>
+                              <p
+                                className={classes.cancel}
+                                onClick={() =>
+                                  actionVisit(item["_id"], "cancel")
+                                }
+                              >
+                                لغو
+                              </p>
+                            </div>
+                          )}
                       </div>
                     ))}
                   </Fragment>
@@ -257,10 +314,13 @@ export default function Patient({ records, visits }) {
                   />
                   <p className={classes.title}>{selected.title}</p>
                 </div>
-                <div className={classes.row} style={margin}>
-                  <p>{convertDate(selected.createdAt)}</p>
-                  <p className={classes.greyTitle}>تاریخ ثبت</p>
-                </div>
+                {(currentUser.permission === "admin" ||
+                  currentUser.permission === "doctor") && (
+                  <div className={classes.row} style={margin}>
+                    <p className={classes.title}>{selected.user?.phone}</p>
+                    <p className={classes.title}>{selected.user?.name}</p>
+                  </div>
+                )}
                 <div className={classes.imageContainer}>
                   <Image
                     className={classes.image}
@@ -275,6 +335,9 @@ export default function Patient({ records, visits }) {
                   />
                 </div>
                 <p className={classes.text}>{selected.comments[0]}</p>
+                <div className={classes.row} style={margin}>
+                  <p>{convertDate(selected.createdAt)}</p>
+                </div>
                 <div className={classes.rowDoctor}>
                   <Image
                     className={classes.image}
@@ -292,7 +355,7 @@ export default function Patient({ records, visits }) {
                   <div className={classes.row}>
                     <p>{convertDate(selected.updatedAt)}</p>
                     <div className={classes.subRow}>
-                      <p>مشاوره تکمیل شده</p>
+                      <p>مشاوره تکمیل</p>
                       <TaskAltIcon
                         className={classes.icon}
                         sx={{ color: "#57a361" }}
@@ -319,30 +382,37 @@ export default function Patient({ records, visits }) {
                     </button>
                   </Fragment>
                 )}
-                {!selected.completed && (
-                  <Fragment>
-                    <div className={classes.input}>
-                      <p className={classes.label}>مشاوره تخصصی</p>
-                      <textarea
-                        placeholder="..."
-                        type="text"
-                        id="comment"
-                        name="comment"
-                        onChange={(e) => setComment(e.target.value)}
-                        value={comment}
-                        autoComplete="off"
-                        dir="rtl"
-                      ></textarea>
-                      <p className="alert">{alert}</p>
-                      <button onClick={() => submit(selected["_id"])}>
-                        ارسال
-                      </button>
-                    </div>
-                  </Fragment>
-                )}
+                {!selected.completed &&
+                  (currentUser.permission === "admin" ||
+                    currentUser.permission === "doctor") && (
+                    <Fragment>
+                      <div className={classes.input}>
+                        <p className={classes.label}>مشاوره تخصصی</p>
+                        <textarea
+                          placeholder="..."
+                          type="text"
+                          id="comment"
+                          name="comment"
+                          onChange={(e) => setComment(e.target.value)}
+                          value={comment}
+                          autoComplete="off"
+                          dir="rtl"
+                        ></textarea>
+                        <p className="alert">{alert}</p>
+                        <button onClick={() => actionRecord(selected)}>
+                          ارسال
+                        </button>
+                      </div>
+                    </Fragment>
+                  )}
               </div>
             )}
           </div>
+          {!displayDetails && (
+            <div className={classes.logout} onClick={() => logOut()}>
+              <p>خروج از پرتال</p>
+            </div>
+          )}
         </div>
       )}
     </Fragment>
@@ -377,10 +447,11 @@ export async function getServerSideProps(context) {
     }
 
     records
-      .sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt))
+      .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
       .sort((a, b) => a.completed - b.completed);
     visits
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .sort((a, b) => a.completed - b.completed)
       .sort((a, b) => a.canceled - b.canceled);
 
     return {

@@ -8,9 +8,12 @@
   font-family: config.$font;
 }
 
+html {
+  background: config.$background;
+}
+
 body {
   user-select: none;
-  background: config.$background;
 }
 
 a {
