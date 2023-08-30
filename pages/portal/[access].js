@@ -230,11 +230,13 @@ export default function Access({ records, visits }) {
                           <Fragment>
                             <div className={classes.row} style={margin}>
                               <p className={classes.greyTitle}>بیمار</p>
-                              <p className={classes.title}>{item.user.name}</p>
+                              <p className={classes.title}>{item.user?.name}</p>
                             </div>
                             <div className={classes.row} style={margin}>
                               <p className={classes.greyTitle}>موبایل</p>
-                              <p className={classes.title}>{item.user.phone}</p>
+                              <p className={classes.title}>
+                                {item.user?.phone}
+                              </p>
                             </div>
                           </Fragment>
                         )}

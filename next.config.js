@@ -7,9 +7,6 @@ const nextConfig = {
   images: {
     domains: ["delmare.storage.iran.liara.space", "trustseal.enamad.ir"],
   },
-  experimental: {
-    largePageDataBytes: 200 * 100000,
-  },
 };
 
 module.exports = withPWA({
