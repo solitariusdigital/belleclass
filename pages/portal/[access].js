@@ -202,9 +202,9 @@ export default function Access({ records, visits }) {
                           <div className={classes.image}>
                             <Image
                               className={classes.image}
-                              src={item.doctor.image}
+                              src={item.doctor?.image}
                               placeholder="blur"
-                              blurDataURL={item.doctor.image}
+                              blurDataURL={item.doctor?.image}
                               alt="image"
                               width={70}
                               height={70}
@@ -213,8 +213,8 @@ export default function Access({ records, visits }) {
                             />
                           </div>
                           <div>
-                            <p className={classes.title}>{item.doctor.name}</p>
-                            <p>{item.doctor.education}</p>
+                            <p className={classes.title}>{item.doctor?.name}</p>
+                            <p>{item.doctor?.education}</p>
                           </div>
                         </div>
                         <div className={classes.row} style={margin}>
