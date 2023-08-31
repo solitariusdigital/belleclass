@@ -213,7 +213,9 @@ export default function Access({ records, visits }) {
                             />
                           </div>
                           <div>
-                            <p className={classes.title}>{item.doctor?.name}</p>
+                            <h2 className={classes.title}>
+                              {item.doctor?.name}
+                            </h2>
                             <p>{item.doctor?.education}</p>
                           </div>
                         </div>
@@ -349,7 +351,7 @@ export default function Access({ records, visits }) {
                     objectFit="cover"
                     loading="eager"
                   />
-                  <p className={classes.title}>پزشک بل کلاس</p>
+                  <h2 className={classes.title}>پزشک بل کلاس</h2>
                 </div>
                 {selected.completed ? (
                   <div className={classes.row}>

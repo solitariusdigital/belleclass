@@ -26,9 +26,12 @@ abbr[title] {
 }
 
 h1,
-h2,
-h3 {
+h2 {
   font-weight: 300;
+}
+
+h2 {
+  font-size: config.$big-font;
 }
 
 .main {
