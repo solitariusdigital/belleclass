@@ -284,21 +284,19 @@ export default function Access({ records, visits }) {
                           currentUser.permission === "doctor") &&
                           !item.canceled &&
                           !item.completed && (
-                            <div className={classes.actionContainer}>
-                              <p
-                                className={classes.done}
+                            <div className={classes.action}>
+                              <TaskAltIcon
                                 onClick={() => actionVisit(item["_id"], "done")}
-                              >
-                                تکمیل
-                              </p>
-                              <p
-                                className={classes.cancel}
+                                className={classes.icon}
+                                sx={{ color: "#57a361" }}
+                              />
+                              <CloseIcon
                                 onClick={() =>
                                   actionVisit(item["_id"], "cancel")
                                 }
-                              >
-                                لغو
-                              </p>
+                                className={classes.icon}
+                                sx={{ color: "#d40d12" }}
+                              />
                             </div>
                           )}
                       </div>

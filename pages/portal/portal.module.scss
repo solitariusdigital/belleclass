@@ -144,26 +144,12 @@
     width: 100%;
   }
 
-  .actionContainer {
+  .action {
     position: absolute;
     top: 12px;
     left: 12px;
-
-    .cancel,
-    .done {
-      color: config.$red;
-
-      @include mixins.desktop {
-        &:hover {
-          cursor: pointer;
-        }
-      }
-    }
-
-    .done {
-      color: config.$green;
-      margin-bottom: 12px;
-    }
+    width: 70px;
+    @include mixins.row-space-between-center();
   }
 
   .logout {

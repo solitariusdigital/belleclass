@@ -7,10 +7,6 @@ import dbConnect from "@/services/dbConnect";
 import doctorModel from "@/models/Doctor";
 
 export default function Doctors({ doctors }) {
-  const toBooking = () => {
-    Router.push("/booking");
-  };
-
   return (
     <div className={classes.container}>
       {doctors.map((doctor, index) => (
@@ -41,7 +37,7 @@ export default function Doctors({ doctors }) {
               onClick={() =>
                 Router.push({
                   pathname: "/booking",
-                  query: { id: doctor["_id"], name: doctor.name },
+                  query: { id: doctor["_id"] },
                 })
               }
             >

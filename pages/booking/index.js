@@ -6,15 +6,22 @@ import { useRouter } from "next/router";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Router from "next/router";
 import Register from "@/components/Register";
+import { getDoctorApi } from "@/services/api";
 
 export default function Booking() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
+  const [doctorName, setDoctorName] = useState("");
 
   const router = useRouter();
-  const doctor = {
-    id: router.query.id,
-    name: router.query.name,
-  };
+  const doctorId = router.query.id;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let doctorData = await getDoctorApi(doctorId);
+      setDoctorName(doctorData.name);
+    };
+    fetchData().catch(console.error);
+  }, [doctorId]);
 
   return (
     <Fragment>
@@ -29,9 +36,9 @@ export default function Booking() {
               className="icon"
               onClick={() => Router.push("/doctors")}
             />
-            <p className={classes.title}>{doctor.name}</p>
+            <p className={classes.title}>{doctorName}</p>
           </div>
-          <DatePicker doctorId={doctor.id} />
+          <DatePicker doctorId={doctorId} />
         </div>
       )}
     </Fragment>
