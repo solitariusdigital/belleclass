@@ -40,17 +40,17 @@ export default function DatePicker({ doctorId }) {
 
   const createVisit = async () => {
     if (!day || !time) {
-      setAlert("روز و زمان انتخاب کنید");
+      setAlert("روز و زمان الزامیست");
       setTimeout(() => {
         setAlert("");
-      }, 1000);
+      }, 3000);
       return;
     }
     if (!name || !title) {
-      setAlert("نام و عنوان وارد کنید");
+      setAlert("نام و عنوان الزامیست");
       setTimeout(() => {
         setAlert("");
-      }, 1000);
+      }, 3000);
       return;
     }
     // create a new visit object
@@ -122,7 +122,7 @@ export default function DatePicker({ doctorId }) {
       resetTime();
       setTimeout(() => {
         setAlert("");
-      }, 1000);
+      }, 3000);
     }
   };
 
@@ -131,7 +131,7 @@ export default function DatePicker({ doctorId }) {
       <div className={classes.input}>
         <div className={classes.bar}>
           <p className={classes.label}>
-            نام و نام خانوادگی
+            نام
             <span>*</span>
           </p>
           <CloseIcon
@@ -151,7 +151,7 @@ export default function DatePicker({ doctorId }) {
         />
         <div className={classes.bar}>
           <p className={classes.label}>
-            عنوان مراجعه
+            عنوان
             <span>*</span>
           </p>
           <CloseIcon

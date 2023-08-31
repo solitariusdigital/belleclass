@@ -2,14 +2,16 @@
 @use "styles/_mixins.scss" as mixins;
 
 .container {
-  width: config.$content-width;
   margin: auto;
-  width: 330px;
+  width: 400px;
   font-weight: 300;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
 }
 
 .header {
-  margin-bottom: 20px;
   @include mixins.row-space-between-center();
 
   .title {

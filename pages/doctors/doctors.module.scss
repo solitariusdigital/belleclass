@@ -50,7 +50,6 @@
 
     p {
       padding: 8px;
-      background: config.$white;
       box-shadow: config.$card-shadow;
       color: config.$gold3;
       @include mixins.border-radius();
@@ -86,6 +85,8 @@
 }
 
 .profile {
+  direction: rtl;
+
   .information {
     text-align: center;
     margin: auto;
@@ -106,7 +107,7 @@
     }
 
     .name {
-      margin: 12px;
+      margin: 20px 0px;
       font-weight: bold;
     }
 
