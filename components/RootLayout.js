@@ -5,10 +5,13 @@ import Menu from "@/components/Menu";
 import Footer from "@/components/Footer";
 import secureLocalStorage from "react-secure-storage";
 import { getNotificationsApi, getUserApi } from "@/services/api";
+import Image from "next/legacy/image";
+import appload from "../assets/appload.png";
 
 export default function RootLayout({ children }) {
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
+  const [appLoader, setAppLoader] = useState(false);
 
   const router = useRouter();
   let pathname = router.pathname;
@@ -42,17 +45,28 @@ export default function RootLayout({ children }) {
       }
     };
     fetchData();
+    setTimeout(() => {
+      setAppLoader(true);
+    }, 500);
   }, [setCurrentUser]);
 
   return (
     <Fragment>
-      <div className="menu">
-        <Menu />
-      </div>
-      <div className="main">
-        <main>{children}</main>
-      </div>
-      <Footer />
+      {appLoader ? (
+        <Fragment>
+          <div className="menu">
+            <Menu />
+          </div>
+          <div className="main">
+            <main>{children}</main>
+          </div>
+          <Footer />
+        </Fragment>
+      ) : (
+        <div className="appload">
+          <Image width={120} height={120} src={appload} alt="lemon" />
+        </div>
+      )}
     </Fragment>
   );
 }
