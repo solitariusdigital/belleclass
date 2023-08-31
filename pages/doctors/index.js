@@ -24,7 +24,7 @@ export default function Doctors({ doctors }) {
               objectFit="cover"
               priority
             />
-            <p className={classes.name}>{doctor.name}</p>
+            <h2 className={classes.name}>{doctor.name}</h2>
           </div>
           <div className={classes.tags}>
             {doctor.tags.map((tag, index) => (

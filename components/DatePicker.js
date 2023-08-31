@@ -66,7 +66,7 @@ export default function DatePicker({ doctorId }) {
     let newVisit = await createVisitApi(visit);
     await updateDoctorObject(newVisit["_id"]);
     await updateUserObject();
-    Router.push("/portal");
+    window.location.href = "/portal";
   };
 
   const updateDoctorObject = async (id) => {
@@ -161,7 +161,7 @@ export default function DatePicker({ doctorId }) {
           />
         </div>
         <input
-          placeholder="گودی زیر چشم"
+          placeholder="فیلر صورت"
           type="text"
           id="title"
           name="title"

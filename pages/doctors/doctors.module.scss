@@ -5,7 +5,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
   gap: 12px;
-  margin: 12px auto;
+  margin: auto;
   direction: rtl;
   font-weight: 300;
   width: config.$content-width;
@@ -77,10 +77,52 @@
     width: 100%;
     margin-top: 12px;
     @include mixins.row-space-between-center();
+  }
 
-    button {
-      @include mixins.button(config.$gold1, config.$gold3, config.$black);
-      width: 150px;
+  button {
+    @include mixins.button(config.$gold1, config.$gold3, config.$black);
+    width: 150px;
+  }
+}
+
+.profile {
+  .information {
+    text-align: center;
+    margin: auto;
+    width: 50%;
+    font-weight: 300;
+
+    @include mixins.mobile {
+      width: calc(100% - 24px);
+    }
+
+    @include mixins.tablet {
+      width: calc(100% - 24px);
+    }
+
+    .arrow {
+      margin: auto;
+      text-align: left;
+    }
+
+    .name {
+      margin: 12px;
+      font-weight: bold;
+    }
+
+    .tags,
+    .info {
+      width: 100%;
+      margin: 30px auto;
+    }
+
+    .info {
+      text-align: right;
+      margin: 12px auto;
+    }
+
+    .image {
+      @include mixins.border-radius();
     }
   }
 }

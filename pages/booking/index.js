@@ -36,7 +36,7 @@ export default function Booking() {
               className="icon"
               onClick={() => Router.push("/doctors")}
             />
-            <p className={classes.title}>{doctorName}</p>
+            <h2 className={classes.title}>{doctorName}</h2>
           </div>
           <DatePicker doctorId={doctorId} />
         </div>
