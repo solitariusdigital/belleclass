@@ -128,6 +128,26 @@ export default function DatePicker({ doctorId }) {
 
   return (
     <div className={classes.container}>
+      <Calendar
+        value={day}
+        onChange={(day) => assingDay(day)}
+        shouldHighlightWeekends
+        minimumDate={utils("fa").getToday()}
+        locale="fa"
+      />
+      <div className={classes.timeContainer}>
+        {Object.keys(times).map((time, index) => (
+          <p
+            key={index}
+            className={times[time] ? classes.activeTime : classes.time}
+            onClick={() => displayDate(time)}
+          >
+            {toFarsiNumber(time).slice(0, 2) +
+              ":" +
+              toFarsiNumber(time).slice(2)}
+          </p>
+        ))}
+      </div>
       <div className={classes.input}>
         <div className={classes.bar}>
           <p className={classes.label}>
@@ -170,26 +190,6 @@ export default function DatePicker({ doctorId }) {
           autoComplete="off"
           dir="rtl"
         />
-      </div>
-      <Calendar
-        value={day}
-        onChange={(day) => assingDay(day)}
-        shouldHighlightWeekends
-        minimumDate={utils("fa").getToday()}
-        locale="fa"
-      />
-      <div className={classes.timeContainer}>
-        {Object.keys(times).map((time, index) => (
-          <p
-            key={index}
-            className={times[time] ? classes.activeTime : classes.time}
-            onClick={() => displayDate(time)}
-          >
-            {toFarsiNumber(time).slice(0, 2) +
-              ":" +
-              toFarsiNumber(time).slice(2)}
-          </p>
-        ))}
       </div>
 
       {alert && <p className="alert">{alert}</p>}
