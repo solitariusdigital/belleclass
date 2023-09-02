@@ -191,7 +191,6 @@ export default function DatePicker({ doctorId }) {
           dir="rtl"
         />
       </div>
-
       {alert && <p className="alert">{alert}</p>}
       {selectedDate && <p className={classes.message}>{selectedDate} ساعت</p>}
       <button className={classes.button} onClick={() => createVisit()}>
