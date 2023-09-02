@@ -242,3 +242,30 @@
     }
   }
 }
+
+.analytics {
+  width: 350px;
+  margin: 20px auto;
+  box-shadow: config.$card-shadow;
+  background: config.$white;
+  padding: 12px;
+  @include mixins.border-radius();
+
+  .row {
+    margin: 4px 0px;
+    @include mixins.row-space-between-center();
+  }
+
+  @include mixins.mobile {
+    width: 100%;
+  }
+
+  p {
+    font-weight: bold;
+  }
+
+  .grey {
+    color: config.$grey;
+    font-weight: 300;
+  }
+}

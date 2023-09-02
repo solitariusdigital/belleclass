@@ -47,10 +47,7 @@ export default function Register() {
 
   const verifyPhone = () => {
     if (phone.length === 0) {
-      setAlert("موبایل خالی");
-      setTimeout(() => {
-        setAlert("");
-      }, 3000);
+      showAlert("موبایل خالی");
       return;
     }
 
@@ -69,19 +66,16 @@ export default function Register() {
       //   },
       //   function (response, status) {
       //     if (status === 200) {
-      //       setAlert("کد تایید ارسال شد");
+      //       showAlert("کد تایید ارسال شد");
       //     } else {
-      //       setAlert("خطا در سامانه ارسال کد تایید");
+      //       showAlert("خطا در سامانه ارسال کد تایید");
       //     }
       //     startCounter();
       //   }
       // );
     } else {
-      setAlert("موبایل اشتباه");
+      showAlert("موبایل اشتباه");
     }
-    setTimeout(() => {
-      setAlert("");
-    }, 3000);
   };
 
   const handleRegister = async () => {
@@ -96,10 +90,14 @@ export default function Register() {
         await createUser();
       }
     } else {
-      setAlert("کد تایید اشتباه");
+      showAlert("کد تایید اشتباه");
     }
     setToken("");
     setCheckToken("");
+  };
+
+  const showAlert = (message) => {
+    setAlert(message);
     setTimeout(() => {
       setAlert("");
     }, 3000);
@@ -115,14 +113,14 @@ export default function Register() {
     try {
       const userData = await createUserApi(user);
       if (userData.hasOwnProperty("error")) {
-        setAlert("خطا در برقراری ارتباط");
+        showAlert("خطا در برقراری ارتباط");
       } else {
         setCurrentUser(userData);
         secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
         Router.push("/portal");
       }
     } catch (error) {
-      setAlert("خطا در برقراری ارتباط");
+      showAlert("خطا در برقراری ارتباط");
     }
     setDisplayCounter(false);
     resetCounter();

@@ -29,7 +29,7 @@ import {
 
 export default function Access({ records, visits }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
-  const [portalType, setPortalType] = useState("online" || "visit");
+  const [portalType, setPortalType] = useState("record" || "visit");
   const [displayDetails, setDisplayDetails] = useState(false);
   const [selected, setSelected] = useState(null);
 
@@ -134,7 +134,7 @@ export default function Access({ records, visits }) {
               <div className={classes.navigation}>
                 <p
                   className={
-                    portalType === "online" ? classes.nav : classes.navActive
+                    portalType === "record" ? classes.nav : classes.navActive
                   }
                   onClick={() => setPortalType("visit")}
                 >
@@ -144,23 +144,62 @@ export default function Access({ records, visits }) {
                   className={
                     portalType === "visit" ? classes.nav : classes.navActive
                   }
-                  onClick={() => setPortalType("online")}
+                  onClick={() => setPortalType("record")}
                 >
                   مشاوره آنلاین
                 </p>
               </div>
             )}
             {!displayDetails && (
-              <p className="message">
-                {portalType === "visit"
-                  ? displayVisits.length
-                  : displayRecords.length}{" "}
-                تعداد
-              </p>
+              <div className={classes.analytics}>
+                {portalType === "visit" && (
+                  <Fragment>
+                    <div className={classes.row}>
+                      <p>{displayVisits.length}</p>
+                      <p className={classes.grey}>تعداد</p>
+                    </div>
+                    <div className={classes.row}>
+                      <p>
+                        {
+                          displayVisits.filter((record) => record.completed)
+                            .length
+                        }
+                      </p>
+                      <p className={classes.grey}>تکمیل</p>
+                    </div>
+                    <div className={classes.row}>
+                      <p>
+                        {
+                          displayVisits.filter((record) => record.canceled)
+                            .length
+                        }
+                      </p>
+                      <p className={classes.grey}>لغو</p>
+                    </div>
+                  </Fragment>
+                )}
+                {portalType === "record" && (
+                  <Fragment>
+                    <div className={classes.row}>
+                      <p>{displayRecords.length}</p>
+                      <p className={classes.grey}>تعداد</p>
+                    </div>
+                    <div className={classes.row}>
+                      <p>
+                        {
+                          displayRecords.filter((record) => record.completed)
+                            .length
+                        }
+                      </p>
+                      <p className={classes.grey}>تکمیل</p>
+                    </div>
+                  </Fragment>
+                )}
+              </div>
             )}
             {!displayDetails && (
               <div className={classes.cards}>
-                {portalType === "online" && (
+                {portalType === "record" && (
                   <Fragment>
                     {displayRecords.map((item, index) => (
                       <div

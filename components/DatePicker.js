@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, Fragment } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./DatePicker.module.scss";
 import { toFarsiNumber } from "../services/utility";
@@ -6,13 +6,13 @@ import { Calendar, utils } from "@hassanmojab/react-modern-calendar-datepicker";
 import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
 // import { Calendar, utils } from "react-modern-calendar-datepicker";
 // import "react-modern-calendar-datepicker/lib/DatePicker.css";
-import Router from "next/router";
 import CloseIcon from "@mui/icons-material/Close";
 import {
   createVisitApi,
   getDoctorApi,
   updateDoctorApi,
   getUserApi,
+  getUsersApi,
   updateUserApi,
 } from "@/services/api";
 
@@ -21,6 +21,7 @@ export default function DatePicker({ doctorId }) {
 
   const [name, setName] = useState(currentUser.name);
   const [title, setTitle] = useState("");
+  const [phone, setPhone] = useState("");
   const [day, setDay] = useState(null);
   const [time, setTime] = useState("");
   const [alert, setAlert] = useState("");
@@ -40,23 +41,21 @@ export default function DatePicker({ doctorId }) {
 
   const createVisit = async () => {
     if (!day || !time) {
-      setAlert("روز و زمان الزامیست");
-      setTimeout(() => {
-        setAlert("");
-      }, 3000);
+      showAlert("روز و زمان الزامیست");
       return;
     }
     if (!name || !title) {
-      setAlert("نام و عنوان الزامیست");
-      setTimeout(() => {
-        setAlert("");
-      }, 3000);
+      showAlert("نام و عنوان الزامیست");
+      return;
+    }
+    if (currentUser.permission === "admin" && !phone) {
+      showAlert("موبایل الزامیست");
       return;
     }
     // create a new visit object
     let visit = {
       title: title,
-      userId: currentUser["_id"],
+      userId: await setUserId(),
       doctorId: doctorId,
       recordId: "",
       time: selectedDate,
@@ -67,6 +66,23 @@ export default function DatePicker({ doctorId }) {
     await updateDoctorObject(newVisit["_id"]);
     await updateUserObject();
     window.location.href = "/portal";
+  };
+
+  const setUserId = async () => {
+    if (currentUser.permission === "admin") {
+      const users = await getUsersApi();
+      const userData = users.find((user) => user.phone === phone);
+      return userData["_id"];
+    } else {
+      return currentUser["_id"];
+    }
+  };
+
+  const showAlert = (message) => {
+    setAlert(message);
+    setTimeout(() => {
+      setAlert("");
+    }, 3000);
   };
 
   const updateDoctorObject = async (id) => {
@@ -190,6 +206,30 @@ export default function DatePicker({ doctorId }) {
           autoComplete="off"
           dir="rtl"
         />
+        {currentUser.permission === "admin" && (
+          <Fragment>
+            <div className={classes.bar}>
+              <p className={classes.label}>
+                موبایل
+                <span>*</span>
+              </p>
+              <CloseIcon
+                className="icon"
+                onClick={() => setPhone("")}
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              onChange={(e) => setPhone(e.target.value)}
+              value={phone}
+              autoComplete="off"
+              dir="rtl"
+            />
+          </Fragment>
+        )}
       </div>
       {alert && <p className="alert">{alert}</p>}
       {selectedDate && <p className={classes.message}>{selectedDate} ساعت</p>}
