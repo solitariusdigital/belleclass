@@ -1,3 +1,5 @@
+import { useState, useContext, useEffect } from "react";
+import { StateContext } from "@/context/stateContext";
 import dbConnect from "@/services/dbConnect";
 import doctorModel from "@/models/Doctor";
 import Image from "next/legacy/image";
@@ -6,6 +8,20 @@ import Router from "next/router";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 export default function Doctor({ doctor }) {
+  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
+
+  useEffect(() => {
+    navigationTopBar.map((nav) => {
+      if (nav.link === "/doctors") {
+        nav.active = true;
+      } else {
+        nav.active = false;
+      }
+    });
+    setNavigationTopBar([...navigationTopBar]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className={classes.profile}>
       <div className={classes.information}>

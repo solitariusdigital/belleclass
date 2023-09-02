@@ -203,16 +203,13 @@
   margin: 60px auto;
   width: config.$content-width;
   direction: rtl;
+  font-weight: 300;
 
   @include mixins.tablet {
     grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
     width: 100%;
     padding: 12px;
     margin: 40px auto;
-  }
-
-  p {
-    font-weight: 300;
   }
 
   @include mixins.mobile {
@@ -238,6 +235,16 @@
       }
     }
 
+    .row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .image {
+        border-radius: 50%;
+      }
+    }
+
     div {
       margin-right: 12px;
 
@@ -246,10 +253,6 @@
         font-size: config.$med-font;
         margin-bottom: 4px;
       }
-    }
-
-    .image {
-      border-radius: 50%;
     }
   }
 }

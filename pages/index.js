@@ -4,8 +4,11 @@ import classes from "./home.module.scss";
 import Image from "next/legacy/image";
 import background from "@/assets/background.jpg";
 import Expertise from "@/components/Expertise";
+import doctorModel from "@/models/Doctor";
+import dbConnect from "@/services/dbConnect";
+import Router from "next/router";
 
-export default function Home() {
+export default function Home({ doctors }) {
   const { expertiseAreas, setExpertiseAreas } = useContext(StateContext);
 
   useEffect(() => {
@@ -15,21 +18,6 @@ export default function Home() {
     setExpertiseAreas([...expertiseAreas]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const doctors = [
-    {
-      name: "دکتر محمد رضا فرهانی",
-      desc: "فارغ التحصیل رشته پزشکی از دانشگاه علوم پزشکی تهران",
-    },
-    {
-      name: "دکتر محمد رضا فرهانی",
-      desc: "فارغ التحصیل رشته پزشکی از دانشگاه علوم پزشکی تهران",
-    },
-    {
-      name: "دکتر محمد رضا فرهانی",
-      desc: "فارغ التحصیل رشته پزشکی از دانشگاه علوم پزشکی تهران",
-    },
-  ];
 
   return (
     <Fragment>
@@ -132,21 +120,24 @@ export default function Home() {
           <div
             className={classes.items}
             key={index}
-            onClick={() => (window.location.href = "/doctors")}
+            onClick={() => Router.push(`/doctors/${doctor["_id"]}`)}
           >
-            <Image
-              className={classes.image}
-              placeholder="blur"
-              src={background}
-              alt="image"
-              width={100}
-              height={100}
-              objectFit="cover"
-              loading="eager"
-            />
-            <div>
-              <p className={classes.name}>{doctor.name}</p>
-              <p>{doctor.desc}</p>
+            <div className={classes.row}>
+              <Image
+                className={classes.image}
+                src={doctor.image}
+                placeholder="blur"
+                blurDataURL={doctor.image}
+                alt="image"
+                width={70}
+                height={70}
+                objectFit="cover"
+                loading="eager"
+              />
+              <div>
+                <p className={classes.name}>{doctor.name}</p>
+                <p>{doctor.education}</p>
+              </div>
             </div>
           </div>
         ))}
@@ -195,4 +186,22 @@ export default function Home() {
       </div>
     </Fragment>
   );
+}
+
+// initial connection to db
+export async function getServerSideProps(context) {
+  try {
+    await dbConnect();
+    const doctors = await doctorModel.find();
+    return {
+      props: {
+        doctors: JSON.parse(JSON.stringify(doctors.slice(0, 3))),
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      notFound: true,
+    };
+  }
 }

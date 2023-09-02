@@ -58,7 +58,6 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     const doctors = await doctorModel.find();
-
     return {
       props: {
         doctors: JSON.parse(JSON.stringify(doctors)),

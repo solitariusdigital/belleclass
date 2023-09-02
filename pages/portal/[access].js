@@ -42,20 +42,35 @@ export default function Access({ records, visits }) {
     if (!currentUser) {
       Router.push("/portal");
     } else {
-      // inject user info into record object
-      records.forEach(async (item, index) => {
-        let userData = await getUserApi(item.userId);
-        records[index].user = userData;
-      });
-      setDisplayRecords(records);
-      // inject doctor/user info into visit object
-      visits.forEach(async (item, index) => {
-        let doctorData = await getDoctorApi(item.doctorId);
-        let userData = await getUserApi(item.userId);
-        visits[index].doctor = doctorData;
-        visits[index].user = userData;
-      });
-      setDisplayVisits(visits);
+      const fetchData = async () => {
+        // inject user info into record object
+        const recordsData = await Promise.all(
+          records.map(async (record) => {
+            const [userData] = await Promise.all([getUserApi(record.userId)]);
+            return {
+              ...record,
+              user: userData,
+            };
+          })
+        );
+        setDisplayRecords(recordsData);
+        // inject doctor/user info into visit object
+        const visitsData = await Promise.all(
+          visits.map(async (visit) => {
+            const [doctorData, userData] = await Promise.all([
+              getDoctorApi(visit.doctorId),
+              getUserApi(visit.userId),
+            ]);
+            return {
+              ...visit,
+              doctor: doctorData,
+              user: userData,
+            };
+          })
+        );
+        setDisplayVisits(visitsData);
+      };
+      fetchData().catch(console.error);
     }
   }, [currentUser, records, visits]);
 

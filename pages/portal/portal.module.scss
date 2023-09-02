@@ -145,9 +145,7 @@
   }
 
   .action {
-    position: absolute;
-    top: 12px;
-    left: 12px;
+    margin-top: 20px;
     width: 70px;
     @include mixins.row-space-between-center();
   }

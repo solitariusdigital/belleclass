@@ -1,10 +1,10 @@
-import { useState, useContext, useRef, Fragment, useEffect } from "react";
+import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import Menu from "@/components/Menu";
 import Footer from "@/components/Footer";
 import secureLocalStorage from "react-secure-storage";
-import { getNotificationsApi, getUserApi } from "@/services/api";
+import { getUserApi } from "@/services/api";
 import Image from "next/legacy/image";
 import appload from "../assets/appload.png";
 
