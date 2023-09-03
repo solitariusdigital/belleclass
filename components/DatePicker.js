@@ -14,12 +14,15 @@ import {
   getUserApi,
   getUsersApi,
   updateUserApi,
+  createUserApi,
 } from "@/services/api";
 
 export default function DatePicker({ doctorId, recordId }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
 
-  const [name, setName] = useState(currentUser.name);
+  const [name, setName] = useState(
+    currentUser.permission === "admin" ? "" : currentUser.name
+  );
   const [title, setTitle] = useState("");
   const [phone, setPhone] = useState("");
   const [day, setDay] = useState(null);
@@ -52,10 +55,11 @@ export default function DatePicker({ doctorId, recordId }) {
       showAlert("موبایل الزامیست");
       return;
     }
+    let userId = await setUserId();
     // create a new visit object
     let visit = {
       title: title,
-      userId: await setUserId(),
+      userId: userId,
       doctorId: doctorId,
       recordId: recordId ? recordId : "",
       time: selectedDate,
@@ -64,14 +68,23 @@ export default function DatePicker({ doctorId, recordId }) {
     };
     let newVisit = await createVisitApi(visit);
     await updateDoctorObject(newVisit["_id"]);
-    await updateUserObject();
+    await updateUserObject(userId);
     window.location.href = "/portal";
   };
 
   const setUserId = async () => {
     if (currentUser.permission === "admin") {
+      let userData = null;
       const users = await getUsersApi();
-      const userData = users.find((user) => user.phone === phone);
+      userData = users.find((user) => user.phone === phone);
+      if (!userData) {
+        const user = {
+          name: name,
+          phone: phone.trim(),
+          permission: "patient",
+        };
+        userData = await createUserApi(user);
+      }
       return userData["_id"];
     } else {
       return currentUser["_id"];
@@ -95,9 +108,9 @@ export default function DatePicker({ doctorId, recordId }) {
     await updateDoctorApi(doctor);
   };
 
-  const updateUserObject = async () => {
+  const updateUserObject = async (id) => {
     // add new doctor to user object
-    let user = await getUserApi(currentUser["_id"]);
+    let user = await getUserApi(id);
     user.name = name;
     if (!user.doctors.includes(doctorId)) {
       user.doctors.push(doctorId);
@@ -185,27 +198,6 @@ export default function DatePicker({ doctorId, recordId }) {
           autoComplete="off"
           dir="rtl"
         />
-        <div className={classes.bar}>
-          <p className={classes.label}>
-            عنوان
-            <span>*</span>
-          </p>
-          <CloseIcon
-            className="icon"
-            onClick={() => setTitle("")}
-            sx={{ fontSize: 16 }}
-          />
-        </div>
-        <input
-          placeholder="فیلر صورت"
-          type="text"
-          id="title"
-          name="title"
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
-          autoComplete="off"
-          dir="rtl"
-        />
         {currentUser.permission === "admin" && (
           <Fragment>
             <div className={classes.bar}>
@@ -230,6 +222,27 @@ export default function DatePicker({ doctorId, recordId }) {
             />
           </Fragment>
         )}
+        <div className={classes.bar}>
+          <p className={classes.label}>
+            عنوان
+            <span>*</span>
+          </p>
+          <CloseIcon
+            className="icon"
+            onClick={() => setTitle("")}
+            sx={{ fontSize: 16 }}
+          />
+        </div>
+        <input
+          placeholder="فیلر صورت"
+          type="text"
+          id="title"
+          name="title"
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+          autoComplete="off"
+          dir="rtl"
+        />
       </div>
       {alert && <p className="alert">{alert}</p>}
       {selectedDate && <p className={classes.message}>{selectedDate} ساعت</p>}

@@ -8,7 +8,7 @@ import Person4Icon from "@mui/icons-material/Person4";
 import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import Router from "next/router";
 import dbConnect from "@/services/dbConnect";
 import recordModel from "@/models/Record";
@@ -383,7 +383,7 @@ export default function Access({ records, visits }) {
             {displayDetails && (
               <div className={classes.details}>
                 <div className={classes.header}>
-                  <ArrowBackIosIcon
+                  <ArrowBackIosNewIcon
                     className="icon"
                     onClick={() => setDisplayDetails(!displayDetails)}
                   />

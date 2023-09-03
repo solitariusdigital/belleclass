@@ -3,7 +3,7 @@ import doctorModel from "@/models/Doctor";
 import Image from "next/legacy/image";
 import classes from "./doctors.module.scss";
 import Router from "next/router";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 export default function Doctor({ doctor }) {
   return (
@@ -11,7 +11,7 @@ export default function Doctor({ doctor }) {
       <div className={classes.information}>
         <div>
           <div className={classes.arrow}>
-            <ArrowBackIosIcon
+            <ArrowBackIosNewIcon
               className="icon"
               onClick={() => Router.push("/doctors")}
             />
