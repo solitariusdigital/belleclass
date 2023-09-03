@@ -13,6 +13,7 @@ export default function Booking() {
 
   const router = useRouter();
   const doctorId = router.query.id;
+  const recordId = router.query.record;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,7 +38,7 @@ export default function Booking() {
             />
             <h2 className={classes.title}>{doctorName}</h2>
           </div>
-          <DatePicker doctorId={doctorId} />
+          <DatePicker doctorId={doctorId} recordId={recordId} />
         </div>
       )}
     </Fragment>

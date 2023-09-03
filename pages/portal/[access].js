@@ -220,9 +220,24 @@ export default function Access({ records, visits }) {
                           <KeyboardArrowLeftIcon />
                         </div>
                         <div className={classes.row} style={margin}>
-                          <p className={classes.greyTitle}>تاریخ ثبت</p>
+                          <p className={classes.greyTitle}>ثبت</p>
                           <p>{convertDate(item.createdAt)}</p>
                         </div>
+                        {(currentUser.permission === "admin" ||
+                          currentUser.permission === "doctor") && (
+                          <Fragment>
+                            <div className={classes.row} style={margin}>
+                              <p className={classes.greyTitle}>بیمار</p>
+                              <p className={classes.title}>{item.user?.name}</p>
+                            </div>
+                            <div className={classes.row} style={margin}>
+                              <p className={classes.greyTitle}>موبایل</p>
+                              <p className={classes.title}>
+                                {item.user?.phone}
+                              </p>
+                            </div>
+                          </Fragment>
+                        )}
                         <div className={classes.row}>
                           {item.completed ? (
                             <div className={classes.row} style={margin}>
@@ -278,7 +293,7 @@ export default function Access({ records, visits }) {
                           </div>
                         </div>
                         <div className={classes.row} style={margin}>
-                          <p className={classes.greyTitle}>تاریخ ثبت</p>
+                          <p className={classes.greyTitle}>ثبت</p>
                           <p>{convertDate(item.createdAt)}</p>
                         </div>
                         <div className={classes.row} style={margin}>
@@ -441,7 +456,10 @@ export default function Access({ records, visits }) {
                       onClick={() =>
                         Router.push({
                           pathname: "/booking",
-                          query: { id: selected.doctor["_id"] },
+                          query: {
+                            id: selected.doctor["_id"],
+                            record: selected["_id"],
+                          },
                         })
                       }
                     >

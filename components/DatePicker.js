@@ -16,7 +16,7 @@ import {
   updateUserApi,
 } from "@/services/api";
 
-export default function DatePicker({ doctorId }) {
+export default function DatePicker({ doctorId, recordId }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
 
   const [name, setName] = useState(currentUser.name);
@@ -57,7 +57,7 @@ export default function DatePicker({ doctorId }) {
       title: title,
       userId: await setUserId(),
       doctorId: doctorId,
-      recordId: "",
+      recordId: recordId ? recordId : "",
       time: selectedDate,
       completed: false,
       canceled: false,
