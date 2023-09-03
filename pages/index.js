@@ -6,7 +6,6 @@ import background from "@/assets/background.jpg";
 import Expertise from "@/components/Expertise";
 import doctorModel from "@/models/Doctor";
 import dbConnect from "@/services/dbConnect";
-import Router from "next/router";
 
 export default function Home({ doctors }) {
   const { expertiseAreas, setExpertiseAreas } = useContext(StateContext);
@@ -120,7 +119,7 @@ export default function Home({ doctors }) {
           <div
             className={classes.items}
             key={index}
-            onClick={() => Router.push(`/doctors/${doctor["_id"]}`)}
+            onClick={() => (window.location.href = `/doctors/${doctor["_id"]}`)}
           >
             <div className={classes.row}>
               <Image

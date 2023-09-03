@@ -4,7 +4,6 @@ import DatePicker from "@/components/DatePicker";
 import classes from "./booking.module.scss";
 import { useRouter } from "next/router";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import Router from "next/router";
 import Register from "@/components/Register";
 import { getDoctorApi } from "@/services/api";
 
@@ -34,7 +33,7 @@ export default function Booking() {
           <div className={classes.header}>
             <ArrowBackIosIcon
               className="icon"
-              onClick={() => Router.push("/doctors")}
+              onClick={() => (window.location.href = "/doctors")}
             />
             <h2 className={classes.title}>{doctorName}</h2>
           </div>

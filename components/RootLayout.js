@@ -18,7 +18,10 @@ export default function RootLayout({ children }) {
 
   useEffect(() => {
     navigationTopBar.map((nav) => {
-      if (nav.link === pathname) {
+      if (nav.link === "/") {
+        navigationTopBar[0].active = true;
+      } else if (pathname.includes(nav.link)) {
+        navigationTopBar[0].active = false;
         nav.active = true;
       } else {
         nav.active = false;

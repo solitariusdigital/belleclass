@@ -46,9 +46,13 @@ export default function Access({ records, visits }) {
         // inject user info into record object
         const recordsData = await Promise.all(
           records.map(async (record) => {
-            const [userData] = await Promise.all([getUserApi(record.userId)]);
+            const [doctorData, userData] = await Promise.all([
+              getDoctorApi(record.doctorId),
+              getUserApi(record.userId),
+            ]);
             return {
               ...record,
+              doctor: doctorData,
               user: userData,
             };
           })
@@ -433,7 +437,14 @@ export default function Access({ records, visits }) {
                 {selected.completed && (
                   <Fragment>
                     <p className={classes.text}>{selected.comments[1]}</p>
-                    <button onClick={() => (window.location.href = "/doctors")}>
+                    <button
+                      onClick={() =>
+                        Router.push({
+                          pathname: "/booking",
+                          query: { id: selected.doctor["_id"] },
+                        })
+                      }
+                    >
                       رزرو مراجعه حضوری
                     </button>
                   </Fragment>
