@@ -243,6 +243,22 @@
   }
 }
 
+.imageSelector {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  gap: 12px;
+  margin: auto;
+
+  .image {
+    border-bottom: 1px solid config.$gold3;
+
+    &:hover {
+      cursor: pointer;
+      border-bottom: 1px solid config.$black;
+    }
+  }
+}
+
 .analytics {
   width: 350px;
   margin: 20px auto;

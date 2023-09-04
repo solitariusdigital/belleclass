@@ -6,7 +6,7 @@ const RecordSchema = new Schema(
     images: String,
     userId: String,
     doctorId: String,
-    archiveId: String,
+    example: String,
     comments: [String],
     completed: Boolean,
   },

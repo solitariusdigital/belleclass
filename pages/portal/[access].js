@@ -36,7 +36,44 @@ export default function Access({ records, visits }) {
   const [displayVisits, setDisplayVisits] = useState([]);
   const [displayRecords, setDisplayRecords] = useState([]);
   const [comment, setComment] = useState("");
+  const [example, setExample] = useState("");
   const [alert, setAlert] = useState("");
+
+  const imageInfo = [
+    {
+      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphone.png",
+    },
+    {
+      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphtwo.png",
+    },
+    {
+      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphthree.png",
+    },
+    {
+      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphfour.png",
+    },
+    {
+      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphfive.png",
+    },
+    {
+      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphsix.png",
+    },
+    {
+      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphfour.png",
+    },
+    {
+      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphfive.png",
+    },
+    {
+      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphsix.png",
+    },
+    {
+      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphfour.png",
+    },
+    {
+      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphfive.png",
+    },
+  ];
 
   useEffect(() => {
     if (!currentUser) {
@@ -93,6 +130,7 @@ export default function Access({ records, visits }) {
 
     let recordData = await getRecordApi(record["_id"]);
     recordData.comments[1] = comment;
+    recordData.example = example;
     recordData.completed = true;
     await updateRecordApi(recordData);
     Router.push("/portal");
@@ -452,6 +490,17 @@ export default function Access({ records, visits }) {
                 {selected.completed && (
                   <Fragment>
                     <p className={classes.text}>{selected.comments[1]}</p>
+                    {selected.example && (
+                      <div className={classes.imageContainer} style={margin}>
+                        <Image
+                          className={classes.image}
+                          src={selected.example}
+                          alt="image"
+                          layout="fill"
+                          objectFit="cover"
+                        />
+                      </div>
+                    )}
                     <button
                       onClick={() =>
                         Router.push({
@@ -483,6 +532,39 @@ export default function Access({ records, visits }) {
                           autoComplete="off"
                           dir="rtl"
                         ></textarea>
+                        {example !== "" && (
+                          <div>
+                            <CloseIcon
+                              className="icon"
+                              onClick={() => setExample("")}
+                              sx={{ fontSize: 16 }}
+                            />
+                            <Image
+                              src={example}
+                              alt="image"
+                              objectFit="contain"
+                              width={200}
+                              height={200}
+                            />
+                          </div>
+                        )}
+                        <div className={classes.imageSelector}>
+                          {imageInfo.map((info, index) => (
+                            <div
+                              className={classes.image}
+                              key={index}
+                              onClick={() => setExample(info.src)}
+                            >
+                              <Image
+                                src={info.src}
+                                alt="image"
+                                objectFit="contain"
+                                width={100}
+                                height={100}
+                              />
+                            </div>
+                          ))}
+                        </div>
                         <p className="alert">{alert}</p>
                         <button onClick={() => actionRecord(selected)}>
                           ارسال
