@@ -17,7 +17,7 @@
   }
 
   .header {
-    max-width: 400px;
+    max-width: 500px;
     margin: auto;
     @include mixins.row-space-between-center();
     text-align: center;
@@ -29,18 +29,18 @@
 
   .progress {
     margin: 20px auto;
-    max-width: 400px;
+    max-width: 500px;
   }
 
   .details {
-    max-width: 400px;
+    max-width: 500px;
     margin: auto;
     font-weight: bold;
     @include mixins.row-space-between-center();
   }
 
   .form {
-    max-width: 400px;
+    max-width: 500px;
     margin: 20px auto;
     text-align: center;
 

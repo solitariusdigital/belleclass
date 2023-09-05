@@ -14,6 +14,7 @@ import dbConnect from "@/services/dbConnect";
 import recordModel from "@/models/Record";
 import visitModel from "@/models/Visit";
 import doctorModel from "@/models/Doctor";
+import userModel from "@/models/User";
 import { convertDate } from "@/services/utility";
 import avatar from "@/assets/avatar.png";
 import CloseIcon from "@mui/icons-material/Close";
@@ -27,7 +28,7 @@ import {
   getUserApi,
 } from "@/services/api";
 
-export default function Access({ records, visits, doctors }) {
+export default function Access({ records, visits, doctors, users }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const [portalType, setPortalType] = useState("record" || "visit");
   const [displayDetails, setDisplayDetails] = useState(false);
@@ -205,6 +206,12 @@ export default function Access({ records, visits, doctors }) {
             )}
             {!displayDetails && (
               <div className={classes.analytics}>
+                {currentUser.permission === "admin" && (
+                  <div className={classes.row}>
+                    <p>{users.length}</p>
+                    <p className={classes.grey}>بیمار</p>
+                  </div>
+                )}
                 {portalType === "visit" && (
                   <Fragment>
                     <div className={classes.row}>
@@ -500,6 +507,12 @@ export default function Access({ records, visits, doctors }) {
                     </div>
                   </div>
                 )}
+                {!selected.completed &&
+                  currentUser.permission === "patient" && (
+                    <p className="message">
+                      هنگام تکمیل مشاوره به شما پیامک ارسال میشود
+                    </p>
+                  )}
                 {selected.completed && (
                   <Fragment>
                     <p className={classes.text}>{selected.comments[1]}</p>
@@ -627,6 +640,8 @@ export async function getServerSideProps(context) {
     let permission = context.query.p;
 
     const doctors = await doctorModel.find();
+    const users = await userModel.find();
+
     let records = null;
     let visits = null;
 
@@ -660,6 +675,7 @@ export async function getServerSideProps(context) {
         records: JSON.parse(JSON.stringify(records)),
         visits: JSON.parse(JSON.stringify(visits)),
         doctors: JSON.parse(JSON.stringify(doctors)),
+        users: JSON.parse(JSON.stringify(users)),
       },
     };
   } catch (error) {
