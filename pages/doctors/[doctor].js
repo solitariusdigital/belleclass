@@ -37,7 +37,7 @@ export default function Doctor({ doctor }) {
               })
             }
           >
-            تقویم
+            نوبت دهی
           </button>
         </div>
         <div className={classes.tags}>

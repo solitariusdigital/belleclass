@@ -185,6 +185,12 @@
       textarea {
         @include mixins.textarea();
       }
+
+      select {
+        @include mixins.input();
+        height: 50px;
+        width: 100%;
+      }
     }
 
     button {

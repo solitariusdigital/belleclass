@@ -27,7 +27,7 @@ import {
   getUserApi,
 } from "@/services/api";
 
-export default function Access({ records, visits }) {
+export default function Access({ records, visits, doctors }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const [portalType, setPortalType] = useState("record" || "visit");
   const [displayDetails, setDisplayDetails] = useState(false);
@@ -37,6 +37,8 @@ export default function Access({ records, visits }) {
   const [displayRecords, setDisplayRecords] = useState([]);
   const [comment, setComment] = useState("");
   const [example, setExample] = useState("");
+  const [doctorId, setDoctorId] = useState("");
+
   const [alert, setAlert] = useState("");
 
   const imageInfo = [
@@ -119,18 +121,27 @@ export default function Access({ records, visits }) {
     margin: "8px 0px",
   };
 
+  const showAlert = (message) => {
+    setAlert(message);
+    setTimeout(() => {
+      setAlert("");
+    }, 3000);
+  };
+
   const actionRecord = async (record) => {
+    if (!doctorId) {
+      showAlert("پزشک منتخب خالی");
+      return;
+    }
     if (!comment) {
-      setAlert("مشاوره خالی");
-      setTimeout(() => {
-        setAlert("");
-      }, 3000);
+      showAlert("مشاوره خالی");
       return;
     }
 
     let recordData = await getRecordApi(record["_id"]);
     recordData.comments[1] = comment;
     recordData.example = example;
+    recordData.doctorId = doctorId;
     recordData.completed = true;
     await updateRecordApi(recordData);
     Router.push("/portal");
@@ -434,19 +445,21 @@ export default function Access({ records, visits }) {
                     <p className={classes.title}>{selected.user?.name}</p>
                   </div>
                 )}
-                <div className={classes.imageContainer}>
-                  <Image
-                    className={classes.image}
-                    src={selected.image}
-                    placeholder="blur"
-                    blurDataURL={selected.image}
-                    alt="image"
-                    loading="eager"
-                    layout="fill"
-                    objectFit="cover"
-                    priority
-                  />
-                </div>
+                {selected.image && (
+                  <div className={classes.imageContainer}>
+                    <Image
+                      className={classes.image}
+                      src={selected.image}
+                      placeholder="blur"
+                      blurDataURL={selected.image}
+                      alt="image"
+                      loading="eager"
+                      layout="fill"
+                      objectFit="cover"
+                      priority
+                    />
+                  </div>
+                )}
                 <p className={classes.text}>{selected.comments[0]}</p>
                 <div className={classes.row} style={margin}>
                   <p>{convertDate(selected.createdAt)}</p>
@@ -491,7 +504,10 @@ export default function Access({ records, visits }) {
                   <Fragment>
                     <p className={classes.text}>{selected.comments[1]}</p>
                     {selected.example && (
-                      <div className={classes.imageContainer} style={margin}>
+                      <div
+                        className={classes.imageContainer}
+                        style={{ margin: "20px 0px" }}
+                      >
                         <Image
                           className={classes.image}
                           src={selected.example}
@@ -520,6 +536,23 @@ export default function Access({ records, visits }) {
                   (currentUser.permission === "admin" ||
                     currentUser.permission === "doctor") && (
                     <Fragment>
+                      <div className={classes.input}>
+                        <select
+                          defaultValue={"default"}
+                          onChange={(e) => setDoctorId(e.target.value)}
+                        >
+                          <option value="default" disabled>
+                            پزشک منتخب
+                          </option>
+                          {doctors.map((doctor, index) => {
+                            return (
+                              <option key={index} value={doctor["_id"]}>
+                                {doctor.name}
+                              </option>
+                            );
+                          })}
+                        </select>
+                      </div>
                       <div className={classes.input}>
                         <p className={classes.label}>مشاوره تخصصی</p>
                         <textarea
@@ -593,6 +626,7 @@ export async function getServerSideProps(context) {
     let id = context.query.id;
     let permission = context.query.p;
 
+    const doctors = await doctorModel.find();
     let records = null;
     let visits = null;
 
@@ -625,6 +659,7 @@ export async function getServerSideProps(context) {
       props: {
         records: JSON.parse(JSON.stringify(records)),
         visits: JSON.parse(JSON.stringify(visits)),
+        doctors: JSON.parse(JSON.stringify(doctors)),
       },
     };
   } catch (error) {

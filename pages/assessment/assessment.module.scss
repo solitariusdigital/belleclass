@@ -17,14 +17,98 @@
   }
 
   .header {
-    width: 50%;
+    max-width: 400px;
     margin: auto;
     @include mixins.row-space-between-center();
-    justify-content: space-around;
     text-align: center;
 
     @include mixins.mobile {
       width: 100%;
     }
+  }
+
+  .progress {
+    margin: 20px auto;
+    max-width: 400px;
+  }
+
+  .details {
+    max-width: 400px;
+    margin: auto;
+    font-weight: bold;
+    @include mixins.row-space-between-center();
+  }
+
+  .form {
+    max-width: 400px;
+    margin: 20px auto;
+    text-align: center;
+
+    .input {
+      width: 100%;
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .bar {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+      }
+
+      .label {
+        color: config.$grey;
+        font-size: config.$small-font;
+        margin-bottom: 8px;
+
+        span {
+          color: config.$red;
+          font-size: config.$tiny-font;
+        }
+      }
+
+      input {
+        @include mixins.input();
+        width: 100%;
+      }
+
+      textarea {
+        @include mixins.textarea();
+      }
+
+      p {
+        display: flex;
+        flex-direction: row-reverse;
+      }
+    }
+
+    .button {
+      @include mixins.button(config.$gold1, config.$gold3, config.$black);
+      margin-top: 40px;
+    }
+  }
+
+  .image {
+    @include mixins.border-radius();
+  }
+
+  // input file
+  label.file input[type="file"] {
+    position: absolute;
+    top: -1000px;
+  }
+  .file {
+    cursor: pointer;
+    border: 1px solid config.$gold3;
+    padding: 8px;
+    color: config.$grey;
+    display: inline-block;
+    margin-bottom: 20px;
+    @include mixins.border-radius();
+  }
+  .file:hover {
+    color: config.$black;
+    border: 1px solid config.$black;
   }
 }

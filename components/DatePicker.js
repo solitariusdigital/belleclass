@@ -24,7 +24,9 @@ export default function DatePicker({ doctorId, recordId }) {
     currentUser.permission === "admin" ? "" : currentUser.name
   );
   const [title, setTitle] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState(
+    currentUser.permission === "admin" ? "" : currentUser.phone
+  );
   const [day, setDay] = useState(null);
   const [time, setTime] = useState("");
   const [alert, setAlert] = useState("");
@@ -53,6 +55,13 @@ export default function DatePicker({ doctorId, recordId }) {
     }
     if (currentUser.permission === "admin" && !phone) {
       showAlert("موبایل الزامیست");
+      return;
+    }
+    if (
+      (currentUser.permission === "admin" && phone.length !== 11) ||
+      !phone.startsWith("09")
+    ) {
+      showAlert("موبایل اشتباه");
       return;
     }
     let userId = await setUserId();

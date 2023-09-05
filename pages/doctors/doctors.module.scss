@@ -34,13 +34,6 @@
   box-shadow: config.$card-shadow;
   @include mixins.border-radius();
 
-  @include mixins.desktop {
-    &:hover {
-      position: relative;
-      bottom: 5px;
-    }
-  }
-
   .tags {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
@@ -51,11 +44,22 @@
     p {
       padding: 8px;
       box-shadow: config.$card-shadow;
-      color: config.$gold3;
       @include mixins.border-radius();
     }
   }
 
+  .bio {
+    span {
+      color: config.$gold3;
+      border-bottom: 1px solid config.$gold3;
+
+      @include mixins.desktop {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
   .row {
     display: flex;
     flex-direction: row;
@@ -73,8 +77,9 @@
 
   .button {
     width: 100%;
-    margin-top: 12px;
+    margin-top: 20px;
     @include mixins.row-space-between-center();
+    justify-content: center;
   }
 
   button {

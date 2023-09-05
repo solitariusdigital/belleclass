@@ -3,7 +3,7 @@ import { Schema, model, models } from "mongoose";
 const RecordSchema = new Schema(
   {
     title: String,
-    images: String,
+    image: String,
     userId: String,
     doctorId: String,
     example: String,

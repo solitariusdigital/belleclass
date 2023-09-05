@@ -28,10 +28,20 @@ export default function Doctors({ doctors }) {
           </div>
           <div className={classes.tags}>
             {doctor.tags.map((tag, index) => (
-              <p key={index}>{tag}</p>
+              <p
+                key={index}
+                onClick={() => Router.push(`/doctors/${doctor["_id"]}`)}
+              >
+                {tag}
+              </p>
             ))}
           </div>
-          <p>{doctor.bio.slice(0, 100)} ...</p>
+          <p className={classes.bio}>
+            {doctor.bio.slice(0, 130)} ...{" "}
+            <span onClick={() => Router.push(`/doctors/${doctor["_id"]}`)}>
+              بیشتر
+            </span>
+          </p>
           <div className={classes.button}>
             <button
               onClick={() =>
@@ -41,10 +51,7 @@ export default function Doctors({ doctors }) {
                 })
               }
             >
-              تقویم
-            </button>
-            <button onClick={() => Router.push(`/doctors/${doctor["_id"]}`)}>
-              پروفایل
+              نوبت دهی
             </button>
           </div>
         </div>
