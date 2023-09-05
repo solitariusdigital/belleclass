@@ -4,6 +4,8 @@ import classes from "./Menu.module.scss";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import Router from "next/router";
+import Image from "next/legacy/image";
+import logo from "../assets/logo.png";
 
 export default function Menu() {
   const { menuMobile, setMenuMobile } = useContext(StateContext);
@@ -25,7 +27,13 @@ export default function Menu() {
   return (
     <div className={classes.container}>
       <div className={classes.largeMenu}>
-        <p>LOGO</p>
+        <Image
+          width={50}
+          height={50}
+          src={logo}
+          alt="logo"
+          onClick={() => (window.location.href = "/")}
+        />
         <div className={classes.largeNavigation}>
           {navigationTopBar
             .map((nav, index) => (
@@ -43,7 +51,13 @@ export default function Menu() {
       </div>
       <div className={classes.smallMenu}>
         <div className={classes.topBar}>
-          <p>LOGO</p>
+          <Image
+            width={50}
+            height={50}
+            src={logo}
+            alt="logo"
+            onClick={() => (window.location.href = "/")}
+          />
           {menuMobile ? (
             <CloseIcon
               className={classes.menuIcon}

@@ -9,7 +9,7 @@
   margin-top: 250px;
   border-top-left-radius: 200px;
   background: config.$gold1;
-  padding: 8px;
+  padding: 12px;
   height: 100%;
   min-height: 250px;
 
@@ -29,6 +29,7 @@
 
     @include mixins.mobile {
       flex-direction: column;
+      width: 100%;
     }
   }
 
@@ -48,6 +49,17 @@
         }
       }
     }
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    width: 100px;
+    margin: 20px 0px;
+    background: config.$black;
+    @include mixins.border-radius();
   }
 
   .information {

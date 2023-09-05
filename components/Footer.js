@@ -2,8 +2,9 @@ import classes from "./Footer.module.scss";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import PhoneIphoneOutlinedIcon from "@mui/icons-material/PhoneIphoneOutlined";
-import Router from "next/router";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import Image from "next/legacy/image";
+import logo from "../assets/logo.png";
 
 export default function Footer() {
   return (
@@ -29,6 +30,12 @@ export default function Footer() {
           <button onClick={() => (window.location.href = "/assessment")}>
             مشاوره آنلاین رایگان
           </button>
+        </div>
+        <div
+          className={classes.logo}
+          onClick={() => (window.location.href = "/")}
+        >
+          <Image width={100} height={100} src={logo} alt="logo" />
         </div>
         <div className={classes.information}>
           <div className={classes.row}>

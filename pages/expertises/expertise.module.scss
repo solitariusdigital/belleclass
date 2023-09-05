@@ -18,6 +18,11 @@
   }
 }
 
+.image {
+  display: flex;
+  justify-content: center;
+}
+
 .information {
   background: config.$white;
   box-shadow: config.$card-shadow;

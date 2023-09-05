@@ -3,6 +3,17 @@ import { StateContext } from "@/context/stateContext";
 import classes from "./expertise.module.scss";
 import Expertise from "@/components/Expertise";
 import FiberManualRecordOutlined from "@mui/icons-material/FiberManualRecordOutlined";
+import Image from "next/legacy/image";
+import Belle33 from "../../assets/Belle-33.png";
+import Belle34 from "../../assets/Belle-34.png";
+import Belle31 from "../../assets/Belle-31.png";
+import Belle09 from "../../assets/Belle-09.png";
+import Belle29 from "../../assets/Belle-29.png";
+import Belle30 from "../../assets/Belle-30.png";
+import Belle32 from "../../assets/Belle-32.png";
+import Belle36 from "../../assets/Belle-36.png";
+import Belle35 from "../../assets/Belle-35.png";
+import Belle14 from "../../assets/Belle-14.png";
 
 export default function Expertises() {
   const { expertiseAreas, setExpertiseAreas } = useContext(StateContext);
@@ -26,6 +37,9 @@ export default function Expertises() {
           <h2>{displayExpertise}</h2>
           {displayExpertise === "فیلر" && (
             <Fragment>
+              <div className={classes.image}>
+                <Image width={250} height={250} src={Belle33} alt="logo" />
+              </div>
               <p>
                 فیلرهای پوستی مواد ژل مانندی هستند که برای بازگرداندن حجم از دست
                 رفته، ایجاد خطوط صاف و نرم کردن چین و چروکها به زیر پوست تزریق
@@ -117,6 +131,9 @@ export default function Expertises() {
           )}
           {displayExpertise === "نوتریژنومیکس" && (
             <Fragment>
+              <div className={classes.image}>
+                <Image width={250} height={250} src={Belle34} alt="logo" />
+              </div>
               <p>
                 ژنومیک تغذیه ای یا نوتریژنومیکس مطالعه تأثیرات مواد غذایی و
                 ترکیبات غذا بر بیان ژن و چگونگی تأثیر تغییرات ژنتیکی بر محیط
@@ -241,6 +258,9 @@ export default function Expertises() {
           )}
           {displayExpertise === "لیزر" && (
             <Fragment>
+              <div className={classes.image}>
+                <Image width={250} height={250} src={Belle31} alt="logo" />
+              </div>
               <p>
                 ​​​​​​​لیزر موهای زائد یک روش پزشکی است که از یک پرتو متمرکز نور
                 (لیزر) برای از بین بردن موهای زائد استفاده می کند. در طی این
@@ -343,6 +363,9 @@ export default function Expertises() {
           )}
           {displayExpertise === "کاشت مو و ابرو" && (
             <Fragment>
+              <div className={classes.image}>
+                <Image width={250} height={250} src={Belle09} alt="logo" />
+              </div>
               <p>
                 در شایع ترین نوع ریزش موی دائمی، فقط قسمت بالای سر تحت تاثیر
                 قرار می گیرد. کاشت مو یا جراحی کاشت مو می تواند از موهایی که
@@ -361,6 +384,9 @@ export default function Expertises() {
           )}
           {displayExpertise === "بوتاکس" && (
             <Fragment>
+              <div className={classes.image}>
+                <Image width={250} height={250} src={Belle29} alt="logo" />
+              </div>
               <p>
                 سم بوتولینوم که با نام تجاری بوتاکس شناخته شده است از سم باکتری
                 کلستریدیوم تهیه و برای فلج موقت عضلات استفاده می شود. تزریق
@@ -467,6 +493,9 @@ export default function Expertises() {
           )}
           {displayExpertise === "پلاسمای غنی از پلاکت" && (
             <Fragment>
+              <div className={classes.image}>
+                <Image width={250} height={250} src={Belle30} alt="logo" />
+              </div>
               <p>
                 پلاسمای غنی از پلاکت به عنوان یک درمان احتمالی برای ریزش مو مورد
                 استفاده قرار می گیرد. همچنین ممکن است بهبود زخم را تسریع کند.
@@ -520,6 +549,9 @@ export default function Expertises() {
           )}
           {displayExpertise === "درمان با فرکانس رادویی" && (
             <Fragment>
+              <div className={classes.image}>
+                <Image width={250} height={250} src={Belle32} alt="logo" />
+              </div>
               <p>
                 درمان با فرکانس رادیویی یک روش غیرجراحی برای سفت کردن پوست است.
                 امواج رادیویی نوعی تابش است که از آزاد شدن انرژی به شکل امواج
@@ -574,6 +606,9 @@ export default function Expertises() {
           )}
           {displayExpertise === "هایفوتراپی" && (
             <Fragment>
+              <div className={classes.image}>
+                <Image width={250} height={250} src={Belle36} alt="logo" />
+              </div>
               <p>
                 در هایفوتراپی از امواج فراصوت برای ایجاد حرارت در سطح عمیقی از
                 پوست استفاده می‌شود. این حرارت سلول ­های پوستی تحریک و بدن را
@@ -673,6 +708,9 @@ export default function Expertises() {
           )}
           {displayExpertise === "کرایوتراپی" && (
             <Fragment>
+              <div className={classes.image}>
+                <Image width={250} height={250} src={Belle14} alt="logo" />
+              </div>
               <p>
                 روش درمانی کرایوتراپی، استفاده از سرمای شدید برای انجماد و
                 برداشتن بافت های غیر طبیعی است. پزشکان از آن برای درمان بسیاری
@@ -769,6 +807,9 @@ export default function Expertises() {
           )}
           {displayExpertise === "لیفت با نخ" && (
             <Fragment>
+              <div className={classes.image}>
+                <Image width={250} height={250} src={Belle35} alt="logo" />
+              </div>
               <p>
                 لیفت با نخ نوعی روش است که در آن از بخیه های موقت برای ایجاد یک
                 لیفت ظریف اما قابل مشاهده در پوست استفاده می شود. این روش
