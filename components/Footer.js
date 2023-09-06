@@ -5,6 +5,7 @@ import PhoneIphoneOutlinedIcon from "@mui/icons-material/PhoneIphoneOutlined";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Image from "next/legacy/image";
 import logo from "../assets/logo.png";
+import Router from "next/router";
 
 export default function Footer() {
   return (
@@ -23,19 +24,16 @@ export default function Footer() {
         />
       </div>
       <div className={classes.container}>
+        <div className={classes.logo} onClick={() => Router.push("/")}>
+          <Image width={100} height={100} src={logo} alt="logo" />
+        </div>
         <div className={classes.buttons}>
-          <button onClick={() => (window.location.href = "/doctors")}>
+          <button onClick={() => Router.push("/doctors")}>
             رزرو مراجعه حضوری
           </button>
-          <button onClick={() => (window.location.href = "/assessment")}>
+          <button onClick={() => Router.push("/assessment")}>
             مشاوره آنلاین رایگان
           </button>
-        </div>
-        <div
-          className={classes.logo}
-          onClick={() => (window.location.href = "/")}
-        >
-          <Image width={100} height={100} src={logo} alt="logo" />
         </div>
         <div className={classes.information}>
           <div className={classes.row}>

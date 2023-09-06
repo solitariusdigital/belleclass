@@ -1,10 +1,15 @@
 import { useState, useContext, Fragment, useEffect } from "react";
+import { useRouter } from "next/router";
 import { StateContext } from "@/context/stateContext";
 import Router from "next/router";
 import Register from "@/components/Register";
 
 export default function Index() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
+  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
+
+  const router = useRouter();
+  let pathname = router.pathname;
 
   useEffect(() => {
     if (currentUser) {
@@ -14,6 +19,21 @@ export default function Index() {
       });
     }
   }, [currentUser]);
+
+  useEffect(() => {
+    navigationTopBar.map((nav) => {
+      if (nav.link === "/") {
+        navigationTopBar[0].active = true;
+      } else if (pathname.includes(nav.link)) {
+        navigationTopBar[0].active = false;
+        nav.active = true;
+      } else {
+        nav.active = false;
+      }
+    });
+    setNavigationTopBar([...navigationTopBar]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Fragment>

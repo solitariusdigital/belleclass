@@ -6,6 +6,7 @@ import { Calendar, utils } from "@hassanmojab/react-modern-calendar-datepicker";
 import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
 // import { Calendar, utils } from "react-modern-calendar-datepicker";
 // import "react-modern-calendar-datepicker/lib/DatePicker.css";
+import Router from "next/router";
 import CloseIcon from "@mui/icons-material/Close";
 import {
   createVisitApi,
@@ -78,7 +79,7 @@ export default function DatePicker({ doctorId, recordId }) {
     let newVisit = await createVisitApi(visit);
     await updateDoctorObject(newVisit["_id"]);
     await updateUserObject(userId);
-    window.location.href = "/portal";
+    Router.push("/portal");
   };
 
   const setUserId = async () => {

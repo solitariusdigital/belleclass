@@ -32,7 +32,7 @@ export default function Menu() {
           height={50}
           src={logo}
           alt="logo"
-          onClick={() => (window.location.href = "/")}
+          onClick={() => window.location.assign("/")}
         />
         <div className={classes.largeNavigation}>
           {navigationTopBar
@@ -56,7 +56,7 @@ export default function Menu() {
             height={50}
             src={logo}
             alt="logo"
-            onClick={() => (window.location.href = "/")}
+            onClick={() => window.location.assign("/")}
           />
           {menuMobile ? (
             <CloseIcon
@@ -89,10 +89,10 @@ export default function Menu() {
               ))}
             </div>
             <div className={classes.buttons}>
-              <button onClick={() => (window.location.href = "/doctors")}>
+              <button onClick={() => Router.push("/doctors")}>
                 رزرو مراجعه حضوری
               </button>
-              <button onClick={() => (window.location.href = "/assessment")}>
+              <button onClick={() => Router.push("/assessment")}>
                 مشاوره آنلاین رایگان
               </button>
             </div>

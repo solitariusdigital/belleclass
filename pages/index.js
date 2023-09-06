@@ -6,6 +6,7 @@ import background from "@/assets/background.jpg";
 import Expertise from "@/components/Expertise";
 import doctorModel from "@/models/Doctor";
 import dbConnect from "@/services/dbConnect";
+import Router from "next/router";
 
 export default function Home({ doctors }) {
   const { expertiseAreas, setExpertiseAreas } = useContext(StateContext);
@@ -33,10 +34,10 @@ export default function Home({ doctors }) {
         <div className={classes.header}>
           <h1>The Gaurdian of Life</h1>
           <h1>نگهبان زندگی</h1>
-          <button onClick={() => (window.location.href = "/doctors")}>
+          <button onClick={() => Router.push("/doctors")}>
             رزرو مراجعه حضوری
           </button>
-          <button onClick={() => (window.location.href = "/assessment")}>
+          <button onClick={() => Router.push("/assessment")}>
             مشاوره آنلاین رایگان
           </button>
         </div>
@@ -119,7 +120,7 @@ export default function Home({ doctors }) {
           <div
             className={classes.items}
             key={index}
-            onClick={() => (window.location.href = `/doctors/${doctor["_id"]}`)}
+            onClick={() => Router.push(`/doctors/${doctor["_id"]}`)}
           >
             <div className={classes.row}>
               <Image
@@ -151,7 +152,7 @@ export default function Home({ doctors }) {
               src="https://belleclass.com/uploads/1cceeb6f0d5e4042927d1c1d05368f52.MOV"
             />
           </div>
-          <button onClick={() => (window.location.href = "/doctors")}>
+          <button onClick={() => Router.push("/doctors")}>
             رزرو مراجعه حضوری
           </button>
           <p>
@@ -173,7 +174,7 @@ export default function Home({ doctors }) {
               src="https://belleclass.com/uploads/e7750b4101324885a8e2e55ad4a6a5ab.MOV"
             />
           </div>
-          <button onClick={() => (window.location.href = "/assessment")}>
+          <button onClick={() => Router.push("/assessment")}>
             مشاوره آنلاین رایگان
           </button>
           <p>

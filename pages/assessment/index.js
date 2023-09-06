@@ -6,9 +6,12 @@ import avatar from "@/assets/doctorAvatar.png";
 import CloseIcon from "@mui/icons-material/Close";
 import Image from "next/legacy/image";
 import { createRecordApi, getUsersApi, createUserApi } from "@/services/api";
+import secureLocalStorage from "react-secure-storage";
+import Router from "next/router";
 
 export default function Assessment() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
+  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
 
   const [progressCompleted, setProgressCompleted] = useState(80);
   const [name, setName] = useState(currentUser ? currentUser.name : "");
@@ -17,6 +20,14 @@ export default function Assessment() {
   const [comment, setComment] = useState("");
   const [image, setImage] = useState("");
   const [alert, setAlert] = useState("");
+
+  useEffect(() => {
+    navigationTopBar.map((nav, i) => {
+      nav.active = false;
+    });
+    setNavigationTopBar([...navigationTopBar]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const createRecord = async () => {
     if (phone.length !== 11 || !phone.startsWith("09")) {
@@ -43,7 +54,7 @@ export default function Assessment() {
       completed: false,
     };
     await createRecordApi(record);
-    window.location.href = "/portal";
+    Router.push("/portal");
   };
 
   const setUserId = async () => {
@@ -58,6 +69,8 @@ export default function Assessment() {
           permission: "patient",
         };
         userData = await createUserApi(user);
+        setCurrentUser(userData);
+        secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
       }
       return userData["_id"];
     } else {

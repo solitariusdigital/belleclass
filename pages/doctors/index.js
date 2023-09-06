@@ -1,5 +1,6 @@
 import { useState, useContext, useRef, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
+import { useRouter } from "next/router";
 import classes from "./doctors.module.scss";
 import Image from "next/legacy/image";
 import Router from "next/router";
@@ -7,6 +8,26 @@ import dbConnect from "@/services/dbConnect";
 import doctorModel from "@/models/Doctor";
 
 export default function Doctors({ doctors }) {
+  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
+
+  const router = useRouter();
+  let pathname = router.pathname;
+
+  useEffect(() => {
+    navigationTopBar.map((nav) => {
+      if (nav.link === "/") {
+        navigationTopBar[0].active = true;
+      } else if (pathname.includes(nav.link)) {
+        navigationTopBar[0].active = false;
+        nav.active = true;
+      } else {
+        nav.active = false;
+      }
+    });
+    setNavigationTopBar([...navigationTopBar]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className={classes.container}>
       {doctors.map((doctor, index) => (

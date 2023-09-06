@@ -4,12 +4,14 @@ import DatePicker from "@/components/DatePicker";
 import classes from "./booking.module.scss";
 import { useRouter } from "next/router";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import Router from "next/router";
 
 import Register from "@/components/Register";
 import { getDoctorApi } from "@/services/api";
 
 export default function Booking() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
+  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const [doctorName, setDoctorName] = useState("");
 
   const router = useRouter();
@@ -24,6 +26,19 @@ export default function Booking() {
     fetchData().catch(console.error);
   }, [doctorId]);
 
+  useEffect(() => {
+    let route = "/doctors";
+    navigationTopBar.map((nav) => {
+      if (nav.link === route) {
+        nav.active = true;
+      } else {
+        nav.active = false;
+      }
+    });
+    setNavigationTopBar([...navigationTopBar]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Fragment>
       {!currentUser ? (
@@ -35,7 +50,7 @@ export default function Booking() {
           <div className={classes.header}>
             <ArrowBackIosNewIcon
               className="icon"
-              onClick={() => (window.location.href = "/doctors")}
+              onClick={() => Router.push("/doctors")}
             />
             <h2 className={classes.title}>{doctorName}</h2>
           </div>
