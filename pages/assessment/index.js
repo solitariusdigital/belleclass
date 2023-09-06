@@ -69,9 +69,9 @@ export default function Assessment() {
           permission: "patient",
         };
         userData = await createUserApi(user);
-        setCurrentUser(userData);
-        secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
       }
+      setCurrentUser(userData);
+      secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
       return userData["_id"];
     } else {
       return currentUser["_id"];

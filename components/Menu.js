@@ -93,10 +93,20 @@ export default function Menu() {
               ))}
             </div>
             <div className={classes.buttons}>
-              <button onClick={() => Router.push("/doctors")}>
+              <button
+                onClick={() => {
+                  Router.push("/doctors");
+                  setMenuMobile(false);
+                }}
+              >
                 رزرو مراجعه حضوری
               </button>
-              <button onClick={() => Router.push("/assessment")}>
+              <button
+                onClick={() => {
+                  Router.push("/assessment");
+                  setMenuMobile(false);
+                }}
+              >
                 مشاوره آنلاین رایگان
               </button>
             </div>
