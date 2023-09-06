@@ -25,7 +25,7 @@ export default function Footer() {
       </div>
       <div className={classes.container}>
         <div className={classes.logo} onClick={() => Router.push("/")}>
-          <Image width={100} height={100} src={logo} alt="logo" />
+          <Image width={100} height={100} src={logo} alt="logo" priority />
         </div>
         <div className={classes.buttons}>
           <button onClick={() => Router.push("/doctors")}>

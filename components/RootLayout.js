@@ -73,6 +73,7 @@ export default function RootLayout({ children }) {
             height={150}
             src={logo}
             alt="logo"
+            priority
           />
         </div>
       )}

@@ -7,7 +7,6 @@ import Image from "next/legacy/image";
 import Person4Icon from "@mui/icons-material/Person4";
 import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import Router from "next/router";
 import dbConnect from "@/services/dbConnect";
@@ -273,7 +272,6 @@ export default function Access({ records, visits, doctors, users }) {
                       >
                         <div className={classes.row} style={margin}>
                           <p className={classes.title}>{item.title}</p>
-                          <KeyboardArrowLeftIcon />
                         </div>
                         <div className={classes.row} style={margin}>
                           <p className={classes.greyTitle}>ثبت</p>
@@ -319,6 +317,9 @@ export default function Access({ records, visits, doctors, users }) {
                             </div>
                           )}
                         </div>
+                        <button onClick={() => actionRecord(selected)}>
+                          مشاهده
+                        </button>
                       </div>
                     ))}
                   </Fragment>
@@ -510,7 +511,7 @@ export default function Access({ records, visits, doctors, users }) {
                 {!selected.completed &&
                   currentUser.permission === "patient" && (
                     <p className="message">
-                      هنگام تکمیل مشاوره به شما پیامک ارسال میشود
+                      هنگام تکمیل مشاوره پیامک ارسال میشود
                     </p>
                   )}
                 {selected.completed && (

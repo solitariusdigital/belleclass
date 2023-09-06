@@ -90,6 +90,11 @@
     }
   }
 
+  .imagePreview {
+    display: flex;
+    flex-direction: column;
+  }
+
   .image {
     @include mixins.border-radius();
   }

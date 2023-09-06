@@ -16,6 +16,14 @@
   @include mixins.desktop {
     padding: 12px 0px;
   }
+
+  .logo {
+    @include mixins.desktop {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
 }
 
 .largeMenu {

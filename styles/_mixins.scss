@@ -46,16 +46,15 @@ $screen-large: 2000px;
   background: config.$background;
   color: config.$black;
   font-size: config.$small-font;
-  border: none;
   outline: none;
-  border-radius: 0px;
-  border-bottom: 1px solid config.$gold3;
+  border-radius: 12px;
+  border: 1px solid config.$gold3;
   font-weight: 300;
 
   &:focus {
     outline: none;
     background: transparent;
-    border-bottom: 1px solid config.$black;
+    border: 1px solid config.$black;
   }
 }
 

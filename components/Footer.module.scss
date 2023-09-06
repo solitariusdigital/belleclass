@@ -60,6 +60,12 @@
     margin: 20px 0px;
     background: config.$black;
     @include mixins.border-radius();
+
+    @include mixins.desktop {
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 
   .information {

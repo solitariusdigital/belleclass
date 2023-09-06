@@ -97,6 +97,7 @@ export default function Assessment() {
           height={150}
           objectFit="cover"
           loading="eager"
+          priority
         />
         <div>
           <h2>پزشک بل کلاس</h2>
@@ -220,18 +221,25 @@ export default function Assessment() {
               type="file"
               accept="image/png, image/jpeg"
             />
-            <p>انتخاب عکس اختیاری</p>
+            <p>ارسال عکس اختیاری به پزشک بل کلاس</p>
           </label>
-
           {image !== "" && (
-            <Image
-              className={classes.image}
-              width={50}
-              height={200}
-              objectFit="cover"
-              src={URL.createObjectURL(image)}
-              alt="image"
-            />
+            <div className={classes.imagePreview}>
+              <CloseIcon
+                className="icon"
+                onClick={() => setImage("")}
+                sx={{ fontSize: 16 }}
+              />
+              <Image
+                className={classes.image}
+                width={50}
+                height={200}
+                objectFit="cover"
+                src={URL.createObjectURL(image)}
+                alt="image"
+                priority
+              />
+            </div>
           )}
         </div>
         {alert && <p className="alert">{alert}</p>}
