@@ -10,6 +10,19 @@ import logo from "../assets/logo.png";
 export default function Menu() {
   const { menuMobile, setMenuMobile } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
+  const [desktop, setDesktop] = useState(false);
+
+  useEffect(() => {
+    const checkDeviceType = () => {
+      if (
+        !window.matchMedia("(display-mode: standalone)").matches &&
+        navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)/i)
+      ) {
+        setDesktop(true);
+      }
+    };
+    checkDeviceType();
+  }, [setDesktop]);
 
   const activateNav = (link, index) => {
     setMenuMobile(false);
@@ -77,40 +90,54 @@ export default function Menu() {
           )}
         </div>
         {menuMobile && (
-          <div
-            className={`${classes.menuMobile} animate__animated animate__slideInDown`}
-          >
-            <div className={classes.list}>
-              {navigationTopBar.map((nav, index) => (
-                <Fragment key={index}>
-                  <div
-                    className={!nav.active ? classes.nav : classes.navActive}
-                    onClick={() => activateNav(nav.link, index)}
-                  >
-                    <p>{nav.title}</p>
+          <Fragment>
+            <div
+              className={`${classes.menuMobile} animate__animated animate__slideInDown`}
+            >
+              <div className={classes.list}>
+                {navigationTopBar.map((nav, index) => (
+                  <Fragment key={index}>
+                    <div
+                      className={!nav.active ? classes.nav : classes.navActive}
+                      onClick={() => activateNav(nav.link, index)}
+                    >
+                      <p>{nav.title}</p>
+                    </div>
+                  </Fragment>
+                ))}
+                {desktop && (
+                  <div className={classes.nav}>
+                    <p
+                      onClick={() => {
+                        Router.push("/download");
+                        setMenuMobile(false);
+                      }}
+                    >
+                      راهنمای نصب
+                    </p>
                   </div>
-                </Fragment>
-              ))}
+                )}
+              </div>
+              <div className={classes.buttons}>
+                <button
+                  onClick={() => {
+                    Router.push("/doctors");
+                    setMenuMobile(false);
+                  }}
+                >
+                  رزرو مراجعه حضوری
+                </button>
+                <button
+                  onClick={() => {
+                    Router.push("/assessment");
+                    setMenuMobile(false);
+                  }}
+                >
+                  مشاوره آنلاین رایگان
+                </button>
+              </div>
             </div>
-            <div className={classes.buttons}>
-              <button
-                onClick={() => {
-                  Router.push("/doctors");
-                  setMenuMobile(false);
-                }}
-              >
-                رزرو مراجعه حضوری
-              </button>
-              <button
-                onClick={() => {
-                  Router.push("/assessment");
-                  setMenuMobile(false);
-                }}
-              >
-                مشاوره آنلاین رایگان
-              </button>
-            </div>
-          </div>
+          </Fragment>
         )}
       </div>
     </div>
