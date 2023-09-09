@@ -94,7 +94,7 @@ export default function Menu() {
             <div
               className={`${classes.menuMobile} animate__animated animate__slideInDown`}
             >
-              <div className={classes.list}>
+              <div>
                 {navigationTopBar.map((nav, index) => (
                   <Fragment key={index}>
                     <div

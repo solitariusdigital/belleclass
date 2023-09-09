@@ -7,13 +7,13 @@ import Image from "next/legacy/image";
 import Belle33 from "../../assets/Belle-33.png";
 import Belle34 from "../../assets/Belle-34.png";
 import Belle31 from "../../assets/Belle-31.png";
-import Belle09 from "../../assets/Belle-09.png";
+import Belle38 from "../../assets/Belle-38.png";
 import Belle29 from "../../assets/Belle-29.png";
 import Belle30 from "../../assets/Belle-30.png";
 import Belle32 from "../../assets/Belle-32.png";
 import Belle36 from "../../assets/Belle-36.png";
 import Belle35 from "../../assets/Belle-35.png";
-import Belle14 from "../../assets/Belle-14.png";
+import Belle37 from "../../assets/Belle-37.png";
 
 export default function Expertises() {
   const { expertiseAreas, setExpertiseAreas } = useContext(StateContext);
@@ -364,7 +364,7 @@ export default function Expertises() {
           {displayExpertise === "کاشت مو و ابرو" && (
             <Fragment>
               <div className={classes.image}>
-                <Image width={250} height={250} src={Belle09} alt="logo" />
+                <Image width={250} height={250} src={Belle38} alt="logo" />
               </div>
               <p>
                 در شایع ترین نوع ریزش موی دائمی، فقط قسمت بالای سر تحت تاثیر
@@ -709,7 +709,7 @@ export default function Expertises() {
           {displayExpertise === "کرایوتراپی" && (
             <Fragment>
               <div className={classes.image}>
-                <Image width={250} height={250} src={Belle14} alt="logo" />
+                <Image width={250} height={250} src={Belle37} alt="logo" />
               </div>
               <p>
                 روش درمانی کرایوتراپی، استفاده از سرمای شدید برای انجماد و

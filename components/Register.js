@@ -162,9 +162,7 @@ export default function Register() {
           </div>
         ) : (
           <div className={classes.activationContainer}>
-            <button className="mainButton" onClick={() => verifyPhone()}>
-              کد تایید
-            </button>
+            <button onClick={() => verifyPhone()}>کد تایید</button>
           </div>
         )}
         <div className={classes.input}>
@@ -193,9 +191,7 @@ export default function Register() {
           <p className="alert">{alert}</p>
           <p className="alert">{token}</p>
           {checkToken.length === 4 && (
-            <button className="mainButton" onClick={() => handleRegister()}>
-              ورود / ​ثبت نام
-            </button>
+            <button onClick={() => handleRegister()}>ورود / ​ثبت نام</button>
           )}
         </div>
       </div>
