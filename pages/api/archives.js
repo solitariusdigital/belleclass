@@ -1,5 +1,5 @@
-import Archive from "../../models/Archive";
-import dbConnect from "../../services/dbConnect";
+import Archive from "@/models/Archive";
+import dbConnect from "@/services/dbConnect";
 
 export default async function archivesHandler(req, res) {
   res.setHeader("Cache-Control", "s-maxage=10");

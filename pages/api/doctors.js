@@ -1,5 +1,5 @@
-import Doctor from "../../models/Doctor";
-import dbConnect from "../../services/dbConnect";
+import Doctor from "@/models/Doctor";
+import dbConnect from "@/services/dbConnect";
 
 export default async function doctorsHandler(req, res) {
   res.setHeader("Cache-Control", "s-maxage=10");

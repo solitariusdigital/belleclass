@@ -4,16 +4,16 @@ import classes from "./expertise.module.scss";
 import Expertise from "@/components/Expertise";
 import FiberManualRecordOutlined from "@mui/icons-material/FiberManualRecordOutlined";
 import Image from "next/legacy/image";
-import Belle33 from "../../assets/Belle-33.png";
-import Belle34 from "../../assets/Belle-34.png";
-import Belle31 from "../../assets/Belle-31.png";
-import Belle38 from "../../assets/Belle-38.png";
-import Belle29 from "../../assets/Belle-29.png";
-import Belle30 from "../../assets/Belle-30.png";
-import Belle32 from "../../assets/Belle-32.png";
-import Belle36 from "../../assets/Belle-36.png";
-import Belle35 from "../../assets/Belle-35.png";
-import Belle37 from "../../assets/Belle-37.png";
+import Belle33 from "@/assets/Belle-33.png";
+import Belle34 from "@/assets/Belle-34.png";
+import Belle31 from "@/assets/Belle-31.png";
+import Belle38 from "@/assets/Belle-38.png";
+import Belle29 from "@/assets/Belle-29.png";
+import Belle30 from "@/assets/Belle-30.png";
+import Belle32 from "@/assets/Belle-32.png";
+import Belle36 from "@/assets/Belle-36.png";
+import Belle35 from "@/assets/Belle-35.png";
+import Belle37 from "@/assets/Belle-37.png";
 
 export default function Expertises() {
   const { expertiseAreas, setExpertiseAreas } = useContext(StateContext);

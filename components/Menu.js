@@ -5,7 +5,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import Router from "next/router";
 import Image from "next/legacy/image";
-import logo from "../assets/logo.png";
+import logo from "@/assets/logo.png";
 
 export default function Menu() {
   const { menuMobile, setMenuMobile } = useContext(StateContext);

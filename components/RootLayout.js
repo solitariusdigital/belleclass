@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import secureLocalStorage from "react-secure-storage";
 import { getUserApi } from "@/services/api";
 import Image from "next/legacy/image";
-import logo from "../assets/logo.png";
+import logo from "@/assets/logo.png";
 
 export default function RootLayout({ children }) {
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);

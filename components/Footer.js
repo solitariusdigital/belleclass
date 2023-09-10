@@ -4,7 +4,7 @@ import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import PhoneIphoneOutlinedIcon from "@mui/icons-material/PhoneIphoneOutlined";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Image from "next/legacy/image";
-import logo from "../assets/logo.png";
+import logo from "@/assets/logo.png";
 import Router from "next/router";
 
 export default function Footer() {

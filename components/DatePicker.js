@@ -1,7 +1,7 @@
 import { useState, useContext, Fragment } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./DatePicker.module.scss";
-import { toFarsiNumber } from "../services/utility";
+import { toFarsiNumber } from "@/services/utility";
 import { Calendar, utils } from "@hassanmojab/react-modern-calendar-datepicker";
 import "@hassanmojab/react-modern-calendar-datepicker/lib/DatePicker.css";
 // import { Calendar, utils } from "react-modern-calendar-datepicker";

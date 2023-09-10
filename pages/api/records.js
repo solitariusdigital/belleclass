@@ -1,5 +1,5 @@
-import Record from "../../models/Record";
-import dbConnect from "../../services/dbConnect";
+import Record from "@/models/Record";
+import dbConnect from "@/services/dbConnect";
 
 export default async function recordsHandler(req, res) {
   res.setHeader("Cache-Control", "s-maxage=10");

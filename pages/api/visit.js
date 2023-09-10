@@ -1,5 +1,5 @@
-import Visit from "../../models/Visit";
-import dbConnect from "../../services/dbConnect";
+import Visit from "@/models/Visit";
+import dbConnect from "@/services/dbConnect";
 
 export default async function visitHandler(req, res) {
   res.setHeader("Cache-Control", "s-maxage=10");
