@@ -1,4 +1,4 @@
-import { useState, useContext, useRef, Fragment, useEffect } from "react";
+import { useState, useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./Menu.module.scss";
 import MenuIcon from "@mui/icons-material/Menu";

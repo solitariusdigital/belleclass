@@ -1,9 +1,8 @@
-import { useState, useContext, useRef, Fragment, useEffect } from "react";
+import { useState } from "react";
 import classes from "./Register.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
 import { createDoctorApi, createUserApi } from "@/services/api";
 import Image from "next/legacy/image";
-import Router from "next/router";
 
 export default function Form() {
   const [name, setName] = useState("");
@@ -23,11 +22,10 @@ export default function Form() {
   };
 
   const transformTags = (value) => {
-    return value.split(" ");
+    return value.trim("").split(" ");
   };
 
   const handleSubmit = async () => {
-    console.log(transformTags(tags));
     if (!name || !title || !bio || !tags || !phone) {
       showAlert("همه موارد الزامیست");
       return;

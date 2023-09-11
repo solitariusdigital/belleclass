@@ -1,4 +1,4 @@
-import { useState, useContext, Fragment, useEffect } from "react";
+import { useContext, Fragment, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./expertise.module.scss";
 import Expertise from "@/components/Expertise";

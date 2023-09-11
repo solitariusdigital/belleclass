@@ -1,8 +1,8 @@
-import { useState, useContext, Fragment, useEffect } from "react";
+import { useContext } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./Expertise.module.scss";
 import Router from "next/router";
-
+import Image from "next/legacy/image";
 import Belle33 from "@/assets/Belle-33.png";
 import Belle34 from "@/assets/Belle-34.png";
 import Belle31 from "@/assets/Belle-31.png";
@@ -13,8 +13,6 @@ import Belle32 from "@/assets/Belle-32.png";
 import Belle36 from "@/assets/Belle-36.png";
 import Belle35 from "@/assets/Belle-35.png";
 import Belle37 from "@/assets/Belle-37.png";
-
-import Image from "next/legacy/image";
 
 export default function Expertise() {
   const { expertiseAreas, setExpertiseAreas } = useContext(StateContext);
@@ -90,10 +88,10 @@ export default function Expertise() {
           onClick={() => expertisesPage(item.title)}
         >
           <Image
-            width={150}
-            height={150}
+            width={100}
+            height={100}
             src={images[index].image}
-            alt="logo"
+            alt="image"
           />
           <p>{item.title}</p>
         </div>
