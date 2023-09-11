@@ -232,9 +232,9 @@ export default function Assessment() {
               />
               <Image
                 className={classes.image}
-                width={50}
+                width={170}
                 height={200}
-                objectFit="cover"
+                objectFit="contain"
                 src={URL.createObjectURL(image)}
                 alt="image"
                 priority

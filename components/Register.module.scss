@@ -4,7 +4,6 @@
 .form {
   display: flex;
   flex-direction: column;
-  margin: auto;
   font-weight: 300;
 
   .title {
@@ -71,4 +70,34 @@
       height: 35px;
     }
   }
+}
+
+.imagePreview {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .image {
+    @include mixins.border-radius();
+  }
+}
+
+// input file
+label.file input[type="file"] {
+  position: absolute;
+  top: -1000px;
+}
+.file {
+  cursor: pointer;
+  border: 1px solid config.$gold3;
+  padding: 8px;
+  color: config.$grey;
+  margin-bottom: 20px;
+  display: inline-block;
+  width: 100%;
+  @include mixins.border-radius();
+}
+.file:hover {
+  color: config.$black;
+  border: 1px solid config.$black;
 }

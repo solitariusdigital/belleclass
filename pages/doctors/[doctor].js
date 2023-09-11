@@ -16,19 +16,22 @@ export default function Doctor({ doctor }) {
               onClick={() => Router.push("/doctors")}
             />
           </div>
-          <Image
-            className={classes.image}
-            src={doctor.image}
-            placeholder="blur"
-            blurDataURL={doctor.image}
-            alt="image"
-            loading="eager"
-            width={150}
-            height={200}
-            objectFit="cover"
-            priority
-          />
+          {doctor.image && (
+            <Image
+              className={classes.image}
+              src={doctor.image}
+              placeholder="blur"
+              blurDataURL={doctor.image}
+              alt="image"
+              loading="eager"
+              width={150}
+              height={200}
+              objectFit="cover"
+              priority
+            />
+          )}
           <h2 className={classes.name}>{doctor.name}</h2>
+          <h3>{doctor.title}</h3>
           <button
             onClick={() =>
               Router.push({
@@ -45,7 +48,6 @@ export default function Doctor({ doctor }) {
             <p key={index}>{tag}</p>
           ))}
         </div>
-        <p className={classes.info}>{doctor.education}</p>
         <p className={classes.info}>{doctor.bio}</p>
       </div>
     </div>

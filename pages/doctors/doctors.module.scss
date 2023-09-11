@@ -2,25 +2,61 @@
 @use "styles/_mixins.scss" as mixins;
 
 .container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-  gap: 12px;
-  margin: auto;
-  direction: rtl;
   font-weight: 300;
   width: config.$content-width;
+  margin: auto;
 
   @include mixins.mobile {
-    display: flex;
-    flex-direction: column;
     width: 100%;
     padding: 0px 12px;
   }
 
   @include mixins.tablet {
-    grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
     width: 100%;
     padding: 0px 12px;
+  }
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  gap: 12px;
+  direction: rtl;
+  margin-top: 20px;
+
+  @include mixins.mobile {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @include mixins.tablet {
+    grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+  }
+}
+
+.button {
+  text-align: center;
+
+  button {
+    @include mixins.button(config.$gold1, config.$gold3, config.$black);
+  }
+}
+
+.form {
+  max-width: 500px;
+  margin: auto;
+  margin-top: 20px;
+
+  @include mixins.mobile {
+    width: 100%;
+  }
+
+  @include mixins.tablet {
+    width: 100%;
+  }
+
+  textarea {
+    @include mixins.textarea();
   }
 }
 
@@ -33,6 +69,10 @@
   background: config.$white;
   box-shadow: config.$card-shadow;
   @include mixins.border-radius();
+
+  h3 {
+    margin: 20px 0px;
+  }
 
   .tags {
     display: grid;
