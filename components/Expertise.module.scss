@@ -9,33 +9,38 @@
   direction: rtl;
 
   @include mixins.desktop {
-    grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
   }
 
-  p,
+  div,
   .active {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 50px;
-    border-radius: 50px;
+    padding: 4px;
+    border-radius: 12px;
     background: config.$white;
     box-shadow: config.$card-shadow;
-    border: 1px solid config.$gold3;
+    border: 1px solid config.$white;
     font-weight: 300;
 
     @include mixins.desktop {
       &:hover {
         cursor: pointer;
-        background: config.$black;
+        border: 1px solid config.$gold3;
         color: config.$gold3;
       }
+    }
+
+    p {
+      font-size: config.$tiny-font;
     }
   }
 
   .active {
-    background: config.$black;
+    border: 1px solid config.$gold3;
     color: config.$gold3;
   }
 }
