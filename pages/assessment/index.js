@@ -5,9 +5,13 @@ import Progress from "@/components/Progress";
 import avatar from "@/assets/doctorAvatar.png";
 import CloseIcon from "@mui/icons-material/Close";
 import Image from "next/legacy/image";
-import { createRecordApi, getUsersApi, createUserApi } from "@/services/api";
+import {
+  createRecordApi,
+  getUsersApi,
+  createUserApi,
+  updateUserApi,
+} from "@/services/api";
 import secureLocalStorage from "react-secure-storage";
-import Router from "next/router";
 
 export default function Assessment() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
@@ -54,7 +58,19 @@ export default function Assessment() {
       completed: false,
     };
     await createRecordApi(record);
-    Router.push("/portal");
+
+    // to save user name into db
+    if (currentUser) {
+      const user = {
+        _id: currentUser["_id"],
+        name: name,
+        phone: phone.trim(),
+        permission: currentUser.permission,
+      };
+      await updateUserApi(user);
+    }
+
+    window.location.assign("/portal");
   };
 
   const setUserId = async () => {
@@ -120,57 +136,50 @@ export default function Assessment() {
         </button>
       </div>
       <div className={classes.form}>
-        {!currentUser ? (
-          <Fragment>
-            <div className={classes.input}>
-              <div className={classes.bar}>
-                <p className={classes.label}>
-                  نام
-                  <span>*</span>
-                </p>
-                <CloseIcon
-                  className="icon"
-                  onClick={() => setName("")}
-                  sx={{ fontSize: 16 }}
-                />
-              </div>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-                autoComplete="off"
-                dir="rtl"
+        <div className={classes.input}>
+          <div className={classes.bar}>
+            <p className={classes.label}>
+              نام
+              <span>*</span>
+            </p>
+            <CloseIcon
+              className="icon"
+              onClick={() => setName("")}
+              sx={{ fontSize: 16 }}
+            />
+          </div>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            autoComplete="off"
+            dir="rtl"
+          />
+        </div>
+        {!currentUser && (
+          <div className={classes.input}>
+            <div className={classes.bar}>
+              <p className={classes.label}>
+                موبایل
+                <span>*</span>
+              </p>
+              <CloseIcon
+                className="icon"
+                onClick={() => setPhone("")}
+                sx={{ fontSize: 16 }}
               />
             </div>
-            <div className={classes.input}>
-              <div className={classes.bar}>
-                <p className={classes.label}>
-                  موبایل
-                  <span>*</span>
-                </p>
-                <CloseIcon
-                  className="icon"
-                  onClick={() => setPhone("")}
-                  sx={{ fontSize: 16 }}
-                />
-              </div>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                onChange={(e) => setPhone(e.target.value)}
-                value={phone}
-                autoComplete="off"
-                dir="rtl"
-              />
-            </div>
-          </Fragment>
-        ) : (
-          <div className={classes.details}>
-            <p>{phone}</p>
-            <p>{name}</p>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              onChange={(e) => setPhone(e.target.value)}
+              value={phone}
+              autoComplete="off"
+              dir="rtl"
+            />
           </div>
         )}
         <div className={classes.input}>

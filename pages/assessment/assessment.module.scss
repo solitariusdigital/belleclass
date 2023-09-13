@@ -33,13 +33,6 @@
     max-width: 500px;
   }
 
-  .details {
-    max-width: 500px;
-    margin: auto;
-    font-weight: bold;
-    @include mixins.row-space-between-center();
-  }
-
   .form {
     max-width: 500px;
     margin: 20px auto;
