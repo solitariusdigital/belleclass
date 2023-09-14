@@ -251,6 +251,9 @@ export default function Assessment() {
             </div>
           )}
         </div>
+        <p className="message">
+          با ثبت درخواست مشاوره حساب پرتال شما ساخته میشود
+        </p>
         {alert && <p className="alert">{alert}</p>}
         <button className={classes.button} onClick={() => createRecord()}>
           ثبت

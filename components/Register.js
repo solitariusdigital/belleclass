@@ -131,6 +131,7 @@ export default function Register() {
     <Fragment>
       <div className={classes.form}>
         <p className={classes.title}>پرتال بل کلاس</p>
+        <p className="message">ورود به خدمات آنلاین</p>
         <div className={classes.input}>
           <div className={classes.bar}>
             <p className={classes.label}>

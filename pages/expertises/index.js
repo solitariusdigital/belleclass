@@ -31,7 +31,6 @@ export default function Expertises() {
 
   return (
     <div className={classes.container}>
-      <Expertise></Expertise>
       {displayExpertise !== "" && (
         <div className={classes.information}>
           <h2>{displayExpertise}</h2>
@@ -887,6 +886,7 @@ export default function Expertises() {
           )}
         </div>
       )}
+      <Expertise></Expertise>
     </div>
   );
 }
