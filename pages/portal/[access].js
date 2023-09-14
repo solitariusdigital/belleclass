@@ -257,6 +257,20 @@ export default function Access({ records, visits, doctors, users }) {
               </div>
             )}
             {!displayDetails && (
+              <div className={classes.button}>
+                {portalType === "record" && (
+                  <button onClick={() => Router.push("/assessment")}>
+                    مشاوره آنلاین رایگان
+                  </button>
+                )}
+                {portalType === "visit" && (
+                  <button onClick={() => Router.push("/doctors")}>
+                    رزرو مراجعه حضوری
+                  </button>
+                )}
+              </div>
+            )}
+            {!displayDetails && (
               <div className={classes.cards}>
                 {portalType === "record" && (
                   <Fragment>

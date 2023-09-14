@@ -73,6 +73,15 @@
     }
   }
 
+  .button {
+    margin: 20px 0px;
+
+    button {
+      @include mixins.button(config.$gold1, config.$gold3, config.$black);
+      margin: auto;
+    }
+  }
+
   .cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
@@ -91,7 +100,7 @@
     button {
       @include mixins.button(config.$gold1, config.$gold3, config.$black);
       margin: auto;
-      margin-top: 12px;
+      margin-top: 20px;
     }
 
     .item {
@@ -259,7 +268,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
   gap: 12px;
-  margin: auto;
+  margin-top: 20px;
 
   .image {
     border-bottom: 1px solid config.$gold3;
