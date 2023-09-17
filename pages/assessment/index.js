@@ -5,13 +5,13 @@ import Progress from "@/components/Progress";
 import avatar from "@/assets/doctorAvatar.png";
 import CloseIcon from "@mui/icons-material/Close";
 import Image from "next/legacy/image";
+import secureLocalStorage from "react-secure-storage";
 import {
   createRecordApi,
   getUsersApi,
   createUserApi,
   updateUserApi,
 } from "@/services/api";
-import secureLocalStorage from "react-secure-storage";
 
 export default function Assessment() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
@@ -69,7 +69,6 @@ export default function Assessment() {
       };
       await updateUserApi(user);
     }
-
     window.location.assign("/portal");
   };
 
