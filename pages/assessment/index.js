@@ -17,7 +17,7 @@ export default function Assessment() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
 
-  const [progressCompleted, setProgressCompleted] = useState(80);
+  const [progressCompleted, setProgressCompleted] = useState(34);
   const [name, setName] = useState(currentUser ? currentUser.name : "");
   const [phone, setPhone] = useState(currentUser ? currentUser.phone : "");
   const [title, setTitle] = useState("");
@@ -25,6 +25,25 @@ export default function Assessment() {
   const [image, setImage] = useState("");
   const [alert, setAlert] = useState("");
   const [disableButton, setDisableButton] = useState(false);
+
+  const ageRange = ["۱۸ - ۳۰", "۳۱ - ۴۰", "۴۱ - ۵۰", "۵۱+"];
+
+  const [histories, setHistories] = useState({
+    "سابقه سرطان": false,
+    دیابت: false,
+    "فشار خون": false,
+    "بیماری قلبی": false,
+    "بیماری انعقادی": false,
+    "بیماری ریوی": false,
+    آلرژی: false,
+    جراحی: false,
+  });
+
+  const [habits, setHabits] = useState({
+    "مصرف قلیان": false,
+    "مصرف الکل": false,
+    "مصرف سیگار": false,
+  });
 
   useEffect(() => {
     navigationTopBar.map((nav, i) => {
@@ -102,6 +121,18 @@ export default function Assessment() {
     }, 3000);
   };
 
+  const assignHistory = (time) => {
+    let updated = { ...histories };
+    updated[time] = !updated[time];
+    setHistories(updated);
+  };
+
+  const assignHabit = (time) => {
+    let updated = { ...habits };
+    updated[time] = !updated[time];
+    setHabits(updated);
+  };
+
   return (
     <div className={classes.container}>
       <div className={classes.header}>
@@ -123,149 +154,278 @@ export default function Assessment() {
       </div>
       <div className={classes.progress}>
         <Progress color={"#e7c69a"} completed={progressCompleted} />
-        <button
-          disabled={progressCompleted === 0}
-          onClick={() => setProgressCompleted(progressCompleted - 20)}
-        >
-          back
-        </button>
-        <button
-          disabled={progressCompleted === 100}
-          onClick={() => setProgressCompleted(progressCompleted + 20)}
-        >
-          next
-        </button>
       </div>
-      <div className={classes.form}>
-        <div className={classes.input}>
-          <div className={classes.bar}>
+      {progressCompleted <= 34 && (
+        <div className={classes.form}>
+          <div className={classes.input}>
             <p className={classes.label}>
-              نام
+              جنسیت
               <span>*</span>
             </p>
-            <CloseIcon
-              className="icon"
-              onClick={() => setName("")}
-              sx={{ fontSize: 16 }}
-            />
+            <select
+              defaultValue={"default"}
+              onChange={(e) => setDoctorId(e.target.value)}
+            >
+              <option value="default" disabled>
+                انتخاب
+              </option>
+              <option value={"زن"}>زن</option>
+              <option value={"مرد"}>مرد</option>
+            </select>
           </div>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-            autoComplete="off"
-            dir="rtl"
-          />
+          <div className={classes.input}>
+            <p className={classes.label}>
+              سن
+              <span>*</span>
+            </p>
+            <select
+              defaultValue={"default"}
+              onChange={(e) => setDoctorId(e.target.value)}
+            >
+              <option value="default" disabled>
+                انتخاب
+              </option>
+              {ageRange.map((age, index) => {
+                return (
+                  <option key={index} value={age}>
+                    {age}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <div className={classes.input}>
+            <p className={classes.label}>
+              تاریخچه پزشکی
+              <span>*</span>
+            </p>
+            <div className={classes.selectContainer}>
+              {Object.keys(histories).map((history, index) => (
+                <p
+                  key={index}
+                  className={
+                    histories[history] ? classes.activeItem : classes.item
+                  }
+                  onClick={() => assignHistory(history)}
+                >
+                  {history}
+                </p>
+              ))}
+            </div>
+          </div>
+          <div className={classes.input}>
+            <p className={classes.label}>
+              عادات
+              <span>*</span>
+            </p>
+            <div className={classes.selectContainer}>
+              {Object.keys(habits).map((habit, index) => (
+                <p
+                  key={index}
+                  className={habits[habit] ? classes.activeItem : classes.item}
+                  onClick={() => assignHabit(habit)}
+                >
+                  {habit}
+                </p>
+              ))}
+            </div>
+          </div>
+          {alert && <p className="alert">{alert}</p>}
+          <button
+            className={classes.button}
+            disabled={disableButton}
+            onClick={() => {
+              setProgressCompleted(progressCompleted + 34);
+              window.scrollTo(0, 0);
+            }}
+          >
+            بعد
+          </button>
         </div>
-        {!currentUser && (
+      )}
+      {progressCompleted > 34 && progressCompleted <= 68 && (
+        <div className={classes.form}>
+          <div className={classes.input}>
+            <p className={classes.label}>
+              جنسیت
+              <span>*</span>
+            </p>
+            <select
+              defaultValue={"default"}
+              onChange={(e) => setDoctorId(e.target.value)}
+            >
+              <option value="default" disabled>
+                انتخاب
+              </option>
+              <option value={"زن"}>زن</option>
+              <option value={"مرد"}>مرد</option>
+            </select>
+          </div>
+          {alert && <p className="alert">{alert}</p>}
+          <button
+            className={classes.button}
+            disabled={disableButton}
+            onClick={() => {
+              setProgressCompleted(progressCompleted - 34);
+              window.scrollTo(0, 0);
+            }}
+          >
+            قبل
+          </button>
+          <button
+            className={classes.button}
+            disabled={disableButton}
+            onClick={() => {
+              setProgressCompleted(progressCompleted + 32);
+              window.scrollTo(0, 0);
+            }}
+          >
+            بعد
+          </button>
+        </div>
+      )}
+      {progressCompleted === 100 && (
+        <div className={classes.form}>
           <div className={classes.input}>
             <div className={classes.bar}>
               <p className={classes.label}>
-                موبایل
+                نام
                 <span>*</span>
               </p>
               <CloseIcon
                 className="icon"
-                onClick={() => setPhone("")}
+                onClick={() => setName("")}
                 sx={{ fontSize: 16 }}
               />
             </div>
             <input
-              type="tel"
-              id="phone"
-              name="phone"
-              onChange={(e) => setPhone(e.target.value)}
-              value={phone}
+              type="text"
+              id="name"
+              name="name"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
               autoComplete="off"
               dir="rtl"
             />
           </div>
-        )}
-        <div className={classes.input}>
-          <div className={classes.bar}>
-            <p className={classes.label}>
-              عنوان
-              <span>*</span>
-            </p>
-            <CloseIcon
-              className="icon"
-              onClick={() => setTitle("")}
-              sx={{ fontSize: 16 }}
-            />
-          </div>
-          <input
-            placeholder="فیلر صورت"
-            type="text"
-            id="title"
-            name="title"
-            onChange={(e) => setTitle(e.target.value)}
-            value={title}
-            autoComplete="off"
-            dir="rtl"
-          />
-        </div>
-        <div className={classes.input}>
-          <p className={classes.label}>
-            توضیحات
-            <span>*</span>
-          </p>
-          <textarea
-            placeholder="..."
-            type="text"
-            id="comment"
-            name="comment"
-            onChange={(e) => setComment(e.target.value)}
-            value={comment}
-            autoComplete="off"
-            dir="rtl"
-          ></textarea>
-        </div>
-        <div className={classes.input}>
-          <label className={classes.file}>
-            <input
-              onChange={(e) => {
-                setImage(e.target.files[0]);
-              }}
-              type="file"
-              accept="image/png, image/jpeg"
-            />
-            <p>ارسال عکس اختیاری به پزشک بل کلاس</p>
-          </label>
-          {image !== "" && (
-            <div className={classes.imagePreview}>
-              <CloseIcon
-                className="icon"
-                onClick={() => setImage("")}
-                sx={{ fontSize: 16 }}
-              />
-              <Image
-                className={classes.image}
-                width={170}
-                height={200}
-                objectFit="contain"
-                src={URL.createObjectURL(image)}
-                alt="image"
-                priority
+          {!currentUser && (
+            <div className={classes.input}>
+              <div className={classes.bar}>
+                <p className={classes.label}>
+                  موبایل
+                  <span>*</span>
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setPhone("")}
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                onChange={(e) => setPhone(e.target.value)}
+                value={phone}
+                autoComplete="off"
+                dir="rtl"
               />
             </div>
           )}
+          <div className={classes.input}>
+            <div className={classes.bar}>
+              <p className={classes.label}>
+                عنوان
+                <span>*</span>
+              </p>
+              <CloseIcon
+                className="icon"
+                onClick={() => setTitle("")}
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              placeholder="فیلر صورت"
+              type="text"
+              id="title"
+              name="title"
+              onChange={(e) => setTitle(e.target.value)}
+              value={title}
+              autoComplete="off"
+              dir="rtl"
+            />
+          </div>
+          <div className={classes.input}>
+            <p className={classes.label}>
+              توضیحات
+              <span>*</span>
+            </p>
+            <textarea
+              placeholder="..."
+              type="text"
+              id="comment"
+              name="comment"
+              onChange={(e) => setComment(e.target.value)}
+              value={comment}
+              autoComplete="off"
+              dir="rtl"
+            ></textarea>
+          </div>
+          <div className={classes.input}>
+            <label className={classes.file}>
+              <input
+                onChange={(e) => {
+                  setImage(e.target.files[0]);
+                }}
+                type="file"
+                accept="image/png, image/jpeg"
+              />
+              <p>ارسال عکس اختیاری به پزشک بل کلاس</p>
+            </label>
+            {image !== "" && (
+              <div className={classes.imagePreview}>
+                <CloseIcon
+                  className="icon"
+                  onClick={() => setImage("")}
+                  sx={{ fontSize: 16 }}
+                />
+                <Image
+                  className={classes.image}
+                  width={170}
+                  height={200}
+                  objectFit="contain"
+                  src={URL.createObjectURL(image)}
+                  alt="image"
+                  priority
+                />
+              </div>
+            )}
+          </div>
+          {!currentUser && (
+            <p className="message">
+              با ثبت درخواست مشاوره حساب پرتال شما ساخته میشود
+            </p>
+          )}
+          {alert && <p className="alert">{alert}</p>}
+          <button
+            className={classes.button}
+            disabled={disableButton}
+            onClick={() => {
+              setProgressCompleted(progressCompleted - 32);
+              window.scrollTo(0, 0);
+            }}
+          >
+            قبل
+          </button>
+          <button
+            className={classes.button}
+            disabled={disableButton}
+            onClick={() => createRecord()}
+          >
+            ثبت
+          </button>
         </div>
-        {!currentUser && (
-          <p className="message">
-            با ثبت درخواست مشاوره حساب پرتال شما ساخته میشود
-          </p>
-        )}
-        {alert && <p className="alert">{alert}</p>}
-        <button
-          className={classes.button}
-          disabled={disableButton}
-          onClick={() => createRecord()}
-        >
-          ثبت
-        </button>
-      </div>
+      )}
     </div>
   );
 }

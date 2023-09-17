@@ -33,6 +33,38 @@
     max-width: 500px;
   }
 
+  .selectContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+    gap: 12px;
+    text-align: center;
+    width: 100%;
+    font-size: config.$tiny-font;
+
+    .item,
+    .activeItem {
+      padding: 8px;
+      background: config.$white;
+      box-shadow: config.$card-shadow;
+      color: config.$black;
+      justify-content: center;
+      @include mixins.border-radius();
+
+      @include mixins.desktop {
+        &:hover {
+          background: config.$gold3;
+          color: config.$white;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .activeItem {
+      background: config.$gold3;
+      color: config.$white;
+    }
+  }
+
   .form {
     max-width: 500px;
     margin: 20px auto;
@@ -62,9 +94,14 @@
         }
       }
 
-      input {
+      input,
+      select {
         @include mixins.input();
         width: 100%;
+      }
+
+      select {
+        height: 50px;
       }
 
       textarea {
@@ -79,7 +116,8 @@
 
     .button {
       @include mixins.button(config.$gold1, config.$gold3, config.$black);
-      margin-top: 40px;
+      margin: 40px 12px;
+      width: 120px;
     }
   }
 
