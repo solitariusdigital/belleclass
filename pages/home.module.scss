@@ -59,15 +59,11 @@
   }
 }
 
-.bannerHeroContainer {
+.bannerContainer {
   position: relative;
   bottom: 100px;
-}
-
-.bannerHeroContainer,
-.bannerContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
   gap: 12px;
   margin: auto;
   width: config.$content-width;
@@ -126,6 +122,7 @@
   flex-direction: column;
   text-align: center;
   margin: auto;
+  margin-bottom: 60px;
   width: config.$content-width;
 
   h2 {
@@ -150,7 +147,7 @@
 
   @include mixins.mobile {
     width: 100%;
-    padding: 12px;
+    padding: 0px 12px;
   }
 
   @include mixins.tablet {
@@ -199,9 +196,9 @@
 
 .doctorsContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
   gap: 12px;
-  margin: 60px auto;
+  margin: auto;
   width: config.$content-width;
   direction: rtl;
   font-weight: 300;

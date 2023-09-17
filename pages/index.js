@@ -42,7 +42,8 @@ export default function Home({ doctors }) {
           </button>
         </div>
       </div>
-      <div className={classes.bannerHeroContainer}>
+      <div className={classes.bannerContainer}>
+        <div className={classes.banner}></div>
         <div className={classes.banner}></div>
         <div className={classes.banner}></div>
         <div className={classes.banner}></div>
@@ -51,6 +52,33 @@ export default function Home({ doctors }) {
       <div className={classes.expertise}>
         <h2>خدمات کلینیک</h2>
         <Expertise></Expertise>
+      </div>
+      <div className={classes.doctorsContainer}>
+        {doctors.map((doctor, index) => (
+          <div
+            className={classes.items}
+            key={index}
+            onClick={() => Router.push(`/doctors/${doctor["_id"]}`)}
+          >
+            <div className={classes.row}>
+              <Image
+                className={classes.image}
+                src={doctor.image}
+                placeholder="blur"
+                blurDataURL={doctor.image}
+                alt="image"
+                width={70}
+                height={70}
+                objectFit="cover"
+                loading="eager"
+              />
+              <div>
+                <p className={classes.name}>{doctor.name}</p>
+                <p>{doctor.education}</p>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
       <div className={classes.lifeStyleContainer}>
         <div className={classes.lifeStyle}>
@@ -90,57 +118,6 @@ export default function Home({ doctors }) {
             مانند هستند و اثر آنها معمولا ۶ تا ۱۲ ماه باقی می ماند
           </p>
         </div>
-        <div className={classes.lifeStyle}>
-          <p>
-            فیلرهای پوستی مواد ژل مانندی هستند که برای بازگرداندن حجم از دست
-            رفته، ایجاد خطوط صاف و نرم کردن چین و چروکها به زیر پوست تزریق
-            میشوند. مدت زمان ماندگاری اثر فیلر های پوستی به محصول، ناحیه درمان و
-            بیمار بستگی دارد. یکی از رایج ترین فیلرها، فیلرهای اسید هیالورونیک
-            است. اسید هیالورونیک HA, یک ماده طبیعی است که در پوست یافت میشود و
-            به صاف و هیدراته شدن پوست کمک می کند. فیلرهای HAمعمولا نرم و ژل
-            مانند هستند و اثر آنها معمولا ۶ تا ۱۲ ماه باقی می ماند
-          </p>
-          <Image
-            className={classes.image}
-            src={background}
-            placeholder="blur"
-            alt="image"
-            loading="eager"
-            priority
-          />
-        </div>
-      </div>
-      <div className={classes.bannerContainer}>
-        <div className={classes.banner}></div>
-        <div className={classes.banner}></div>
-        <div className={classes.banner}></div>
-      </div>
-      <div className={classes.doctorsContainer}>
-        {doctors.map((doctor, index) => (
-          <div
-            className={classes.items}
-            key={index}
-            onClick={() => Router.push(`/doctors/${doctor["_id"]}`)}
-          >
-            <div className={classes.row}>
-              <Image
-                className={classes.image}
-                src={doctor.image}
-                placeholder="blur"
-                blurDataURL={doctor.image}
-                alt="image"
-                width={70}
-                height={70}
-                objectFit="cover"
-                loading="eager"
-              />
-              <div>
-                <p className={classes.name}>{doctor.name}</p>
-                <p>{doctor.education}</p>
-              </div>
-            </div>
-          </div>
-        ))}
       </div>
       <div className={classes.videoContainer}>
         <div className={classes.boxContainer}>
@@ -195,7 +172,7 @@ export async function getServerSideProps(context) {
     const doctors = await doctorModel.find();
     return {
       props: {
-        doctors: JSON.parse(JSON.stringify(doctors.slice(0, 3))),
+        doctors: JSON.parse(JSON.stringify(doctors.slice(0, 4))),
       },
     };
   } catch (error) {

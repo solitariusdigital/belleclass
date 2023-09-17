@@ -24,6 +24,7 @@ export default function Assessment() {
   const [comment, setComment] = useState("");
   const [image, setImage] = useState("");
   const [alert, setAlert] = useState("");
+  const [disableButton, setDisableButton] = useState(false);
 
   useEffect(() => {
     navigationTopBar.map((nav, i) => {
@@ -46,6 +47,7 @@ export default function Assessment() {
       showAlert("عنوان و توضیحات الزامیست");
       return;
     }
+    setDisableButton(true);
     let userId = await setUserId();
     // create a new record object
     let record = {
@@ -256,7 +258,11 @@ export default function Assessment() {
           </p>
         )}
         {alert && <p className="alert">{alert}</p>}
-        <button className={classes.button} onClick={() => createRecord()}>
+        <button
+          className={classes.button}
+          disabled={disableButton}
+          onClick={() => createRecord()}
+        >
           ثبت
         </button>
       </div>

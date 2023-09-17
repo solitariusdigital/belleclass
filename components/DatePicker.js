@@ -43,6 +43,7 @@ export default function DatePicker({ doctorId, recordId }) {
     "17:00": false,
     "18:00": false,
   });
+  const [disableButton, setDisableButton] = useState(false);
 
   const createVisit = async () => {
     if (!day || !time) {
@@ -64,6 +65,7 @@ export default function DatePicker({ doctorId, recordId }) {
       showAlert("موبایل اشتباه");
       return;
     }
+    setDisableButton(true);
     let userId = await setUserId();
     // create a new visit object
     let visit = {
@@ -255,7 +257,11 @@ export default function DatePicker({ doctorId, recordId }) {
       </div>
       {alert && <p className="alert">{alert}</p>}
       {selectedDate && <p className={classes.message}>{selectedDate} ساعت</p>}
-      <button className={classes.button} onClick={() => createVisit()}>
+      <button
+        className={classes.button}
+        disabled={disableButton}
+        onClick={() => createVisit()}
+      >
         ثبت
       </button>
     </div>

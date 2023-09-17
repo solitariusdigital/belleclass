@@ -208,14 +208,14 @@ export default function Access({ records, visits, doctors, users }) {
                 {currentUser.permission === "admin" && (
                   <div className={classes.row}>
                     <p>{users.length}</p>
-                    <p className={classes.grey}>بیمار</p>
+                    <p className={classes.grey}>کل بیمارها</p>
                   </div>
                 )}
                 {portalType === "visit" && (
                   <Fragment>
                     <div className={classes.row}>
                       <p>{displayVisits.length}</p>
-                      <p className={classes.grey}>تعداد</p>
+                      <p className={classes.grey}>تعداد مراجعه</p>
                     </div>
                     <div className={classes.row}>
                       <p>
@@ -224,7 +224,7 @@ export default function Access({ records, visits, doctors, users }) {
                             .length
                         }
                       </p>
-                      <p className={classes.grey}>تکمیل</p>
+                      <p className={classes.grey}>مراجعه تکمیل</p>
                     </div>
                     <div className={classes.row}>
                       <p>
@@ -233,7 +233,7 @@ export default function Access({ records, visits, doctors, users }) {
                             .length
                         }
                       </p>
-                      <p className={classes.grey}>لغو</p>
+                      <p className={classes.grey}>مراجعه لغو</p>
                     </div>
                   </Fragment>
                 )}
@@ -241,7 +241,7 @@ export default function Access({ records, visits, doctors, users }) {
                   <Fragment>
                     <div className={classes.row}>
                       <p>{displayRecords.length}</p>
-                      <p className={classes.grey}>تعداد</p>
+                      <p className={classes.grey}>تعداد مشاوره</p>
                     </div>
                     <div className={classes.row}>
                       <p>
@@ -250,7 +250,7 @@ export default function Access({ records, visits, doctors, users }) {
                             .length
                         }
                       </p>
-                      <p className={classes.grey}>تکمیل</p>
+                      <p className={classes.grey}>مشاوره تکمیل</p>
                     </div>
                   </Fragment>
                 )}
