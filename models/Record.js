@@ -8,6 +8,7 @@ const RecordSchema = new Schema(
     doctorId: String,
     example: String,
     comments: [String],
+    assessment: {},
     completed: Boolean,
   },
   { timestamps: true }

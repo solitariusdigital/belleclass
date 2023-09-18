@@ -368,7 +368,7 @@ export default function Access({ records, visits, doctors, users }) {
                           <p>{convertDate(item.createdAt)}</p>
                         </div>
                         <div className={classes.row} style={margin}>
-                          <p className={classes.greyTitle}>عنوان</p>
+                          <p className={classes.greyTitle}>موضوع</p>
                           <p className={classes.title}>{item.title}</p>
                         </div>
                         {(currentUser.permission === "admin" ||
@@ -485,6 +485,40 @@ export default function Access({ records, visits, doctors, users }) {
                 <p className={classes.text}>{selected.comments[0]}</p>
                 <div className={classes.row} style={margin}>
                   <p>{convertDate(selected.createdAt)}</p>
+                </div>
+                <div className={classes.assessment}>
+                  <div className={classes.row}>
+                    <p className={classes.greyTitle}>جنسیت</p>
+                    <p>{selected.assessment.sex}</p>
+                  </div>
+                  <div className={classes.row}>
+                    <p className={classes.greyTitle}>بازه سنی</p>
+                    <p>{selected.assessment.age}</p>
+                  </div>
+                  <div className={classes.row}>
+                    <p className={classes.greyTitle}>تاریخچه پزشکی</p>
+                    <div className={classes.subRow}>
+                      {selected.assessment.histories.map((item, index) => (
+                        <p key={index}>{item}</p>
+                      ))}
+                    </div>
+                  </div>
+                  <div className={classes.row}>
+                    <p className={classes.greyTitle}>عادات</p>
+                    <div className={classes.subRow}>
+                      {selected.assessment.habits.map((item, index) => (
+                        <p key={index}>{item}</p>
+                      ))}
+                    </div>
+                  </div>
+                  <div className={classes.row}>
+                    <p className={classes.greyTitle}>خدمات</p>
+                    <div className={classes.subRow}>
+                      {selected.assessment.services.map((item, index) => (
+                        <p key={index}>{item}</p>
+                      ))}
+                    </div>
+                  </div>
                 </div>
                 <div className={classes.rowDoctor}>
                   <Image

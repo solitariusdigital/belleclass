@@ -215,6 +215,28 @@
       margin-top: 40px;
     }
 
+    .assessment {
+      padding: 12px;
+      margin-top: 20px;
+      background: config.$white;
+      box-shadow: config.$card-shadow;
+      @include mixins.border-radius();
+      text-align: right;
+
+      .row {
+        margin: 8px 0px;
+        direction: rtl;
+      }
+
+      .subRow {
+        flex-wrap: wrap;
+
+        p {
+          margin-right: 8px;
+        }
+      }
+    }
+
     .rowDoctor {
       display: flex;
       flex-direction: row;

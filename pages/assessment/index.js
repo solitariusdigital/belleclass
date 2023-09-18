@@ -25,9 +25,15 @@ export default function Assessment() {
   const [image, setImage] = useState("");
   const [alert, setAlert] = useState("");
   const [disableButton, setDisableButton] = useState(false);
+  const [assessmentData, setAssessmentData] = useState({
+    sex: "",
+    age: "",
+    histories: [],
+    habits: [],
+    services: [],
+  });
 
   const ageRange = ["۱۸ - ۳۰", "۳۱ - ۴۰", "۴۱ - ۵۰", "۵۱+"];
-
   const [histories, setHistories] = useState({
     "سابقه سرطان": false,
     دیابت: false,
@@ -38,12 +44,37 @@ export default function Assessment() {
     آلرژی: false,
     جراحی: false,
   });
-
   const [habits, setHabits] = useState({
     "مصرف قلیان": false,
     "مصرف الکل": false,
     "مصرف سیگار": false,
   });
+  const services = {
+    "ریزش مو": [
+      "نروتراپی",
+      "PRP",
+      "Biogenix",
+      "Hair Filler",
+      "مزونیدلینگ آمیا",
+    ],
+    "لیزر موی زائد": ["ناحیه ای", "فول بادی"],
+    جوانسازی: [
+      "لیزر فوتونا",
+      "مزوژل پروفایلو",
+      "مزوژل Sline",
+      "RF Fractional",
+      "مزونیدلینگ",
+    ],
+    لاغری: ["کول تک", "RF / Cavitation", "مشاوره تغذیه", "مزوتراپی چربی سوز"],
+    "تزریق بوتاکس یا فیلر": [
+      "فیلر کانتورینگ",
+      "فیلر لب",
+      "بوتاکس لیفت",
+      "بوتاکس کل صورت",
+    ],
+    "فیشال صورت": ["درمانی", "ماساژ ریلکسی"],
+    "پزشکی پیشگیرانه": ["آزمایشهای ژنتیک", "واکسیناسیون"],
+  };
 
   useEffect(() => {
     navigationTopBar.map((nav, i) => {
@@ -63,7 +94,7 @@ export default function Assessment() {
       return;
     }
     if (!title || !comment) {
-      showAlert("عنوان و توضیحات الزامیست");
+      showAlert("موضوع و توضیحات الزامیست");
       return;
     }
     setDisableButton(true);
@@ -76,6 +107,7 @@ export default function Assessment() {
       comments: [comment],
       image: "",
       example: "",
+      assessment: assessmentData,
       completed: false,
     };
     await createRecordApi(record);
@@ -121,16 +153,28 @@ export default function Assessment() {
     }, 3000);
   };
 
-  const assignHistory = (time) => {
+  const assignHistory = (history) => {
     let updated = { ...histories };
-    updated[time] = !updated[time];
+    updated[history] = !updated[history];
     setHistories(updated);
+    setAssessmentData((prevData) => ({
+      ...prevData,
+      ["histories"]: updated[history]
+        ? [...prevData["histories"], history]
+        : prevData["histories"].filter((item) => item !== history),
+    }));
   };
 
-  const assignHabit = (time) => {
+  const assignHabit = (habit) => {
     let updated = { ...habits };
-    updated[time] = !updated[time];
+    updated[habit] = !updated[habit];
     setHabits(updated);
+    setAssessmentData((prevData) => ({
+      ...prevData,
+      ["habits"]: updated[habit]
+        ? [...prevData["habits"], habit]
+        : prevData["habits"].filter((item) => item !== habit),
+    }));
   };
 
   return (
@@ -158,13 +202,15 @@ export default function Assessment() {
       {progressCompleted <= 34 && (
         <div className={classes.form}>
           <div className={classes.input}>
-            <p className={classes.label}>
-              جنسیت
-              <span>*</span>
-            </p>
+            <p className={classes.label}>جنسیت</p>
             <select
               defaultValue={"default"}
-              onChange={(e) => setDoctorId(e.target.value)}
+              onChange={(e) => {
+                setAssessmentData({
+                  ...assessmentData,
+                  sex: e.target.value,
+                });
+              }}
             >
               <option value="default" disabled>
                 انتخاب
@@ -174,13 +220,15 @@ export default function Assessment() {
             </select>
           </div>
           <div className={classes.input}>
-            <p className={classes.label}>
-              سن
-              <span>*</span>
-            </p>
+            <p className={classes.label}>بازه سنی</p>
             <select
               defaultValue={"default"}
-              onChange={(e) => setDoctorId(e.target.value)}
+              onChange={(e) => {
+                setAssessmentData({
+                  ...assessmentData,
+                  age: e.target.value,
+                });
+              }}
             >
               <option value="default" disabled>
                 انتخاب
@@ -195,10 +243,7 @@ export default function Assessment() {
             </select>
           </div>
           <div className={classes.input}>
-            <p className={classes.label}>
-              تاریخچه پزشکی
-              <span>*</span>
-            </p>
+            <p className={classes.label}>تاریخچه پزشکی</p>
             <div className={classes.selectContainer}>
               {Object.keys(histories).map((history, index) => (
                 <p
@@ -214,10 +259,7 @@ export default function Assessment() {
             </div>
           </div>
           <div className={classes.input}>
-            <p className={classes.label}>
-              عادات
-              <span>*</span>
-            </p>
+            <p className={classes.label}>عادات</p>
             <div className={classes.selectContainer}>
               {Object.keys(habits).map((habit, index) => (
                 <p
@@ -239,39 +281,65 @@ export default function Assessment() {
               window.scrollTo(0, 0);
             }}
           >
-            بعد
+            بعدی
           </button>
+          <p
+            className={classes.skip}
+            onClick={() => {
+              setProgressCompleted(100);
+              window.scrollTo(0, 0);
+            }}
+          >
+            رد کن
+          </p>
         </div>
       )}
       {progressCompleted > 34 && progressCompleted <= 68 && (
         <div className={classes.form}>
           <div className={classes.input}>
-            <p className={classes.label}>
-              جنسیت
-              <span>*</span>
-            </p>
+            <p className={classes.label}>خدمات کلینیک</p>
             <select
               defaultValue={"default"}
-              onChange={(e) => setDoctorId(e.target.value)}
+              onChange={(e) => {
+                setAssessmentData({
+                  ...assessmentData,
+                  services: [e.target.value],
+                });
+              }}
             >
               <option value="default" disabled>
                 انتخاب
               </option>
-              <option value={"زن"}>زن</option>
-              <option value={"مرد"}>مرد</option>
+              {Object.keys(services).map((service, index) => {
+                return (
+                  <option key={index} value={service}>
+                    {service}
+                  </option>
+                );
+              })}
             </select>
           </div>
+          {assessmentData.services.length > 0 && (
+            <div className={classes.input}>
+              <p className={classes.label}>{assessmentData.services[0]}</p>
+              <select
+                defaultValue={"default"}
+                onChange={(e) => assessmentData.services.push(e.target.value)}
+              >
+                <option value="default" disabled>
+                  انتخاب
+                </option>
+                {services[assessmentData.services[0]].map((service, index) => {
+                  return (
+                    <option key={index} value={service}>
+                      {service}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+          )}
           {alert && <p className="alert">{alert}</p>}
-          <button
-            className={classes.button}
-            disabled={disableButton}
-            onClick={() => {
-              setProgressCompleted(progressCompleted - 34);
-              window.scrollTo(0, 0);
-            }}
-          >
-            قبل
-          </button>
           <button
             className={classes.button}
             disabled={disableButton}
@@ -280,8 +348,17 @@ export default function Assessment() {
               window.scrollTo(0, 0);
             }}
           >
-            بعد
+            بعدی
           </button>
+          <p
+            className={classes.skip}
+            onClick={() => {
+              setProgressCompleted(100);
+              window.scrollTo(0, 0);
+            }}
+          >
+            رد کن
+          </p>
         </div>
       )}
       {progressCompleted === 100 && (
@@ -335,7 +412,7 @@ export default function Assessment() {
           <div className={classes.input}>
             <div className={classes.bar}>
               <p className={classes.label}>
-                عنوان
+                موضوع مشاوره
                 <span>*</span>
               </p>
               <CloseIcon
@@ -407,16 +484,6 @@ export default function Assessment() {
             </p>
           )}
           {alert && <p className="alert">{alert}</p>}
-          <button
-            className={classes.button}
-            disabled={disableButton}
-            onClick={() => {
-              setProgressCompleted(progressCompleted - 32);
-              window.scrollTo(0, 0);
-            }}
-          >
-            قبل
-          </button>
           <button
             className={classes.button}
             disabled={disableButton}

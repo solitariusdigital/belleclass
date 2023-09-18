@@ -116,8 +116,23 @@
 
     .button {
       @include mixins.button(config.$gold1, config.$gold3, config.$black);
-      margin: 40px 12px;
-      width: 120px;
+      margin-top: 40px;
+    }
+
+    .skip {
+      margin: auto;
+      width: 50px;
+      margin-top: 40px;
+      border-bottom: 1px solid config.$gold3;
+      color: config.$gold3;
+
+      @include mixins.desktop {
+        &:hover {
+          border-bottom: 1px solid config.$black;
+          color: config.$black;
+          cursor: pointer;
+        }
+      }
     }
   }
 

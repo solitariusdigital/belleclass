@@ -51,7 +51,7 @@ export default function DatePicker({ doctorId, recordId }) {
       return;
     }
     if (!name || !title) {
-      showAlert("نام و عنوان الزامیست");
+      showAlert("نام و موضوع الزامیست");
       return;
     }
     if (currentUser.permission === "admin" && !phone) {
@@ -235,7 +235,7 @@ export default function DatePicker({ doctorId, recordId }) {
         )}
         <div className={classes.bar}>
           <p className={classes.label}>
-            عنوان
+            موضوع مراجعه
             <span>*</span>
           </p>
           <CloseIcon
