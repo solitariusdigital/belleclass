@@ -522,7 +522,12 @@ export default function Access({ records, visits, doctors, users }) {
                     {selected.assessment.histories.length > 0 ? (
                       <div className={classes.subRow}>
                         {selected.assessment.histories.map((item, index) => (
-                          <p key={index}>{item}</p>
+                          <p key={index}>
+                            {item}{" "}
+                            {selected.assessment.histories.length === index + 1
+                              ? ""
+                              : "-"}
+                          </p>
                         ))}
                       </div>
                     ) : (
@@ -534,7 +539,12 @@ export default function Access({ records, visits, doctors, users }) {
                     {selected.assessment.habits.length > 0 ? (
                       <div className={classes.subRow}>
                         {selected.assessment.habits.map((item, index) => (
-                          <p key={index}>{item}</p>
+                          <p key={index}>
+                            {item}{" "}
+                            {selected.assessment.habits.length === index + 1
+                              ? ""
+                              : "-"}
+                          </p>
                         ))}
                       </div>
                     ) : (
@@ -546,7 +556,12 @@ export default function Access({ records, visits, doctors, users }) {
                     {selected.assessment.services.length > 0 ? (
                       <div className={classes.subRow}>
                         {selected.assessment.services.map((item, index) => (
-                          <p key={index}>{item}</p>
+                          <p key={index}>
+                            {item}{" "}
+                            {selected.assessment.services.length === index + 1
+                              ? ""
+                              : "-"}
+                          </p>
                         ))}
                       </div>
                     ) : (
