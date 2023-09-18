@@ -26,9 +26,12 @@ import {
   updateVisitApi,
   getUserApi,
 } from "@/services/api";
+import Kavenegar from "kavenegar";
 
 export default function Access({ records, visits, doctors, users }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
+  const { kavenegarKey, setKavenegarKey } = useContext(StateContext);
+
   const [portalType, setPortalType] = useState("record" || "visit");
   const [displayDetails, setDisplayDetails] = useState(false);
   const [selected, setSelected] = useState(null);
@@ -144,6 +147,17 @@ export default function Access({ records, visits, doctors, users }) {
     recordData.doctorId = doctorId;
     recordData.completed = true;
     await updateRecordApi(recordData);
+    const api = Kavenegar.KavenegarApi({
+      apikey: kavenegarKey,
+    });
+    api.VerifyLookup(
+      {
+        receptor: selected.user.phone,
+        token: recordData.title,
+        template: "assessment",
+      },
+      function (response, status) {}
+    );
     Router.push("/portal");
   };
 
@@ -489,35 +503,55 @@ export default function Access({ records, visits, doctors, users }) {
                 <div className={classes.assessment}>
                   <div className={classes.row}>
                     <p className={classes.greyTitle}>جنسیت</p>
-                    <p>{selected.assessment.sex}</p>
+                    <p>
+                      {selected.assessment.sex
+                        ? selected.assessment.sex
+                        : "خالی"}
+                    </p>
                   </div>
                   <div className={classes.row}>
                     <p className={classes.greyTitle}>بازه سنی</p>
-                    <p>{selected.assessment.age}</p>
+                    <p className={classes.age}>
+                      {selected.assessment.age
+                        ? selected.assessment.age
+                        : "خالی"}
+                    </p>
                   </div>
                   <div className={classes.row}>
                     <p className={classes.greyTitle}>تاریخچه پزشکی</p>
-                    <div className={classes.subRow}>
-                      {selected.assessment.histories.map((item, index) => (
-                        <p key={index}>{item}</p>
-                      ))}
-                    </div>
+                    {selected.assessment.histories.length > 0 ? (
+                      <div className={classes.subRow}>
+                        {selected.assessment.histories.map((item, index) => (
+                          <p key={index}>{item}</p>
+                        ))}
+                      </div>
+                    ) : (
+                      "خالی"
+                    )}
                   </div>
                   <div className={classes.row}>
                     <p className={classes.greyTitle}>عادات</p>
-                    <div className={classes.subRow}>
-                      {selected.assessment.habits.map((item, index) => (
-                        <p key={index}>{item}</p>
-                      ))}
-                    </div>
+                    {selected.assessment.habits.length > 0 ? (
+                      <div className={classes.subRow}>
+                        {selected.assessment.habits.map((item, index) => (
+                          <p key={index}>{item}</p>
+                        ))}
+                      </div>
+                    ) : (
+                      "خالی"
+                    )}
                   </div>
                   <div className={classes.row}>
                     <p className={classes.greyTitle}>خدمات</p>
-                    <div className={classes.subRow}>
-                      {selected.assessment.services.map((item, index) => (
-                        <p key={index}>{item}</p>
-                      ))}
-                    </div>
+                    {selected.assessment.services.length > 0 ? (
+                      <div className={classes.subRow}>
+                        {selected.assessment.services.map((item, index) => (
+                          <p key={index}>{item}</p>
+                        ))}
+                      </div>
+                    ) : (
+                      "خالی"
+                    )}
                   </div>
                 </div>
                 <div className={classes.rowDoctor}>

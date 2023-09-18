@@ -6,10 +6,12 @@ import CloseIcon from "@mui/icons-material/Close";
 import secureLocalStorage from "react-secure-storage";
 import Router from "next/router";
 import { createUserApi, getUsersApi } from "@/services/api";
+import Kavenegar from "kavenegar";
 
 export default function Register() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { appUsers, setAppUsers } = useContext(StateContext);
+  const { kavenegarKey, setKavenegarKey } = useContext(StateContext);
 
   const [phone, setPhone] = useState("");
   const [token, setToken] = useState("");
@@ -145,6 +147,7 @@ export default function Register() {
             />
           </div>
           <input
+            placeholder="09123456789"
             type="tel"
             id="phone"
             name="phone"

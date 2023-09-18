@@ -226,6 +226,10 @@
       .row {
         margin: 8px 0px;
         direction: rtl;
+
+        .age {
+          direction: ltr;
+        }
       }
 
       .subRow {

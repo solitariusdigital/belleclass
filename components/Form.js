@@ -92,6 +92,7 @@ export default function Form() {
           />
         </div>
         <input
+          placeholder="09123456789"
           type="tel"
           id="phone"
           name="phone"

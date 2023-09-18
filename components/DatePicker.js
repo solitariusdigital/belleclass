@@ -16,9 +16,11 @@ import {
   updateUserApi,
   createUserApi,
 } from "@/services/api";
+import Kavenegar from "kavenegar";
 
 export default function DatePicker({ doctorId, recordId }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
+  const { kavenegarKey, setKavenegarKey } = useContext(StateContext);
 
   const [name, setName] = useState(
     currentUser.permission === "admin" ? "" : currentUser.name
@@ -80,6 +82,26 @@ export default function DatePicker({ doctorId, recordId }) {
     let newVisit = await createVisitApi(visit);
     await updateDoctorObject(newVisit["_id"]);
     await updateUserObject(userId);
+
+    let date = `${toFarsiNumber(day.year)}/${toFarsiNumber(
+      day.month
+    )}/${toFarsiNumber(day.day)}`;
+    let time = `${
+      toFarsiNumber(time).slice(0, 2) + ":" + toFarsiNumber(time).slice(2)
+    }`;
+
+    const api = Kavenegar.KavenegarApi({
+      apikey: kavenegarKey,
+    });
+    api.VerifyLookup(
+      {
+        receptor: phone,
+        token: date,
+        token2: time,
+        template: "confirmation",
+      },
+      function (response, status) {}
+    );
     window.location.assign("/portal");
   };
 
@@ -223,6 +245,7 @@ export default function DatePicker({ doctorId, recordId }) {
               />
             </div>
             <input
+              placeholder="09123456789"
               type="tel"
               id="phone"
               name="phone"
