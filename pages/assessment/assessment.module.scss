@@ -5,6 +5,7 @@
   font-weight: 300;
   margin: auto;
   width: config.$content-width;
+  margin-top: 70px;
 
   @include mixins.mobile {
     width: 100%;

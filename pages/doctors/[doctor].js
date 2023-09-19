@@ -6,6 +6,9 @@ import Router from "next/router";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 export default function Doctor({ doctor }) {
+  const doctorDefault =
+    "https://belleclass.storage.iran.liara.space/doctors/belleclass.png";
+
   return (
     <div className={classes.profile}>
       <div className={classes.information}>
@@ -16,20 +19,18 @@ export default function Doctor({ doctor }) {
               onClick={() => Router.push("/doctors")}
             />
           </div>
-          {doctor.image && (
-            <Image
-              className={classes.image}
-              src={doctor.image}
-              placeholder="blur"
-              blurDataURL={doctor.image}
-              alt="image"
-              loading="eager"
-              width={150}
-              height={200}
-              objectFit="cover"
-              priority
-            />
-          )}
+          <Image
+            className={classes.image}
+            src={doctor.image ? doctor.image : doctorDefault}
+            placeholder="blur"
+            blurDataURL={doctor.image ? doctor.image : doctorDefault}
+            alt="image"
+            loading="eager"
+            width={150}
+            height={200}
+            objectFit="cover"
+            priority
+          />
           <h2 className={classes.name}>{doctor.name}</h2>
           <h3>{doctor.title}</h3>
           <button

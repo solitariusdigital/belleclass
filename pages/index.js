@@ -10,6 +10,8 @@ import Router from "next/router";
 
 export default function Home({ doctors }) {
   const { expertiseAreas, setExpertiseAreas } = useContext(StateContext);
+  const doctorDefault =
+    "https://belleclass.storage.iran.liara.space/doctors/belleclass.png";
 
   useEffect(() => {
     expertiseAreas.map((nav) => {
@@ -63,9 +65,9 @@ export default function Home({ doctors }) {
             <div className={classes.row}>
               <Image
                 className={classes.image}
-                src={doctor.image}
+                src={doctor.image ? doctor.image : doctorDefault}
                 placeholder="blur"
-                blurDataURL={doctor.image}
+                blurDataURL={doctor.image ? doctor.image : doctorDefault}
                 alt="image"
                 width={70}
                 height={70}

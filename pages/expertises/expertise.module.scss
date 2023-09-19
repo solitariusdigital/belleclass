@@ -6,6 +6,7 @@
   margin: auto;
   font-weight: 300;
   text-align: center;
+  margin-top: 70px;
 
   @include mixins.mobile {
     width: 100%;

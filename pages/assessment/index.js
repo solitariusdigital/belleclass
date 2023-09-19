@@ -5,6 +5,7 @@ import Progress from "@/components/Progress";
 import avatar from "@/assets/doctorAvatar.png";
 import CloseIcon from "@mui/icons-material/Close";
 import Image from "next/legacy/image";
+import { sixGenerator } from "@/services/utility";
 import secureLocalStorage from "react-secure-storage";
 import {
   createRecordApi,
@@ -32,6 +33,8 @@ export default function Assessment() {
     habits: [],
     services: [],
   });
+
+  const sourceLink = "https://belleclass.storage.iran.liara.space";
 
   const ageRange = ["۱۸ - ۳۰", "۳۱ - ۴۰", "۴۱ - ۵۰", "۵۱+"];
   const [histories, setHistories] = useState({
@@ -98,14 +101,25 @@ export default function Assessment() {
       return;
     }
     setDisableButton(true);
+
     let userId = await setUserId();
+
+    // upload image
+    let imageLink = "";
+    if (image) {
+      let imageFolder = userId.slice(0, 6);
+      let imageId = `img${sixGenerator()}`;
+      imageLink = `${sourceLink}/${imageFolder}/${imageId}.jpg`;
+      await uploadImages(image, imageId, imageFolder);
+    }
+
     // create a new record object
     let record = {
       title: title,
       userId: userId,
       doctorId: "",
       comments: [comment],
-      image: "",
+      image: imageLink,
       example: "",
       assessment: assessmentData,
       completed: false,
@@ -123,6 +137,23 @@ export default function Assessment() {
       await updateUserApi(user);
     }
     window.location.assign("/portal");
+  };
+
+  // upload image into s3 bucket
+  const uploadImages = async (image, imageId, imageFolder) => {
+    const file = image;
+    const res = await fetch(`/api/image?file=${imageFolder}/${imageId}.jpg`);
+    const { url, fields } = await res.json();
+
+    const formData = new FormData();
+    Object.entries({ ...fields, file }).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+
+    await fetch(url, {
+      method: "POST",
+      body: formData,
+    });
   };
 
   const setUserId = async () => {

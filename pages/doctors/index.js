@@ -16,6 +16,9 @@ export default function Doctors({ doctors }) {
   const router = useRouter();
   let pathname = router.pathname;
 
+  const doctorDefault =
+    "https://belleclass.storage.iran.liara.space/doctors/belleclass.png";
+
   useEffect(() => {
     setDisplayForm(false);
     navigationTopBar.map((nav) => {
@@ -51,20 +54,19 @@ export default function Doctors({ doctors }) {
           {doctors.map((doctor, index) => (
             <div className={classes.information} key={index}>
               <div className={classes.row}>
-                {doctor.image && (
-                  <Image
-                    className={classes.image}
-                    src={doctor.image}
-                    placeholder="blur"
-                    blurDataURL={doctor.image}
-                    alt="image"
-                    loading="eager"
-                    width={70}
-                    height={70}
-                    objectFit="cover"
-                    priority
-                  />
-                )}
+                <Image
+                  className={classes.image}
+                  src={doctor.image ? doctor.image : doctorDefault}
+                  placeholder="blur"
+                  blurDataURL={doctor.image ? doctor.image : doctorDefault}
+                  alt="image"
+                  loading="eager"
+                  width={70}
+                  height={70}
+                  objectFit="cover"
+                  priority
+                />
+
                 <h2 className={classes.name}>{doctor.name}</h2>
               </div>
               <div className={classes.tags}>

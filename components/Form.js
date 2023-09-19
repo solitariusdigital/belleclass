@@ -3,6 +3,7 @@ import classes from "./Register.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
 import { createDoctorApi, createUserApi } from "@/services/api";
 import Image from "next/legacy/image";
+import { sixGenerator } from "@/services/utility";
 
 export default function Form() {
   const [name, setName] = useState("");
@@ -13,6 +14,7 @@ export default function Form() {
   const [image, setImage] = useState("");
 
   const [alert, setAlert] = useState("");
+  const sourceLink = "https://belleclass.storage.iran.liara.space";
 
   const showAlert = (message) => {
     setAlert(message);
@@ -42,15 +44,41 @@ export default function Form() {
     };
     const userData = await createUserApi(user);
 
+    // upload image
+    let imageLink = "";
+    if (image) {
+      let imageId = `img${sixGenerator()}`;
+      imageLink = `${sourceLink}/doctors/${imageId}.jpg`;
+      await uploadImages(image, imageId);
+    }
+
     const doctor = {
       name: name,
       title: title,
       bio: bio,
       userId: userData["_id"],
       tags: transformTags(tags),
+      image: imageLink,
     };
     await createDoctorApi(doctor);
     window.location.assign("/doctors");
+  };
+
+  // upload image into s3 bucket
+  const uploadImages = async (image, imageId) => {
+    const file = image;
+    const res = await fetch(`/api/image?file=doctors/${imageId}.jpg`);
+    const { url, fields } = await res.json();
+
+    const formData = new FormData();
+    Object.entries({ ...fields, file }).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+
+    await fetch(url, {
+      method: "POST",
+      body: formData,
+    });
   };
 
   return (
