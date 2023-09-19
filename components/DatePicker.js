@@ -83,10 +83,10 @@ export default function DatePicker({ doctorId, recordId }) {
     await updateDoctorObject(newVisit["_id"]);
     await updateUserObject(userId);
 
-    let date = `${toFarsiNumber(day.year)}/${toFarsiNumber(
+    let reserveDate = `${toFarsiNumber(day.year)}/${toFarsiNumber(
       day.month
     )}/${toFarsiNumber(day.day)}`;
-    let time = `${
+    let reserveTime = `${
       toFarsiNumber(time).slice(0, 2) + ":" + toFarsiNumber(time).slice(2)
     }`;
 
@@ -96,8 +96,8 @@ export default function DatePicker({ doctorId, recordId }) {
     api.VerifyLookup(
       {
         receptor: phone,
-        token: date,
-        token2: time,
+        token: reserveDate,
+        token2: reserveTime,
         template: "confirmation",
       },
       function (response, status) {}

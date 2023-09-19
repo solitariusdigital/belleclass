@@ -44,6 +44,8 @@ export default function Access({ records, visits, doctors, users }) {
   const [doctorId, setDoctorId] = useState("");
 
   const [alert, setAlert] = useState("");
+  const doctorDefault =
+    "https://belleclass.storage.iran.liara.space/doctors/belleclass.png";
 
   const imageInfo = [
     {
@@ -334,9 +336,17 @@ export default function Access({ records, visits, doctors, users }) {
                           <div className={classes.image}>
                             <Image
                               className={classes.image}
-                              src={item.doctor?.image}
+                              src={
+                                item.doctor?.image
+                                  ? item.doctor?.image
+                                  : doctorDefault
+                              }
                               placeholder="blur"
-                              blurDataURL={item.doctor?.image}
+                              blurDataURL={
+                                item.doctor?.image
+                                  ? item.doctor?.image
+                                  : doctorDefault
+                              }
                               alt="image"
                               width={70}
                               height={70}
