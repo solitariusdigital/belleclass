@@ -74,9 +74,9 @@ export default function Home({ doctors }) {
                 objectFit="cover"
                 loading="eager"
               />
-              <div>
+              <div className={classes.info}>
                 <p className={classes.name}>{doctor.name}</p>
-                <p>{doctor.education}</p>
+                <p>{doctor.title}</p>
               </div>
             </div>
           </div>

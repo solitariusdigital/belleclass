@@ -6,6 +6,7 @@ import avatar from "@/assets/doctorAvatar.png";
 import CloseIcon from "@mui/icons-material/Close";
 import Image from "next/legacy/image";
 import { sixGenerator } from "@/services/utility";
+import loaderImage from "@/assets/loader.png";
 import secureLocalStorage from "react-secure-storage";
 import {
   createRecordApi,
@@ -26,6 +27,7 @@ export default function Assessment() {
   const [image, setImage] = useState("");
   const [alert, setAlert] = useState("");
   const [disableButton, setDisableButton] = useState(false);
+  const [loader, setLoader] = useState(false);
   const [assessmentData, setAssessmentData] = useState({
     sex: "",
     age: "",
@@ -100,6 +102,8 @@ export default function Assessment() {
       showAlert("موضوع و توضیحات الزامیست");
       return;
     }
+
+    setLoader(true);
     setDisableButton(true);
 
     let userId = await setUserId();
@@ -306,7 +310,6 @@ export default function Assessment() {
           {alert && <p className="alert">{alert}</p>}
           <button
             className={classes.button}
-            disabled={disableButton}
             onClick={() => {
               setProgressCompleted(progressCompleted + 34);
               window.scrollTo(0, 0);
@@ -373,7 +376,6 @@ export default function Assessment() {
           {alert && <p className="alert">{alert}</p>}
           <button
             className={classes.button}
-            disabled={disableButton}
             onClick={() => {
               setProgressCompleted(progressCompleted + 32);
               window.scrollTo(0, 0);
@@ -516,6 +518,12 @@ export default function Assessment() {
             </p>
           )}
           {alert && <p className="alert">{alert}</p>}
+          {loader && (
+            <div>
+              <Image width={50} height={50} src={loaderImage} alt="isLoading" />
+              <p className="message">در حال بار گذاری، صبر کنید</p>
+            </div>
+          )}
           <button
             className={classes.button}
             disabled={disableButton}

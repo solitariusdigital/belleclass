@@ -281,6 +281,15 @@
       position: relative;
       height: 300px;
 
+      .imagePopup {
+        position: absolute;
+        width: 100%;
+        height: 600px;
+        z-index: 2;
+        box-shadow: config.$image-shadow;
+        @include mixins.border-radius();
+      }
+
       .image {
         @include mixins.border-radius();
       }

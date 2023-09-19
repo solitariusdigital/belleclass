@@ -35,6 +35,7 @@ export default function Access({ records, visits, doctors, users }) {
   const [portalType, setPortalType] = useState("record" || "visit");
   const [displayDetails, setDisplayDetails] = useState(false);
   const [selected, setSelected] = useState(null);
+  const [displayPopup, setDisplayPopup] = useState(false);
 
   const [displayVisits, setDisplayVisits] = useState([]);
   const [displayRecords, setDisplayRecords] = useState([]);
@@ -46,37 +47,10 @@ export default function Access({ records, visits, doctors, users }) {
 
   const imageInfo = [
     {
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphone.png",
+      src: "https://belleclass.storage.iran.liara.space/examples/sizegraphfour.png",
     },
     {
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphtwo.png",
-    },
-    {
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphthree.png",
-    },
-    {
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphfour.png",
-    },
-    {
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphfive.png",
-    },
-    {
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphsix.png",
-    },
-    {
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphfour.png",
-    },
-    {
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphfive.png",
-    },
-    {
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphsix.png",
-    },
-    {
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphfour.png",
-    },
-    {
-      src: "https://delmare.storage.iran.liara.space/sizegraph/sizegraphfive.png",
+      src: "https://belleclass.storage.iran.liara.space/examples/sizegraphfive.png",
     },
   ];
 
@@ -493,7 +467,30 @@ export default function Access({ records, visits, doctors, users }) {
                       layout="fill"
                       objectFit="cover"
                       priority
+                      onClick={() => {
+                        setDisplayPopup(true);
+                        window.scrollTo(0, 0);
+                      }}
                     />
+                    {displayPopup && (
+                      <div className={classes.imagePopup}>
+                        <Image
+                          className={classes.image}
+                          src={selected.image}
+                          placeholder="blur"
+                          blurDataURL={selected.image}
+                          alt="image"
+                          layout="fill"
+                          objectFit="cover"
+                          priority
+                          loading="eager"
+                          onClick={() => {
+                            setDisplayPopup(false);
+                            window.scrollTo(0, 0);
+                          }}
+                        />
+                      </div>
+                    )}
                   </div>
                 )}
                 <p className={classes.text}>{selected.comments[0]}</p>

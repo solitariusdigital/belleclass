@@ -4,6 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { createDoctorApi, createUserApi } from "@/services/api";
 import Image from "next/legacy/image";
 import { sixGenerator } from "@/services/utility";
+import loaderImage from "@/assets/loader.png";
 
 export default function Form() {
   const [name, setName] = useState("");
@@ -14,6 +15,8 @@ export default function Form() {
   const [image, setImage] = useState("");
 
   const [alert, setAlert] = useState("");
+  const [disableButton, setDisableButton] = useState(false);
+  const [loader, setLoader] = useState(false);
   const sourceLink = "https://belleclass.storage.iran.liara.space";
 
   const showAlert = (message) => {
@@ -36,6 +39,9 @@ export default function Form() {
       showAlert("موبایل اشتباه");
       return;
     }
+
+    setLoader(true);
+    setDisableButton(true);
 
     const user = {
       name: name,
@@ -224,7 +230,14 @@ export default function Form() {
       </div>
       <div className={classes.formAction}>
         <p className="alert">{alert}</p>
-        <button onClick={() => handleSubmit()}>ذخیره</button>
+        {loader && (
+          <div>
+            <Image width={50} height={50} src={loaderImage} alt="isLoading" />
+          </div>
+        )}
+        <button disabled={disableButton} onClick={() => handleSubmit()}>
+          ذخیره
+        </button>
       </div>
     </div>
   );

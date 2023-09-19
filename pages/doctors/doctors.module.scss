@@ -71,10 +71,6 @@
   box-shadow: config.$card-shadow;
   @include mixins.border-radius();
 
-  h3 {
-    margin: 20px 0px;
-  }
-
   .tags {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
@@ -106,9 +102,12 @@
     flex-direction: row;
     align-items: center;
 
-    .name {
-      font-weight: bold;
-      margin-right: 12px;
+    .info {
+      margin-right: 20px;
+
+      .name {
+        font-weight: bold;
+      }
     }
 
     .image {
@@ -149,6 +148,10 @@
     .arrow {
       margin: auto;
       text-align: left;
+    }
+
+    h3 {
+      margin: 20px 0px;
     }
 
     .name {

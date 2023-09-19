@@ -243,13 +243,12 @@
       }
     }
 
-    div {
-      margin-right: 12px;
+    .info {
+      margin-right: 20px;
 
       .name {
         font-weight: bold;
         font-size: config.$med-font;
-        margin-bottom: 4px;
       }
     }
   }
