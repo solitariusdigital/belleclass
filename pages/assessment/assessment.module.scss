@@ -69,12 +69,12 @@
 
   .form {
     max-width: 500px;
-    margin: 20px auto;
+    margin: auto;
     text-align: center;
 
     .input {
       width: 100%;
-      margin-top: 40px;
+      margin-top: 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -102,10 +102,6 @@
         width: 100%;
       }
 
-      select {
-        height: 50px;
-      }
-
       textarea {
         @include mixins.textarea();
       }
@@ -121,9 +117,9 @@
       margin-top: 40px;
     }
 
-    .skip {
+    .action {
       margin: auto;
-      width: 50px;
+      width: 100px;
       margin-top: 40px;
       border-bottom: 1px solid config.$gold3;
       color: config.$gold3;

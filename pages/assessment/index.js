@@ -50,9 +50,9 @@ export default function Assessment() {
     جراحی: false,
   });
   const [habits, setHabits] = useState({
-    "مصرف قلیان": false,
-    "مصرف الکل": false,
     "مصرف سیگار": false,
+    "مصرف الکل": false,
+    "مصرف قلیان": false,
   });
   const services = {
     "ریزش مو": [
@@ -236,6 +236,9 @@ export default function Assessment() {
       </div>
       {progressCompleted <= 34 && (
         <div className={classes.form}>
+          <p className="message">
+            در جهت ارتقای خدمات به سوالات عمومی پاسخ دهید
+          </p>
           <div className={classes.input}>
             <p className={classes.label}>جنسیت</p>
             <select
@@ -318,7 +321,7 @@ export default function Assessment() {
             بعدی
           </button>
           <p
-            className={classes.skip}
+            className={classes.action}
             onClick={() => {
               setProgressCompleted(100);
               window.scrollTo(0, 0);
@@ -330,6 +333,7 @@ export default function Assessment() {
       )}
       {progressCompleted > 34 && progressCompleted <= 68 && (
         <div className={classes.form}>
+          <p className="message">کدام خدمات کلینیک مرتبط به درخواست شماست؟</p>
           <div className={classes.input}>
             <p className={classes.label}>خدمات کلینیک</p>
             <select
@@ -384,7 +388,7 @@ export default function Assessment() {
             بعدی
           </button>
           <p
-            className={classes.skip}
+            className={classes.action}
             onClick={() => {
               setProgressCompleted(100);
               window.scrollTo(0, 0);
@@ -396,6 +400,7 @@ export default function Assessment() {
       )}
       {progressCompleted === 100 && (
         <div className={classes.form}>
+          <p className="message">سوالات و درخواست خود را به پزشک ارسال کنید</p>
           <div className={classes.input}>
             <div className={classes.bar}>
               <p className={classes.label}>
@@ -531,6 +536,14 @@ export default function Assessment() {
           >
             ثبت
           </button>
+          <p
+            className={classes.action}
+            onClick={() => {
+              window.location.assign("/assessment");
+            }}
+          >
+            شروع مجدد
+          </p>
         </div>
       )}
     </div>

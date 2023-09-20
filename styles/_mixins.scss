@@ -42,7 +42,7 @@ $screen-large: 2000px;
 
 @mixin input() {
   padding: 12px;
-  height: 40px;
+  height: 50px;
   background: config.$background;
   color: config.$black;
   font-size: config.$small-font;

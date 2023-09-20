@@ -34,7 +34,6 @@ export default function DatePicker({ doctorId, recordId }) {
   const [alert, setAlert] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const [times, setTimes] = useState({
-    "09:00": false,
     "10:00": false,
     "11:00": false,
     "12:00": false,
@@ -44,6 +43,8 @@ export default function DatePicker({ doctorId, recordId }) {
     "16:00": false,
     "17:00": false,
     "18:00": false,
+    "19:00": false,
+    "20:00": false,
   });
   const [disableButton, setDisableButton] = useState(false);
 
