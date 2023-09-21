@@ -7,6 +7,7 @@ import Expertise from "@/components/Expertise";
 import doctorModel from "@/models/Doctor";
 import dbConnect from "@/services/dbConnect";
 import Router from "next/router";
+import { NextSeo } from "next-seo";
 
 export default function Home({ doctors }) {
   const { expertiseAreas, setExpertiseAreas } = useContext(StateContext);
@@ -23,6 +24,16 @@ export default function Home({ doctors }) {
 
   return (
     <Fragment>
+      <NextSeo
+        title="کلینیک تخصصی زیبایی بل کلاس"
+        description="نگهبان زندگی"
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://belleclass.com",
+          siteName: "Belle Class",
+        }}
+      />
       <div className={classes.heroHeader}>
         <Image
           className={classes.heroImage}
@@ -34,8 +45,8 @@ export default function Home({ doctors }) {
           loading="eager"
         />
         <div className={classes.header}>
-          <h1>The Gaurdian of Life</h1>
           <h1>نگهبان زندگی</h1>
+          <h2>The Gaurdian of Life</h2>
           <button onClick={() => Router.push("/doctors")}>
             رزرو مراجعه حضوری
           </button>

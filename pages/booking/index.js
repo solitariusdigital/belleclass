@@ -5,7 +5,7 @@ import classes from "./booking.module.scss";
 import { useRouter } from "next/router";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import Router from "next/router";
-
+import { NextSeo } from "next-seo";
 import Register from "@/components/Register";
 import { getDoctorApi } from "@/services/api";
 
@@ -41,6 +41,16 @@ export default function Booking() {
 
   return (
     <Fragment>
+      <NextSeo
+        title="رزرو مراجعه حضوری"
+        description="رزرو مراجعه حضوری پزشک زیبایی"
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://belleclass.com",
+          siteName: "Belle Class",
+        }}
+      />
       {!currentUser ? (
         <div className="register">
           <Register></Register>

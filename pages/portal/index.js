@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { StateContext } from "@/context/stateContext";
 import Router from "next/router";
 import Register from "@/components/Register";
+import { NextSeo } from "next-seo";
 
 export default function Index() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
@@ -37,6 +38,16 @@ export default function Index() {
 
   return (
     <Fragment>
+      <NextSeo
+        title="خدمات آنلاین بل کلاس"
+        description="مشاوره آنلاین رایگان و رزرو مراجعه حضوری"
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://belleclass.com",
+          siteName: "Belle Class",
+        }}
+      />
       {!currentUser && (
         <div className="register">
           <Register></Register>

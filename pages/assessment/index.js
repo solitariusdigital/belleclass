@@ -8,6 +8,7 @@ import Image from "next/legacy/image";
 import { sixGenerator } from "@/services/utility";
 import loaderImage from "@/assets/loader.png";
 import secureLocalStorage from "react-secure-storage";
+import { NextSeo } from "next-seo";
 import {
   createRecordApi,
   getUsersApi,
@@ -214,6 +215,16 @@ export default function Assessment() {
 
   return (
     <div className={classes.container}>
+      <NextSeo
+        title="مشاوره آنلاین رایگان"
+        description="مشاوره آنلاین رایگان پزشک زیبایی"
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://belleclass.com",
+          siteName: "Belle Class",
+        }}
+      />
       <div className={classes.header}>
         <Image
           className={classes.image}

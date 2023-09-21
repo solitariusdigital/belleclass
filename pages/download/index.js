@@ -6,10 +6,21 @@ import { getMobileOperatingSystem } from "@/services/utility";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import AddToHomeScreenIcon from "@mui/icons-material/AddToHomeScreen";
 import Router from "next/router";
+import { NextSeo } from "next-seo";
 
 export default function Download() {
   return (
     <Fragment>
+      <NextSeo
+        title="راهنمای نصب"
+        description="وب اپلیکیشن پیشرو بل کلاس"
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://belleclass.com",
+          siteName: "Belle Class",
+        }}
+      />
       {getMobileOperatingSystem() === "ios" && (
         <div className={classes.container}>
           <p className={classes.title}>

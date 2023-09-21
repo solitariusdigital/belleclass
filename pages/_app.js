@@ -8,12 +8,12 @@ export default function App({ Component, pageProps }) {
     <StateProvider>
       <RootLayout>
         <DefaultSeo
-          title="Belle Class"
-          description="Beauty Clinic"
+          title="کلینیک تخصصی زیبایی بل کلاس"
+          description="نگهبان زندگی"
           openGraph={{
             type: "website",
             locale: "fa_IR",
-            url: "https://belleclass.com/",
+            url: "https://belleclass.com",
             siteName: "Belle Class",
           }}
         />

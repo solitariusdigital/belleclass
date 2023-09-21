@@ -18,6 +18,8 @@ import { convertDate } from "@/services/utility";
 import avatar from "@/assets/avatar.png";
 import CloseIcon from "@mui/icons-material/Close";
 import secureLocalStorage from "react-secure-storage";
+import Kavenegar from "kavenegar";
+import { NextSeo } from "next-seo";
 import {
   getDoctorApi,
   updateRecordApi,
@@ -26,7 +28,6 @@ import {
   updateVisitApi,
   getUserApi,
 } from "@/services/api";
-import Kavenegar from "kavenegar";
 
 export default function Access({ records, visits, doctors, users }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
@@ -164,6 +165,16 @@ export default function Access({ records, visits, doctors, users }) {
 
   return (
     <Fragment>
+      <NextSeo
+        title="پرتال بیمار بل کلاس"
+        description="مشاوره آنلاین رایگان و رزرو مراجعه حضوری"
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://belleclass.com",
+          siteName: "Belle Class",
+        }}
+      />
       {currentUser && (
         <div className={classes.container}>
           <div className={classes.headerHero}>

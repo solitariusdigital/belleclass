@@ -7,6 +7,7 @@ import Router from "next/router";
 import dbConnect from "@/services/dbConnect";
 import doctorModel from "@/models/Doctor";
 import Form from "@/components/Form";
+import { NextSeo } from "next-seo";
 
 export default function Doctors({ doctors }) {
   const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
@@ -37,6 +38,16 @@ export default function Doctors({ doctors }) {
 
   return (
     <div className={classes.container}>
+      <NextSeo
+        title="پزشکان بل کلاس"
+        description="لیست پزشکان زیبایی"
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://belleclass.com",
+          siteName: "Belle Class",
+        }}
+      />
       {currentUser && currentUser.permission === "admin" && (
         <div className={classes.button}>
           <button onClick={() => setDisplayForm(!displayForm)}>

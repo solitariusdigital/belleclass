@@ -4,6 +4,7 @@ import classes from "./expertise.module.scss";
 import Expertise from "@/components/Expertise";
 import FiberManualRecordOutlined from "@mui/icons-material/FiberManualRecordOutlined";
 import Image from "next/legacy/image";
+import { NextSeo } from "next-seo";
 import Belle33 from "@/assets/Belle-33.png";
 import Belle34 from "@/assets/Belle-34.png";
 import Belle31 from "@/assets/Belle-31.png";
@@ -31,6 +32,16 @@ export default function Expertises() {
 
   return (
     <div className={classes.container}>
+      <NextSeo
+        title="خدمات کلینیک بل کلاس"
+        description="کلینیک تخصصی زیبایی"
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://belleclass.com",
+          siteName: "Belle Class",
+        }}
+      />
       <div className={classes.information}>
         <h2>{displayExpertise}</h2>
         {displayExpertise === "فیلر" && (

@@ -40,12 +40,9 @@ abbr[title] {
   text-decoration: none;
 }
 
-h1 {
-  font-weight: 300;
-}
-
+h1,
 h2 {
-  font-size: config.$big-font;
+  font-weight: 300;
 }
 
 .main {

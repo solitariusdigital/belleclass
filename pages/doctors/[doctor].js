@@ -4,6 +4,7 @@ import Image from "next/legacy/image";
 import classes from "./doctors.module.scss";
 import Router from "next/router";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { NextSeo } from "next-seo";
 
 export default function Doctor({ doctor }) {
   const doctorDefault =
@@ -11,6 +12,16 @@ export default function Doctor({ doctor }) {
 
   return (
     <div className={classes.profile}>
+      <NextSeo
+        title={doctor.name}
+        description={doctor.title}
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://belleclass.com",
+          siteName: "Belle Class",
+        }}
+      />
       <div className={classes.information}>
         <div>
           <div className={classes.arrow}>
