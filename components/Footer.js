@@ -40,9 +40,12 @@ export default function Footer() {
             <LocationOnOutlinedIcon />
             <p>تهران، فرشته، خیابان نیلوفر، مجتمع یوتوپیا، طبقه ۴</p>
           </div>
-          <div className={classes.row}>
-            <PhoneIphoneOutlinedIcon />
-            <p>۰۲۱ ۹۱۶۹۰۰۳۰</p>
+          <div
+            className={classes.row}
+            onClick={() => window.open("tel:02191690030")}
+          >
+            <PhoneIphoneOutlinedIcon className="icon" />
+            <p className="icon">۰۲۱ ۹۱۶۹۰۰۳۰</p>
           </div>
           <div
             className={classes.row}
@@ -54,7 +57,7 @@ export default function Footer() {
             }
           >
             <InstagramIcon className="icon" />
-            <p>belleclass.official</p>
+            <p className="icon">belleclass.official</p>
           </div>
         </div>
       </div>
