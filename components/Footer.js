@@ -42,7 +42,7 @@ export default function Footer() {
           </div>
           <div
             className={classes.row}
-            onClick={() => window.open("tel:02191690030")}
+            onClick={() => window.open("tel:02191690030", "_self")}
           >
             <PhoneIphoneOutlinedIcon className="icon" />
             <p className="icon">۰۲۱ ۹۱۶۹۰۰۳۰</p>
@@ -52,7 +52,7 @@ export default function Footer() {
             onClick={() =>
               window.open(
                 "https://www.instagram.com/belleclass.official",
-                "_ blank"
+                "_ self"
               )
             }
           >
@@ -69,7 +69,7 @@ export default function Footer() {
           onClick={() =>
             window.open(
               "https://docs.google.com/forms/d/e/1FAIpQLSeWMRH3AqAVxQdRLDanQK7tubVFPyNHjeFTvdIs4IQQhMVkHg/viewform?usp=sf_link",
-              "_ blank"
+              "_ self"
             )
           }
         >
