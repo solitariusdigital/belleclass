@@ -58,6 +58,21 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      <div className={classes.copyright}>
+        <p>کليه حقوق اين وب اپلیکیشن به بل کلاس تعلق دارد</p>
+        <p>belleclass.com @Copyright 2023</p>
+        <p
+          className={classes.action}
+          onClick={() =>
+            window.open(
+              "https://docs.google.com/forms/d/e/1FAIpQLSeWMRH3AqAVxQdRLDanQK7tubVFPyNHjeFTvdIs4IQQhMVkHg/viewform?usp=sf_link",
+              "_ blank"
+            )
+          }
+        >
+          طراحی، توسعه و پشتیبانی
+        </p>
+      </div>
     </div>
   );
 }
