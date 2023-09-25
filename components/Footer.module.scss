@@ -96,12 +96,19 @@
   font-size: 12px;
   text-align: center;
 
-  .action {
-    margin: 0px 8px;
+  .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 
     @include mixins.desktop {
       &:hover {
         cursor: pointer;
+      }
+
+      .action {
+        margin: 0px 8px;
       }
     }
   }

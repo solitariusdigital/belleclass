@@ -6,6 +6,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Image from "next/legacy/image";
 import logo from "@/assets/logo.png";
 import Router from "next/router";
+import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
 
 export default function Footer() {
   return (
@@ -64,8 +65,8 @@ export default function Footer() {
       <div className={classes.copyright}>
         <p>کليه حقوق اين وب اپلیکیشن به بل کلاس تعلق دارد</p>
         <p>belleclass.com @Copyright 2023</p>
-        <p
-          className={classes.action}
+        <div
+          className={classes.row}
           onClick={() =>
             window.open(
               "https://docs.google.com/forms/d/e/1FAIpQLSeWMRH3AqAVxQdRLDanQK7tubVFPyNHjeFTvdIs4IQQhMVkHg/viewform?usp=sf_link",
@@ -73,8 +74,9 @@ export default function Footer() {
             )
           }
         >
-          طراحی، توسعه و پشتیبانی
-        </p>
+          <p className={classes.action}>طراحی، توسعه و پشتیبانی</p>
+          <PrecisionManufacturingIcon sx={{ fontSize: 18 }} />
+        </div>
       </div>
     </div>
   );
