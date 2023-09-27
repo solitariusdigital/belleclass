@@ -505,7 +505,7 @@ export default function Assessment() {
                   setImage(e.target.files[0]);
                 }}
                 type="file"
-                accept="image/png, image/jpeg"
+                accept="image/*"
               />
               <p>ارسال عکس اختیاری به پزشک بل کلاس</p>
             </label>
