@@ -7,6 +7,7 @@ import Image from "next/legacy/image";
 import logo from "@/assets/logo.png";
 import Router from "next/router";
 import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
+import MinimalTechLab from "@/assets/MinimalTechLab.svg";
 
 export default function Footer() {
   return (
@@ -69,12 +70,20 @@ export default function Footer() {
           className={classes.row}
           onClick={() =>
             window.open(
-              "https://docs.google.com/forms/d/e/1FAIpQLSeWMRH3AqAVxQdRLDanQK7tubVFPyNHjeFTvdIs4IQQhMVkHg/viewform?usp=sf_link",
+              "https://docs.google.com/forms/d/e/1FAIpQLSdqKHLBydQIfm06LTtw0wELHaDJJFGU3GNQFsVWNd3t0jz5hA/viewform?usp=sf_link",
               "_ self"
             )
           }
         >
-          <p className={classes.action}>طراحی، توسعه و پشتیبانی</p>
+          <Image
+            className={classes.image}
+            src={MinimalTechLab}
+            alt="image"
+            width={120}
+            height={30}
+            loading="eager"
+          />
+          <p className={classes.action}>طراحی توسعه پشتیبانی</p>
           <PrecisionManufacturingIcon sx={{ fontSize: 18 }} />
         </div>
       </div>
