@@ -66,7 +66,7 @@ export default function Footer() {
       <div className={classes.copyright}>
         <p>کليه حقوق اين وب اپلیکیشن به بل کلاس تعلق دارد</p>
         <p>belleclass.com @Copyright 2023</p>
-        <div
+        {/* <div
           className={classes.row}
           onClick={() =>
             window.open(
@@ -85,7 +85,7 @@ export default function Footer() {
           />
           <p className={classes.action}>طراحی توسعه پشتیبانی</p>
           <PrecisionManufacturingIcon sx={{ fontSize: 18 }} />
-        </div>
+        </div> */}
       </div>
     </div>
   );
