@@ -34,7 +34,7 @@ export default function Home({ doctors }) {
           siteName: "Belle Class",
         }}
       />
-      <div className={classes.heroHeader}>
+      <section className={classes.heroHeader}>
         <Image
           className={classes.heroImage}
           src={background}
@@ -54,19 +54,19 @@ export default function Home({ doctors }) {
             مشاوره آنلاین رایگان
           </button>
         </div>
-      </div>
-      <div className={classes.bannerContainer}>
+      </section>
+      <section className={classes.bannerContainer}>
         <div className={classes.banner}></div>
         <div className={classes.banner}></div>
         <div className={classes.banner}></div>
         <div className={classes.banner}></div>
-      </div>
+      </section>
       <div className={classes.border}></div>
-      <div className={classes.expertise}>
+      <section className={classes.expertise}>
         <h2>خدمات کلینیک</h2>
         <Expertise></Expertise>
-      </div>
-      <div className={classes.doctorsContainer}>
+      </section>
+      <section className={classes.doctorsContainer}>
         {doctors.map((doctor, index) => (
           <div
             className={classes.items}
@@ -92,8 +92,8 @@ export default function Home({ doctors }) {
             </div>
           </div>
         ))}
-      </div>
-      <div className={classes.lifeStyleContainer}>
+      </section>
+      <section className={classes.lifeStyleContainer}>
         <div className={classes.lifeStyle}>
           <p>
             فیلرهای پوستی مواد ژل مانندی هستند که برای بازگرداندن حجم از دست
@@ -131,8 +131,8 @@ export default function Home({ doctors }) {
             مانند هستند و اثر آنها معمولا ۶ تا ۱۲ ماه باقی می ماند
           </p>
         </div>
-      </div>
-      <div className={classes.videoContainer}>
+      </section>
+      <section className={classes.videoContainer}>
         <div className={classes.boxContainer}>
           <div className={classes.box}>
             <video
@@ -173,7 +173,7 @@ export default function Home({ doctors }) {
             میشوند. مدت زمان ماندگاری اثر فیلر های پوستی به محصول
           </p>
         </div>
-      </div>
+      </section>
     </Fragment>
   );
 }

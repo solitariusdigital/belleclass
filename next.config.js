@@ -5,7 +5,7 @@ const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   images: {
-    domains: ["belleclass.storage.iran.liara.space", "trustseal.enamad.ir"],
+    domains: ["belleclass.storage.iran.liara.space"],
   },
 };
 
