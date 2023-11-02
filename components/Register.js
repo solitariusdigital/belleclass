@@ -57,24 +57,24 @@ export default function Register() {
       setDisplayCounter(true);
       let tokenId = fourGenerator();
       setToken(tokenId);
-      // const api = Kavenegar.KavenegarApi({
-      //   apikey: kavenegarKey,
-      // });
-      // api.VerifyLookup(
-      //   {
-      //     receptor: phone,
-      //     token: tokenId.toString(),
-      //     template: "registerverify",
-      //   },
-      //   function (response, status) {
-      //     if (status === 200) {
-      //       showAlert("کد تایید ارسال شد");
-      //     } else {
-      //       showAlert("خطا در سامانه ارسال کد تایید");
-      //     }
-      //     startCounter();
-      //   }
-      // );
+      const api = Kavenegar.KavenegarApi({
+        apikey: kavenegarKey,
+      });
+      api.VerifyLookup(
+        {
+          receptor: phone,
+          token: tokenId.toString(),
+          template: "registerverify",
+        },
+        function (response, status) {
+          if (status === 200) {
+            showAlert("کد تایید ارسال شد");
+          } else {
+            showAlert("خطا در سامانه ارسال کد تایید");
+          }
+          startCounter();
+        }
+      );
     } else {
       showAlert("موبایل اشتباه");
     }
@@ -193,7 +193,6 @@ export default function Register() {
         </div>
         <div className={classes.formAction}>
           <p className="alert">{alert}</p>
-          <p className="alert">{token}</p>
           {checkToken.length === 4 && (
             <button onClick={() => handleRegister()}>ورود / ​ثبت نام</button>
           )}
