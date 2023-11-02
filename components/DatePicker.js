@@ -92,7 +92,7 @@ export default function DatePicker({ doctorId, recordId }) {
     }`;
 
     const api = Kavenegar.KavenegarApi({
-      apikey: process.env.NEXT_PUBLIC_KAVEHNEGAR,
+      apikey: kavenegarKey,
     });
     api.VerifyLookup(
       {

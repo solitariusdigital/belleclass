@@ -58,7 +58,7 @@ export default function Register() {
       let tokenId = fourGenerator();
       setToken(tokenId);
       const api = Kavenegar.KavenegarApi({
-        apikey: process.env.NEXT_PUBLIC_KAVEHNEGAR,
+        apikey: kavenegarKey,
       });
       api.VerifyLookup(
         {
