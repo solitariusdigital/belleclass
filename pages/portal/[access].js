@@ -125,7 +125,7 @@ export default function Access({ records, visits, doctors, users }) {
     recordData.completed = true;
     await updateRecordApi(recordData);
     const api = Kavenegar.KavenegarApi({
-      apikey: kavenegarKey,
+      apikey: process.env.NEXT_PUBLIC_KAVEHNEGAR,
     });
     api.VerifyLookup(
       {
