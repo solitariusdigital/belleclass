@@ -26,7 +26,10 @@ export default function Footer() {
         />
       </div>
       <div className={classes.container}>
-        <div className={classes.logo} onClick={() => Router.push("/")}>
+        <div
+          className={classes.logo}
+          onClick={() => window.location.assign("/")}
+        >
           <Image width={100} height={100} src={logo} alt="logo" priority />
         </div>
         <div className={classes.buttons}>
@@ -53,27 +56,22 @@ export default function Footer() {
             className={classes.row}
             onClick={() =>
               window.open(
-                "https://www.instagram.com/belleclass.official",
+                "https://www.instagram.com/bellecenter.beauty/",
                 "_ self"
               )
             }
           >
             <InstagramIcon className="icon" />
-            <p className="icon">belleclass.official</p>
+            <p className="icon">bellecenter.beauty</p>
           </div>
         </div>
       </div>
       <div className={classes.copyright}>
         <p>کليه حقوق اين وب اپلیکیشن به بل کلاس تعلق دارد</p>
         <p>belleclass.com @Copyright 2023</p>
-        {/* <div
+        <div
           className={classes.row}
-          onClick={() =>
-            window.open(
-              "https://docs.google.com/forms/d/e/1FAIpQLSdqKHLBydQIfm06LTtw0wELHaDJJFGU3GNQFsVWNd3t0jz5hA/viewform?usp=sf_link",
-              "_ self"
-            )
-          }
+          onClick={() => window.open("https://musetechlab.com/")}
         >
           <Image
             className={classes.image}
@@ -85,7 +83,7 @@ export default function Footer() {
           />
           <p className={classes.action}>طراحی توسعه پشتیبانی</p>
           <PrecisionManufacturingIcon sx={{ fontSize: 18 }} />
-        </div> */}
+        </div>
       </div>
     </div>
   );

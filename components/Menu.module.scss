@@ -49,7 +49,10 @@
   border-bottom: 1px solid config.$background;
   font-weight: bold !important;
   cursor: pointer;
-  color: config.$gold3;
+
+  &:hover {
+    color: config.$gold3;
+  }
 
   @include mixins.mobile {
     border-bottom: 1px solid config.$gold1;
@@ -97,7 +100,7 @@
   .topBar {
     width: 100%;
     padding: 12px;
-    height: 50px;
+    height: 80px;
     @include mixins.row-space-between-center();
   }
 

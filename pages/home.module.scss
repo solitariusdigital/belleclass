@@ -8,6 +8,7 @@
   display: flex;
   height: 320px;
   width: 100%;
+  margin-top: 80px;
 
   .heroImage {
     position: relative !important;
@@ -41,22 +42,6 @@
       margin-bottom: 12px;
       font-family: config.$font-gilan;
     }
-  }
-}
-
-.border {
-  position: relative;
-  bottom: 40px;
-  margin: auto;
-  border: 0.5px solid config.$gold3;
-  width: config.$content-width;
-
-  @include mixins.mobile {
-    display: none;
-  }
-
-  @include mixins.tablet {
-    width: calc(100% - 40px);
   }
 }
 
@@ -313,5 +298,16 @@
     flex-direction: column;
     width: 100%;
     padding: 0px 12px;
+  }
+}
+
+.notFound {
+  margin: auto;
+  width: config.$content-width;
+  margin-top: 150px;
+  text-align: center;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
   }
 }

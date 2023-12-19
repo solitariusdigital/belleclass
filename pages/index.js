@@ -61,7 +61,6 @@ export default function Home({ doctors }) {
         <div className={classes.banner}></div>
         <div className={classes.banner}></div>
       </section>
-      <div className={classes.border}></div>
       <section className={classes.expertise}>
         <h2>خدمات کلینیک</h2>
         <Expertise></Expertise>
@@ -139,7 +138,7 @@ export default function Home({ doctors }) {
               className={classes.video}
               preload="metadata"
               controls
-              src="https://belleclass.com/uploads/1cceeb6f0d5e4042927d1c1d05368f52.MOV"
+              src="https://belleclass.com/uploads/1cceeb6f0d5e4042927d1c1d05368f52.MOV#t=0.1"
             />
           </div>
           <button onClick={() => Router.push("/doctors")}>
@@ -161,7 +160,7 @@ export default function Home({ doctors }) {
               className={classes.video}
               preload="metadata"
               controls
-              src="https://belleclass.com/uploads/e7750b4101324885a8e2e55ad4a6a5ab.MOV"
+              src="https://belleclass.com/uploads/e7750b4101324885a8e2e55ad4a6a5ab.MOV#t=0.1"
             />
           </div>
           <button onClick={() => Router.push("/assessment")}>

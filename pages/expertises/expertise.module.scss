@@ -25,15 +25,15 @@
 }
 
 .information {
-  background: config.$white;
-  box-shadow: config.$card-shadow;
-  @include mixins.border-radius();
   padding: 50px 100px;
   margin: 20px auto;
   text-align: right;
 
   @include mixins.mobile {
+    background: config.$white;
+    box-shadow: config.$card-shadow;
     padding: 12px;
+    @include mixins.border-radius();
   }
 
   .row {

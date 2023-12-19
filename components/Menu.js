@@ -42,8 +42,8 @@ export default function Menu() {
       <div className={classes.largeMenu}>
         <Image
           className={classes.logo}
-          width={50}
-          height={50}
+          width={70}
+          height={70}
           src={logo}
           alt="logo"
           onClick={() => window.location.assign("/")}
@@ -68,8 +68,8 @@ export default function Menu() {
         <div className={classes.topBar}>
           <Image
             className={classes.logo}
-            width={50}
-            height={50}
+            width={70}
+            height={70}
             src={logo}
             alt="logo"
             onClick={() => window.location.assign("/")}
