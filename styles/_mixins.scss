@@ -1,7 +1,7 @@
 @use "config" as config;
 
 $screen-mobile: 700px;
-$screen-tablet: 1200px;
+$screen-tablet: 1400px;
 $screen-large: 2000px;
 
 @mixin mobile {

@@ -5,7 +5,7 @@
   font-weight: 300;
   width: config.$content-width;
   margin: auto;
-  margin-top: 70px;
+  margin-top: 80px;
 
   @include mixins.mobile {
     width: 100%;
@@ -130,7 +130,7 @@
 
 .profile {
   direction: rtl;
-  margin-top: 70px;
+  margin-top: 80px;
 
   .information {
     text-align: center;

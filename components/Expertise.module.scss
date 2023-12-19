@@ -29,10 +29,10 @@
     box-shadow: config.$card-shadow;
     border: 1px solid config.$white;
     font-weight: 300;
+    cursor: pointer;
 
     @include mixins.desktop {
       &:hover {
-        cursor: pointer;
         border: 1px solid config.$gold3;
         color: config.$gold3;
       }

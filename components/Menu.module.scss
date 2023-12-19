@@ -18,11 +18,7 @@
   }
 
   .logo {
-    @include mixins.desktop {
-      &:hover {
-        cursor: pointer;
-      }
-    }
+    cursor: pointer;
   }
 }
 
@@ -52,13 +48,8 @@
 .nav {
   border-bottom: 1px solid config.$background;
   font-weight: bold !important;
-
-  @include mixins.desktop {
-    &:hover {
-      cursor: pointer;
-      color: config.$gold3;
-    }
-  }
+  cursor: pointer;
+  color: config.$gold3;
 
   @include mixins.mobile {
     border-bottom: 1px solid config.$gold1;
@@ -100,12 +91,7 @@
 
   .menuIcon {
     background: config.$gold1;
-
-    @include mixins.desktop {
-      &:hover {
-        cursor: pointer;
-      }
-    }
+    cursor: pointer;
   }
 
   .topBar {
@@ -143,10 +129,10 @@
       button {
         @include mixins.button(config.$black, config.$black, config.$gold3);
         margin: 12px 0px;
+        cursor: pointer;
 
         @include mixins.desktop {
           &:hover {
-            cursor: pointer;
             background: config.$white;
             color: config.$black;
           }

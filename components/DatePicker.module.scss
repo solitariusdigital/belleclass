@@ -59,13 +59,13 @@
     background: config.$white;
     box-shadow: config.$card-shadow;
     color: config.$black;
+    cursor: pointer;
     @include mixins.border-radius();
 
     @include mixins.desktop {
       &:hover {
         background: config.$gold3;
         color: config.$white;
-        cursor: pointer;
       }
     }
   }

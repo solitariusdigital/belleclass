@@ -5,7 +5,7 @@
   font-weight: 300;
   margin: auto;
   width: config.$content-width;
-  margin-top: 70px;
+  margin-top: 80px;
 
   @include mixins.mobile {
     width: 100%;
@@ -50,13 +50,13 @@
       box-shadow: config.$card-shadow;
       color: config.$black;
       justify-content: center;
+      cursor: pointer;
       @include mixins.border-radius();
 
       @include mixins.desktop {
         &:hover {
           background: config.$gold3;
           color: config.$white;
-          cursor: pointer;
         }
       }
     }
@@ -123,12 +123,12 @@
       margin-top: 40px;
       border-bottom: 1px solid config.$gold3;
       color: config.$gold3;
+      cursor: pointer;
 
       @include mixins.desktop {
         &:hover {
           border-bottom: 1px solid config.$black;
           color: config.$black;
-          cursor: pointer;
         }
       }
     }
