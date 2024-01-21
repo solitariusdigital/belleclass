@@ -6,8 +6,6 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Image from "next/legacy/image";
 import logo from "@/assets/logo.png";
 import Router from "next/router";
-import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
-import MuseTechLab from "@/assets/MuseTechLab.svg";
 
 export default function Footer() {
   return (
@@ -69,21 +67,6 @@ export default function Footer() {
       <div className={classes.copyright}>
         <p>کليه حقوق اين وب اپلیکیشن به بل کلاس تعلق دارد</p>
         <p>belleclass.com @Copyright 2023</p>
-        <div
-          className={classes.row}
-          onClick={() => window.open("https://musetechlab.com/")}
-        >
-          <Image
-            className={classes.image}
-            src={MuseTechLab}
-            alt="image"
-            width={120}
-            height={30}
-            loading="eager"
-          />
-          <p className={classes.action}>طراحی توسعه پشتیبانی</p>
-          <PrecisionManufacturingIcon sx={{ fontSize: 18 }} />
-        </div>
       </div>
     </div>
   );
