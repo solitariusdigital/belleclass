@@ -12,7 +12,7 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@hassanmojab/react-modern-calendar-datepicker": "^3.1.7",
-    "@mui/icons-material": "^5.14.12",
+    "@mui/icons-material": "^5.15.2",
     "@mui/material": "^5.14.12",
     "aws-sdk": "^2.1506.0",
     "eslint": "8.50.0",
