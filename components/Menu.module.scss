@@ -3,6 +3,8 @@
 
 .container {
   width: config.$content-width;
+  max-width: config.$max-widthHeigh;
+
   @include mixins.row-space-between-center();
 
   @include mixins.mobile {
@@ -25,10 +27,6 @@
 .largeMenu {
   width: 100%;
   @include mixins.row-space-between-center();
-
-  @include mixins.mobile {
-    display: none;
-  }
 
   @include mixins.tablet {
     padding: 0px 12px;
@@ -57,6 +55,9 @@
   @include mixins.mobile {
     border-bottom: 1px solid config.$gold1;
   }
+  @include mixins.tablet {
+    border-bottom: 1px solid config.$gold1;
+  }
 }
 
 .nav::after {
@@ -67,6 +68,9 @@
   transition: width 0.3s;
 
   @include mixins.mobile {
+    border-bottom: 1px solid config.$gold1;
+  }
+  @include mixins.tablet {
     border-bottom: 1px solid config.$gold1;
   }
 }
@@ -83,14 +87,13 @@
   @include mixins.mobile {
     border-bottom: 1px solid config.$gold1;
   }
+  @include mixins.tablet {
+    border-bottom: 1px solid config.$gold1;
+  }
 }
 
 .smallMenu {
   width: 100%;
-
-  @include mixins.desktop {
-    display: none;
-  }
 
   .menuIcon {
     background: config.$gold1;
@@ -119,10 +122,6 @@
     p {
       padding: 8px 0px;
       color: config.$black;
-    }
-
-    @include mixins.desktop {
-      display: none;
     }
 
     .buttons {

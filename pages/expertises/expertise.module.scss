@@ -2,6 +2,7 @@
 @use "styles/_mixins.scss" as mixins;
 
 .container {
+  max-width: config.$max-widthHeigh;
   width: config.$content-width;
   margin: auto;
   font-weight: 300;

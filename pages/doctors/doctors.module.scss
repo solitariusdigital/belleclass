@@ -3,6 +3,7 @@
 
 .container {
   font-weight: 300;
+  max-width: config.$max-widthHeigh;
   width: config.$content-width;
   margin: auto;
   margin-top: 80px;

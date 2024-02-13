@@ -74,6 +74,9 @@ export const StateProvider = (props) => {
   const [kavenegarKey, setKavenegarKey] = useState(
     "78766C6A30637772692B3758716579425A45592B3562304D65784A6F6A754B43594D7239774A7A635752633D"
   );
+  const [screenSize, setScreenSize] = useState(
+    "desktop" || "tablet" || "mobile"
+  );
 
   const stateContext = {
     menuMobile,
@@ -90,6 +93,8 @@ export const StateProvider = (props) => {
     setDisplayExpertise,
     kavenegarKey,
     setKavenegarKey,
+    screenSize,
+    setScreenSize,
   };
   return (
     <StateContext.Provider value={stateContext}>
